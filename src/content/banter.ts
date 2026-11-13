@@ -31,7 +31,7 @@ export const rivalryCategories: BanterCategory[] = [
     title: 'ALL-OUT WAR',
     subtitle: 'The 12-Match League Stage Dogfight',
     badge: 'LEAGUE DOMINANCE',
-    matchContext: 'Verified Context: Skyshot topped the 12-match regular season (4 wins, 8 pts, +NRR), defeating Authors twice (Matches 6 & 12).',
+    matchContext: 'Verified Context: Skyshot topped the 12-match regular season (4 wins, 8 pts), defeating Authors twice (Matches 6 & 12).',
     messages: [
       {
         id: 'aow-1',
@@ -52,8 +52,8 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'authors',
         teamName: 'AUTHORS',
         teamColor: '#00E676',
-        message: 'Winning regular-season fixtures on a Tuesday night is cute, Sky. But championship cricket isn’t about who peaks in Match 6 — it’s about who has ice in their veins when the trophy is on the pitch.',
-        verifiedContext: 'Authors finished 2nd in League Stage (3-3, 6 pts) before storming the playoffs'
+        message: 'Winning regular-season fixtures is cute, Sky. But championship cricket isn’t about who peaks in Match 6 — it’s about who has ice in their veins when the trophy is on the line.',
+        verifiedContext: 'Authors finished regular season tied for 2nd (3-3, 6 pts) before claiming the championship'
       },
       {
         id: 'aow-3',
@@ -63,7 +63,7 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'champions',
         teamName: 'CHAMPIONS',
         teamColor: '#FF2E4D',
-        message: 'Sky conveniently forgets Match 2. First meeting of the tournament, Champions walked into your stadium and took the points. You weren’t untouchable — you just had good net run rate math.',
+        message: 'Sky conveniently forgets Match 2. First meeting of the tournament, Champions shut you down and took the points. You weren’t untouchable — you were just loud.',
         verifiedContext: 'Match 2: Skyshot vs Champions — Champions victory'
       },
       {
@@ -74,7 +74,7 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'knights',
         teamName: 'KNIGHTS',
         teamColor: '#F8FAFC',
-        message: 'Table toppers or not, Skyshot still had to bowl to me in Match 3. We didn’t just beat them; we hung 291 on the board. The greatest single batting spectacle of the summer.',
+        message: 'Table toppers or not, Skyshot still had to bowl to me in Match 3. We didn’t just beat them; we hung 291 on the board. The greatest single team total of the tournament.',
         verifiedContext: 'Match 3: Skyshot vs Knights — Knights won posting all-time tournament record 291'
       }
     ]
@@ -84,7 +84,7 @@ export const rivalryCategories: BanterCategory[] = [
     title: 'THE PLAYOFF SALT',
     subtitle: 'The 10-Run Heartbreak & Semi-Final Fallout',
     badge: 'PLAYOFF CRUNCH',
-    matchContext: 'Verified Context: Match 13 (SF1): Champions 225 vs Skyshot 215 (Champions won by 10 runs). Match 14 (SF2): Authors defeated Skyshot.',
+    matchContext: 'Verified Context: Match 13 (SF1): Champions 225 vs Skyshot 215/5 (Champions won by 10 runs). Match 14 (SF2): Authors defeated Skyshot.',
     messages: [
       {
         id: 'ps-1',
@@ -94,8 +94,8 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'skyshot',
         teamName: 'SKYSHOT',
         teamColor: '#00D2FF',
-        message: 'Ten runs. That is all it was in Semi-Final 1. We were cruising at 200 with Lelouch on 56 and Shamrock on 71. Two freak runouts by Paul and Oscar, and suddenly we miss the final by ten agonising runs.',
-        verifiedContext: 'Match 13 (SF1): Lelouch run out (56), Shamrock run out (71); Skyshot stranded on 215'
+        message: 'Ten runs. That is all it was in Semi-Final 1. We put 215 on the board chasing 225, and suddenly we miss the final by ten agonising runs. That semi-final still haunts the group chat.',
+        verifiedContext: 'Match 13 (SF1): Champions defended 225, restricting Skyshot to 215/5'
       },
       {
         id: 'ps-2',
@@ -105,8 +105,8 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'champions',
         teamName: 'CHAMPIONS',
         teamColor: '#FF2E4D',
-        message: 'Those weren’t "freak" runouts, Sky. That was Champions pressure. We put 225 on the scoreboard batting first, choked the middle overs, and executed two direct hits when your batsmen started panicking.',
-        verifiedContext: 'Match 13 (SF1): Champions posted 225, defended by 10 runs to qualify for Grand Final'
+        message: 'That wasn’t luck, Sky. That was Champions defense. We put 225 on the scoreboard batting first, held our nerve, and shut the door when you came chasing. A ten-run win is a ten-run win.',
+        verifiedContext: 'Match 13 (SF1): Champions defended 225 by 10 runs to reach the Grand Final'
       },
       {
         id: 'ps-3',
@@ -127,8 +127,8 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'knights',
         teamName: 'KNIGHTS',
         teamColor: '#F8FAFC',
-        message: 'All those regular season celebrations on Google Meet, only to watch Sunday’s Grand Final from the call lobby. Beautiful poetry.',
-        verifiedContext: 'Skyshot eliminated in 3rd place despite leading the tournament in regular-season points'
+        message: 'All those regular season celebrations, only to watch the Grand Final from the sidelines. You led the table all season and still didn’t make the decider.',
+        verifiedContext: 'Skyshot eliminated in the semi-finals despite leading the regular-season table (4-2, 8 pts)'
       }
     ]
   },
@@ -158,7 +158,7 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'skyshot',
         teamName: 'SKYSHOT',
         teamColor: '#00D2FF',
-        message: 'Congratulations, Jay. You scored 146 runs in Match 3, your team posted 291, and you still managed to finish dead last in the standings with four total points. That has to be an Olympic record for stat-padding.',
+        message: 'You scored 146 and still couldn’t take your franchise to the playoffs, Jay. That’s an impressive way to waste a good innings. Four total points at the bottom of the table.',
         verifiedContext: 'Knights finished 4th in league table (2 wins, 4 losses, 4 points)'
       },
       {
@@ -169,7 +169,7 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'champions',
         teamName: 'CHAMPIONS',
         teamColor: '#FF2E4D',
-        message: 'It was the ultimate feast or famine. In Match 3 Knights looked like world champions. Two games later against us, you collapsed to 122 all out. That’s the lowest score of the entire season!',
+        message: 'It was the ultimate feast or famine. In Match 3 Knights looked like world champions. Two games later against us, you were bowled out for 122. That’s the lowest team total of the entire tournament!',
         verifiedContext: 'Tournament Record: Knights lowest team score (122) vs Champions'
       },
       {
@@ -180,7 +180,7 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'authors',
         teamName: 'AUTHORS',
         teamColor: '#00E676',
-        message: 'Innings like that win highlights reels, Jay. Balanced elevens win championships. That’s why the trophy stays in the green corner.',
+        message: 'Innings like that win highlight reels, Jay. Balanced elevens win championships. That’s why the trophy stays in the green corner.',
         verifiedContext: 'Authors lifted the Season 1 trophy through collective squad depth'
       }
     ]
@@ -200,7 +200,7 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'authors',
         teamName: 'AUTHORS',
         teamColor: '#00E676',
-        message: 'Chasing 226 at over 11.3 an over under lights with everything on the line. King smashed 108 from 54, Cross blasted 46 off 23, and we hit the winning boundary with four balls to spare. That is how champions close.',
+        message: '225 on the scoreboard, runners-up on the record, UB. That’s a lot of runs for a silver medal. Chasing 226 with everything on the line, King delivered 108 off 54 and we crossed the line with four balls to spare. That is how champions close.',
         verifiedContext: 'Match 15 Final: Authors chased 226/7 in 19.2 ov — highest successful run chase in APL history'
       },
       {
@@ -211,7 +211,7 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'champions',
         teamName: 'CHAMPIONS',
         teamColor: '#FF2E4D',
-        message: 'We posted 225/8 in twenty overs. Harvy made 60, Stark dropped 40 off 16. Ninety-nine times out of a hundred, 225 wins you a championship final. King played the innings of his life — take four deliveries away and that cup is ours.',
+        message: 'Enjoy that trophy while you can. We put up 225/8 in twenty overs with Harvy making 60 and Stark scored 40 off 16. King had the chase of his life, but we will make sure you don’t get comfortable next season.',
         verifiedContext: 'Match 15 Final: Champions 225/8; Harvy 60 (33), Stark 40 (16), Parker 2/30'
       },
       {
@@ -222,7 +222,7 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'skyshot',
         teamName: 'SKYSHOT',
         teamColor: '#00D2FF',
-        message: 'I still hold the Purple Cap with twelve wickets. If we hadn’t left those ten runs out on the pitch in Semi-Final 1, Authors would have had to chase 226 against my bowling attack instead.',
+        message: 'I still hold the Purple Cap with twelve wickets. If we hadn’t left those ten runs out there in Semi-Final 1, Authors would have had to chase 226 against my bowling attack instead.',
         verifiedContext: 'Season 1 Honors: N. Sky won the Purple Cap with 12 tournament wickets'
       },
       {
@@ -233,10 +233,9 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'knights',
         teamName: 'KNIGHTS',
         teamColor: '#F8FAFC',
-        message: 'Would’ve, could’ve, should’ve. The history books don’t record "what if", Sky. Dharm chased 226, UB defended 225 once, and I hit 146. You’re holding a purple cap and zero final appearances. Roll on Season 2.',
+        message: 'Purple Cap looks great in your trophy cabinet, Sky. Shame the actual championship wasn’t available in your size. Dharm chased 226, UB defended 225 once, and I hit 146. You’re holding a cap and watching the celebration. Roll on Season 2.',
         verifiedContext: 'Ashes Premier League Season 1 conclusion'
       }
     ]
   }
 ];
-

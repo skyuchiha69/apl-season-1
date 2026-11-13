@@ -27,7 +27,7 @@ export const OwnersPage: React.FC = () => {
       favoriteCricketer: 'Rohit Sharma',
       captainAvatar: {
         name: 'Rohit Sharma',
-        note: 'Selected by Dharm for calculated batting aggression and ice-cold tactical composure.',
+        note: 'Honorary in-game captain avatar selected by Dharm.',
       },
       narrativeOverview: [
         'Dharm masterminded Authors’ path through an intensely competitive Season 1 campaign. Navigating an even 3–3 regular-season run that left Authors tied for second place on 6 points, his side peaked at the defining moment of the tournament.',
@@ -51,7 +51,7 @@ export const OwnersPage: React.FC = () => {
             name: 'R. Dharm',
             role: 'Bowler • Owner',
             headlineStat: '5 Tournament Wickets',
-            breakdown: '1/36 in 4.0 ov (Grand Final) • 4 League Wickets [2, 0, 1, 1, 0, 0, 0, 1]',
+            breakdown: '5 Total Tournament Wickets [2, 0, 1, 1, 0, 0, 0, 1] Across 8 Matches (Includes Grand Final: 1/36 (4.0 ov))',
           },
         ],
       },
@@ -72,7 +72,7 @@ export const OwnersPage: React.FC = () => {
       favoriteCricketer: 'MS Dhoni',
       captainAvatar: {
         name: 'MS Dhoni',
-        note: 'Selected by Umang for match-finishing acumen, composure, and high-pressure strategic defense.',
+        note: 'Honorary in-game captain avatar selected by Umang.',
       },
       narrativeOverview: [
         'Umang constructed Champions as a high-octane powerhouse capable of setting imposing totals. Champions posted 225 runs in both of their playoff matches, establishing one of the most formidable scoring records of the entire tournament.',
@@ -108,7 +108,7 @@ export const OwnersPage: React.FC = () => {
       favoriteCricketer: 'Jos Buttler',
       captainAvatar: {
         name: 'Jos Buttler',
-        note: 'Selected by Shubham for explosive boundary striking and aggressive powerplay tempo.',
+        note: 'Honorary in-game captain avatar selected by Shubham.',
       },
       narrativeOverview: [
         'Shubham established Skyshot as the gold standard of regular-season play. Skyshot dominated the 12-match double-round-robin phase, collecting four victories (8 points) to finish clear at the top of the league table.',
@@ -160,7 +160,7 @@ export const OwnersPage: React.FC = () => {
       favoriteCricketer: 'Shubman Gill',
       captainAvatar: {
         name: 'Shubman Gill',
-        note: 'Selected by Jay for classical stroke-making elegance, poise, and relentless run accumulation.',
+        note: 'Honorary in-game captain avatar selected by Jay.',
       },
       narrativeOverview: [
         'Jay powered Knights with breathtaking individual batting brilliance that defined the historical record book of APL Season 1. While Knights faced a challenging league campaign finishing fourth on 4 points, Jay produced the tournament’s most electrifying batting exhibitions.',
@@ -169,7 +169,7 @@ export const OwnersPage: React.FC = () => {
       keyMilestones: [
         'Scored the tournament’s all-time highest individual innings: 146 runs against Skyshot in Match 3.',
         'Propelled Knights to the all-time highest team score in APL history: 291 in Match 3.',
-        'Amassed 245 total runs in 6 league matches (average 40.8 runs per innings).',
+        'Amassed 245 total runs in 6 league matches.',
         'Scored the only recorded century for Knights in Season 1 (146 HS).',
         'Finished fourth in the regular season table with 2 wins (4 points), concluding in the league stage.',
       ],

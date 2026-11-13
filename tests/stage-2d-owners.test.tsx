@@ -83,6 +83,22 @@ describe('APL Stage 2D.2 — Owners Chronicle (/owners)', () => {
     expect(html).toContain('Archival Identity Protocol • Honorary Captain Avatars');
     expect(html).toContain('honorary in-game captain avatars');
     expect(html).toContain('Professional international players did not participate');
+
+    // Neutral descriptions for all four honorary captains
+    expect(html).toContain('Honorary in-game captain avatar selected by Dharm.');
+    expect(html).toContain('Honorary in-game captain avatar selected by Umang.');
+    expect(html).toContain('Honorary in-game captain avatar selected by Shubham.');
+    expect(html).toContain('Honorary in-game captain avatar selected by Jay.');
+
+    // Negative assertions: Ensure NO invented captain-selection rationales appear
+    expect(html).not.toContain('calculated batting aggression');
+    expect(html).not.toContain('ice-cold tactical composure');
+    expect(html).not.toContain('match-finishing acumen');
+    expect(html).not.toContain('clutch high-pressure leadership');
+    expect(html).not.toContain('explosive boundary striking');
+    expect(html).not.toContain('powerplay dominance');
+    expect(html).not.toContain('classical stroke-making elegance');
+    expect(html).not.toContain('relentless run accumulation');
   });
 
   it('3. should verify Dharm chapter: 3-3 league, SF2 upset, 226 chase, and 5 tournament wickets (NEVER 10)', () => {
@@ -93,11 +109,14 @@ describe('APL Stage 2D.2 — Owners Chronicle (/owners)', () => {
     expect(html).toContain('hunting down 226/7 in 19.2 overs');
     expect(html).toContain('A. King’s heroic 108 off 54');
     expect(html).toContain('5 Tournament Wickets');
-    expect(html).toContain('1/36 in 4.0 ov (Grand Final)');
+    expect(html).toContain('5 Total Tournament Wickets [2, 0, 1, 1, 0, 0, 0, 1]');
+    expect(html).toContain('Across 8 Matches');
+    expect(html).toContain('Includes Grand Final: 1/36 (4.0 ov)');
     expect(html).toContain('R. Dharm');
 
     // Historical Accuracy: Dharm has 5 wickets, NEVER 10
     expect(html).not.toContain('10 verified wickets');
+    expect(html).not.toContain('10 Wickets');
   });
 
   it('4. should verify Umang chapter with verbatim neutral archival disclosure', () => {
@@ -134,6 +153,7 @@ describe('APL Stage 2D.2 — Owners Chronicle (/owners)', () => {
     expect(html).not.toContain('3rd Place • APL');
     expect(html).not.toContain('3rd Place (League');
     expect(html).not.toContain('Third Place');
+    expect(html).not.toContain('third-place');
   });
 
   it('6. should verify Jay chapter: 146 highest score, 291 team total, 245 season runs, and league stage finish', () => {
@@ -145,6 +165,10 @@ describe('APL Stage 2D.2 — Owners Chronicle (/owners)', () => {
     expect(html).toContain('245 total runs in 6 league matches');
     expect(html).toContain('4th Place (League Stage)');
     expect(html).toContain('League Stage (4th Place)');
+
+    // Unsupported averages or subjective traits must NOT appear
+    expect(html).not.toContain('40.8');
+    expect(html).not.toContain('average 40.8 runs per innings');
   });
 
   it('7. should dynamically derive all six head-to-head records matching verified outcomes', () => {
@@ -209,31 +233,51 @@ describe('APL Stage 2D.2 — Owners Chronicle (/owners)', () => {
     expect(html).toContain('Match #15');
   });
 
-  it('9. should disclose missing scorecards and preserve Match 4, 10, 13, 14, 15 records', () => {
+  it('9. should disclose missing scorecards and preserve Match 4, 10, 13, 14, 15 records from data', () => {
     const html = renderWithProviders(<OwnersPage />);
 
     // Missing scorecard disclosure for league matches
     expect(html).toContain('Official result recorded; detailed scorecard not surviving in archive');
 
     // Match 14 qualification disclosure
+    expect(html).toContain('AUTHORS qualified for Final');
     expect(html).toContain('Scorecard and run margin unrecorded; Authors victory officially verified');
 
-    // Match 13 SF1 defense
+    // Match 13 SF1 defense (derived from match records)
     expect(html).toContain('CHAMPIONS 225 vs SKYSHOT 215/5 (20.0 ov)');
-    expect(html).toContain('Champions won by 10 runs • Defended 225 to qualify for Grand Final');
+    expect(html).toContain('CHAMPIONS won by 10 runs • Defended 225 to qualify for Grand Final');
+    expect(html).toContain('First innings total (225) preserved from match summary');
 
-    // Match 15 Final decider
-    expect(html).toContain('CHAMPIONS 225/8');
-    expect(html).toContain('AUTHORS 226/7');
-    expect(html).toContain('Authors won by 3 wickets (Chased 226 in 19.2 ov)');
+    // Match 15 Final decider (derived from stored innings)
+    expect(html).toContain('CHAMPIONS 225/8 (20.0 ov) vs AUTHORS 226/7 (19.2 ov)');
+    expect(html).toContain('AUTHORS won by 3 wickets • Complete scorecard preserved');
   });
 
-  it('10. should render rivalry banter with the verbatim required disclaimer', () => {
+  it('10. should render rivalry banter with the verbatim required disclaimer and grounded historical banter', () => {
     const html = renderWithProviders(<OwnersPage />);
 
     expect(html).toContain('RIVALRY ROOM BANTER');
     expect(html).toContain(BANTER_DISCLOSURE);
     expect(html).toContain('APL Editorial Banter • Fictional Rivalry Dialogue • Grounded in Verified Season 1 Outcomes.');
+
+    // Grounded historical banter assertions
+    expect(html).toContain('Stark scored 40 off 16');
+
+    // Negative assertions: ensure no unsupported banter claims
+    expect(html).not.toContain('+NRR');
+    expect(html).not.toContain('-NRR');
+    expect(html).not.toContain('net run rate math');
+    expect(html).not.toContain('Net Run Rate');
+    expect(html).not.toContain('direct hits');
+    expect(html).not.toContain('freak run-out');
+    expect(html).not.toContain('two run-outs in three balls');
+    expect(html).not.toContain('Stark dropped 40');
+    expect(html).not.toContain('call lobby');
+    expect(html).not.toContain('Tuesday night');
+    expect(html).not.toContain("Sunday's");
+    expect(html).not.toContain('winning boundary');
+    expect(html).not.toContain('stadium');
+    expect(html).not.toContain('walked into your stadium');
   });
 
   it('11. should render legacy epilogue with cross-links to /teams, /matches, and /stats', () => {

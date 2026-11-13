@@ -7,7 +7,8 @@ import { MatchesPage } from '../pages/Matches/MatchesPage';
 import { TeamsPage } from '../pages/Teams/TeamsPage';
 import { TeamDetailPage } from '../pages/Teams/TeamDetailPage';
 import { OwnersPage } from '../pages/Owners/OwnersPage';
-import { Trophy, Award } from 'lucide-react';
+import { HallOfFamePage } from '../pages/HallOfFame/HallOfFamePage';
+import { Trophy } from 'lucide-react';
 
 // Generic placeholder for future milestone routes
 const RoutePlaceholder: React.FC<{ title: string; subtitle: string; icon: React.ReactNode }> = ({
@@ -48,16 +49,7 @@ export const AppRouter: React.FC = () => {
       <Route path="/teams/:teamId" element={<TeamDetailPage />} />
       <Route path="/stats" element={<StatsPage />} />
       <Route path="/matches" element={<MatchesPage />} />
-      <Route
-        path="/hall-of-fame"
-        element={
-          <RoutePlaceholder
-            title="Hall of Fame"
-            subtitle="Stage 5 Target: Permanent trophy inductees, golden caps, and historic records ceremony."
-            icon={<Award className="w-8 h-8" />}
-          />
-        }
-      />
+      <Route path="/hall-of-fame" element={<HallOfFamePage />} />
       <Route
         path="*"
         element={
