@@ -1,0 +1,47 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies and build outputs
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Environment & local configurations
+.env
+.env.local
+.env.*.local
+*.env
+
+# Testing & tool scratch directories
+coverage/
+.gemini/
+*.tmp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Private APL Source Assets (Excluded from Public Distribution)
+Apl ( Season 1 ).pdf
+public/assets/gallery/meet-cousins-tension.png
+public/assets/gallery/meet-gameplay-climax.png
+public/assets/gallery/meet-sf1-scorecard.png

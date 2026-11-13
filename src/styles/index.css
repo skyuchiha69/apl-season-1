@@ -1,0 +1,81 @@
+@import './themes.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#08090C] text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-amber-400 selection:text-black;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-white;
+  }
+}
+
+/* Atmospheric Stadium Lighting & Backgrounds */
+.bg-stadium-night {
+  background-color: #08090C;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(245, 184, 0, 0.12), transparent 75%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(14, 22, 38, 0.5), transparent 80%);
+}
+
+.stadium-floodlight-beam {
+  background: radial-gradient(ellipse 50% 70% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, rgba(245, 184, 0, 0.04) 40%, transparent 80%);
+}
+
+.stadium-pitch-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 230, 118, 0.04) 0%, transparent 70%);
+}
+
+/* Premium Sports Card & Border Treatments */
+.stadium-card {
+  background-color: #0F121A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+}
+
+.stadium-card-gold {
+  background: linear-gradient(145deg, #121520 0%, #0A0D14 100%);
+  border: 1px solid rgba(245, 184, 0, 0.25);
+  box-shadow: 0 15px 35px -10px rgba(245, 184, 0, 0.15);
+}
+
+.gold-border-glow {
+  border: 1px solid rgba(245, 184, 0, 0.35);
+  box-shadow: 0 0 20px rgba(245, 184, 0, 0.15);
+}
+
+/* Subtle Floodlight Pulse Animation */
+@keyframes floodlight-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+@keyframes subtle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.animate-floodlight {
+  animation: floodlight-pulse 6s ease-in-out infinite;
+}
+
+.animate-subtle-bounce {
+  animation: subtle-bounce 2s ease-in-out infinite;
+}
+
+/* Accessibility: Strict Prefers-Reduced-Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-delay: 0s !important;
+    transition-duration: 0s !important;
+  }
+}
