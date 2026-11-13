@@ -9,6 +9,7 @@ export const season1Players: Player[] = [
     aliases: ['King'],
     teamId: 'authors',
     role: 'batsman',
+    isCaptain: true,
     stats: {
       runs: 527,
       inningsRuns: [94, 81, 71, 40, 3, 25, 105, 108],
@@ -190,6 +191,7 @@ export const season1Players: Player[] = [
     aliases: ['Stark'],
     teamId: 'champions',
     role: 'batsman',
+    isCaptain: true,
     stats: {
       runs: 228,
       inningsRuns: [112, 0, 2, 8, 28, 24, 14, 40],
@@ -436,6 +438,7 @@ export const season1Players: Player[] = [
     teamId: 'skyshot',
     role: 'batsman',
     isOwner: true,
+    isCaptain: true,
     stats: {
       runs: 134,
       inningsRuns: [51, 0, 32, 20, 19, 12, 0, 0],
@@ -468,7 +471,6 @@ export const season1Players: Player[] = [
     aliases: ['Sky'],
     teamId: 'skyshot',
     role: 'all-rounder',
-    isOwner: true,
     stats: {
       runs: 23,
       inningsRuns: [0, 0, 20, 0, 0, 3, 0, 0],
@@ -557,6 +559,7 @@ export const season1Players: Player[] = [
     teamId: 'knights',
     role: 'batsman',
     isOwner: true,
+    isCaptain: true,
     stats: {
       runs: 245,
       inningsRuns: [18, 146, 21, 36, 0, 24],

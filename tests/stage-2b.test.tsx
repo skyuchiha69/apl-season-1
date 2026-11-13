@@ -76,7 +76,7 @@ describe('APL Stage 2B — Four Cousins & Rivalry Room Unit & Integration Tests'
       expect(html).toContain('The Four Cousins.');
     });
 
-    it('should present all four cousins as both owners and players', () => {
+    it('should present all four cousins as owners and leaders', () => {
       const html = renderToString(
         <MemoryRouter>
           <CousinsSection />
@@ -93,30 +93,29 @@ describe('APL Stage 2B — Four Cousins & Rivalry Room Unit & Integration Tests'
       expect(html).toContain('Jay');
       expect(html).toContain('Red');
 
-      // Dual roles highlighted
+      // Roles highlighted
       expect(html).toContain('Franchise Owner &amp; Championship Bowler');
-      expect(html).toContain('Franchise Owner &amp; Battle-Hardened Player');
-      expect(html).toContain('Franchise Owner &amp; Dual-Threat All-Rounder');
-      expect(html).toContain('Franchise Owner &amp; Premier Record Batsman');
+      expect(html).toContain('Franchise Owner &amp; Tactical Architect');
+      expect(html).toContain('Franchise Owner &amp; Team Captain');
     });
 
-    it('should explicitly separate honorary international captain avatars with a disclaimer banner', () => {
+    it('should explicitly present actual on-field team captains with a disclaimer banner', () => {
       const html = renderToString(
         <MemoryRouter>
           <CousinsSection />
         </MemoryRouter>
       );
 
-      // Captain avatars
-      expect(html).toContain('Rohit Sharma');
-      expect(html).toContain('MS Dhoni');
-      expect(html).toContain('Jos Buttler');
-      expect(html).toContain('Shubman Gill');
+      // Team captains
+      expect(html).toContain('King');
+      expect(html).toContain('Stark');
+      expect(html).toContain('Shubham');
+      expect(html).toContain('Jay');
 
       // Architecture disclaimer
-      expect(html).toContain('Dual Identity &amp; Honorary Avatar Architecture:');
-      expect(html).toContain('honorary digital captain avatars');
-      expect(html).toContain('did not literally participate');
+      expect(html).toContain('Franchise Ownership &amp; On-Field Team Captaincy:');
+      expect(html).toContain('real-life strategic franchise owners');
+      expect(html).toContain('actual in-game captains');
     });
 
     it('should display verified tournament player stats for each cousin', () => {
@@ -134,9 +133,10 @@ describe('APL Stage 2B — Four Cousins & Rivalry Room Unit & Integration Tests'
       expect(html).toContain('Defended 225 (Won by 10)');
       expect(html).toContain('225/8 in 20.0 ov');
 
-      // Shubham
-      expect(html).toContain('12 Wickets (No. 1)');
+      // Shubham (134 runs, 51 HS; NOT 12 wickets)
       expect(html).toContain('134 Runs');
+      expect(html).toContain('51 (1 Fifty)');
+      expect(html).not.toContain('12 Wickets (No. 1)');
 
       // Jay
       expect(html).toContain('146 Runs (Match 3)');

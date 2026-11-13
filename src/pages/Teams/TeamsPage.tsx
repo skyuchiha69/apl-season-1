@@ -152,7 +152,7 @@ export const TeamsPage: React.FC = () => {
                 Archival Identity Architecture:
               </strong>
               The four cousins (Dharm, Umang, Shubham, Jay) are the real-life franchise owners, tacticians, and tournament competitors.
-              International cricketers (Rohit Sharma, MS Dhoni, Jos Buttler, Shubman Gill) serve as digital in-game captain avatars selected by each owner, not literal participants.
+              On the field, the franchises were led by their actual in-game captains: A. King (Authors), T. Stark (Champions), Shubham (Skyshot), and Jay (Knights).
             </div>
           </div>
 
@@ -242,7 +242,7 @@ export const TeamsPage: React.FC = () => {
                         </strong>
                       </div>
                       <div className="space-y-1">
-                        <span className="text-[10px] text-[#87968B] uppercase block">Honorary Captain:</span>
+                        <span className="text-[10px] text-[#87968B] uppercase block">Team Captain:</span>
                         <strong className="text-[#EAE4D8] block">
                           {team.captain.name}
                         </strong>

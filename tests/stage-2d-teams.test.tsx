@@ -48,7 +48,7 @@ describe('APL Stage 2D.1 — Franchises Hub & Four Team Portals', () => {
       expect(html).toContain('Franchises Hub');
     });
 
-    it('2. should render all four franchises with correct names, owners, and captain avatars', () => {
+    it('2. should render all four franchises with correct names, owners, and team captains', () => {
       const html = renderWithProviders(<TeamsPage />);
 
       // Franchise Names
@@ -63,11 +63,11 @@ describe('APL Stage 2D.1 — Franchises Hub & Four Team Portals', () => {
       expect(html).toContain('Shubham');
       expect(html).toContain('Jay');
 
-      // Four Honorary Captain Avatars
-      expect(html).toContain('Rohit Sharma');
-      expect(html).toContain('MS Dhoni');
-      expect(html).toContain('Jos Buttler');
-      expect(html).toContain('Shubman Gill');
+      // Four Team Captains
+      expect(html).toContain('King');
+      expect(html).toContain('Stark');
+      expect(html).toContain('Shubham');
+      expect(html).toContain('Jay');
     });
 
     it('3. should explicitly display Authors and Champions as tied second (T-2nd)', () => {
@@ -96,7 +96,7 @@ describe('APL Stage 2D.1 — Franchises Hub & Four Team Portals', () => {
 
       expect(html).toContain('Archival Identity Architecture:');
       expect(html).toContain('real-life franchise owners, tacticians, and tournament competitors');
-      expect(html).toContain('digital in-game captain avatars');
+      expect(html).toContain('actual in-game captains');
     });
   });
 
@@ -167,7 +167,7 @@ describe('APL Stage 2D.1 — Franchises Hub & Four Team Portals', () => {
       expect(html).toContain('His verified role as Champions franchise owner and tactical architect is preserved here');
     });
 
-    it('9. should render Skyshot portal with Shubham batting and bowling avatars distinct', () => {
+    it('9. should render Skyshot portal with Shubham batting and strike bowler N. Sky distinct', () => {
       const html = renderAppRoute('/teams/skyshot');
 
       expect(html).toContain('SKYSHOT');
@@ -180,9 +180,9 @@ describe('APL Stage 2D.1 — Franchises Hub & Four Team Portals', () => {
       expect(html).toContain('N. Sky');
       expect(html).toContain('12 Wickets');
 
-      // Both Shubham characters distinct
-      expect(html).toContain('Recorded in-game batting character for cousin owner Shubham (Sky)');
-      expect(html).toContain('Recorded in-game all-rounder character for cousin owner Shubham (Sky)');
+      // Shubham batting and N. Sky distinct
+      expect(html).toContain('Franchise owner and on-field team captain for Skyshot • 134 runs, 1 fifty.');
+      expect(html).toContain('Skyshot strike bowler &amp; Purple Cap winner (12 wickets across 8 matches).');
 
       // 11 verified squad players
       const skyshotPlayers = season1Players.filter((p) => p.teamId === 'skyshot');

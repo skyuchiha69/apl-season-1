@@ -125,7 +125,7 @@ export const TeamHero: React.FC<TeamHeroProps> = ({ team }) => {
         </div>
       </div>
 
-      {/* Leadership Distinction Module — Strictly separates Owner vs Honorary Captain */}
+      {/* Leadership Distinction Module — Owner & Team Captain */}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {/* Cousin Owner Card */}
         <div className="p-4 sm:p-5 rounded-xl bg-[#0E1713] border border-[#EAE4D8]/15 relative overflow-hidden group hover:border-[#B99A5B]/40 transition-colors">
@@ -136,7 +136,7 @@ export const TeamHero: React.FC<TeamHeroProps> = ({ team }) => {
                 style={{ backgroundColor: primaryColor }}
               />
               <span className="text-[11px] font-mono tracking-wider uppercase text-[#B99A5B] font-semibold">
-                Franchise Owner & Strategist
+                Franchise Owner &amp; Strategist
               </span>
             </div>
             <span className="text-[10px] font-mono text-[#87968B] uppercase">Real-Life Architect</span>
@@ -179,16 +179,16 @@ export const TeamHero: React.FC<TeamHeroProps> = ({ team }) => {
           </div>
         </div>
 
-        {/* Honorary International Captain Avatar Card */}
+        {/* Actual Team Captain Card */}
         <div className="p-4 sm:p-5 rounded-xl bg-[#0E1713] border border-[#EAE4D8]/15 relative overflow-hidden group hover:border-[#EAE4D8]/30 transition-colors">
           <div className="flex items-center justify-between pb-3 border-b border-[#EAE4D8]/10 mb-3">
             <div className="flex items-center space-x-2">
               <UserCheck className="w-3.5 h-3.5 text-[#B99A5B]" />
               <span className="text-[11px] font-mono tracking-wider uppercase text-[#B99A5B] font-semibold">
-                Honorary Captain Avatar
+                Team Captain
               </span>
             </div>
-            <span className="text-[10px] font-mono text-[#87968B] uppercase">Digital Persona</span>
+            <span className="text-[10px] font-mono text-[#87968B] uppercase">On-Field Leader</span>
           </div>
 
           <div className="space-y-2">
@@ -196,20 +196,19 @@ export const TeamHero: React.FC<TeamHeroProps> = ({ team }) => {
               <h2 className="text-xl sm:text-2xl font-bold font-display text-[#EAE4D8]">
                 {team.captain.name}
               </h2>
-              <span className="text-xs font-mono text-[#87968B]">
-                (Digital In-Game Avatar)
+              <span className="text-xs font-mono text-[#B99A5B]">
+                (Official Captain)
               </span>
             </div>
 
             <p className="text-xs font-sans text-[#A69F92] leading-relaxed">
-              Selected by <strong className="text-[#EAE4D8]">{team.owner.name}</strong> as the team’s digital gameplay captain.
-              International cricketers did not participate in person; they serve as tactical digital avatars in the cousins’ PC tournament.
+              Official on-field captain for <strong className="text-[#EAE4D8]">{team.name}</strong> during APL Season 1, leading tactical executions and in-game decisions.
             </p>
 
             <div className="pt-1 text-[11px] font-mono text-[#87968B]">
-              <span>Inspiration: </span>
+              <span>Owner&apos;s Favorite Cricketer: </span>
               <span className="text-[#EAE4D8] font-semibold">
-                {team.owner.favouriteCricketer} (Owner’s Favorite Cricketer)
+                {team.owner.favouriteCricketer} (Personal Preference)
               </span>
             </div>
           </div>

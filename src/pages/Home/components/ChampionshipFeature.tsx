@@ -65,7 +65,7 @@ export const ChampionshipFeature: React.FC = () => {
                   <h3 className="font-display text-2xl sm:text-3xl font-black text-[#EAE4D8] tracking-wide">
                     CHAMPIONS
                   </h3>
-                  <span className="text-[11px] sm:text-xs text-[#87968B] font-sans block">Owner: Umang (UB) • Capt: MS Dhoni</span>
+                  <span className="text-[11px] sm:text-xs text-[#87968B] font-sans block">Owner: Umang (UB) • Capt: Stark</span>
                 </div>
                 <div className="text-right shrink-0">
                   <div className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-rose-400 tracking-tight leading-none">
@@ -107,7 +107,7 @@ export const ChampionshipFeature: React.FC = () => {
                   <h3 className="font-display text-2xl sm:text-3xl font-black text-[#EAE4D8] tracking-wide">
                     AUTHORS
                   </h3>
-                  <span className="text-[11px] sm:text-xs text-[#87968B] font-sans block">Owner: Dharm • Capt: Rohit Sharma</span>
+                  <span className="text-[11px] sm:text-xs text-[#87968B] font-sans block">Owner: Dharm • Capt: King</span>
                 </div>
                 <div className="text-right shrink-0">
                   <div className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-400 tracking-tight leading-none">

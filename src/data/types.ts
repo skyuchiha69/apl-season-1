@@ -34,8 +34,9 @@ export interface Owner {
 
 export interface Captain {
   name: string;
-  realLifeCounterpart: string;
+  realLifeCounterpart?: string;
   teamId: TeamId;
+  playerId?: string;
 }
 
 export interface PlayerStats {
@@ -68,6 +69,7 @@ export interface Player {
   teamId: TeamId;
   role: PlayerRole;
   isCaptainIcon?: boolean;
+  isCaptain?: boolean;
   isOwner?: boolean;
   stats: PlayerStats;
 }

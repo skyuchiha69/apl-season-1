@@ -188,28 +188,35 @@ export const SquadRoster: React.FC<SquadRosterProps> = ({ team, players }) => {
                     </span>
                   </div>
 
-                  {/* Owner Avatar Badge */}
-                  {player.isOwner && (
-                    <span className="shrink-0 px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#B99A5B]/20 text-[#B99A5B] border border-[#B99A5B]/40 uppercase">
-                      Cousin Owner
-                    </span>
-                  )}
+                  {/* Badges: Captain & Owner */}
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    {player.isCaptain && (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase">
+                        Captain
+                      </span>
+                    )}
+                    {player.isOwner && (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#B99A5B]/20 text-[#B99A5B] border border-[#B99A5B]/40 uppercase">
+                        Cousin Owner
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Identity Clarification Notes */}
                 {isShubhamBat && (
                   <p className="text-[11px] font-sans text-cyan-300/90 bg-cyan-950/20 p-2 rounded border border-cyan-800/30">
-                    Recorded in-game batting character for cousin owner Shubham (Sky) • 134 runs, 1 fifty.
+                    Franchise owner and on-field team captain for Skyshot • 134 runs, 1 fifty.
                   </p>
                 )}
                 {isSkyBowler && (
-                  <p className="text-[11px] font-sans text-cyan-300/90 bg-cyan-950/20 p-2 rounded border border-cyan-800/30">
-                    Recorded in-game all-rounder character for cousin owner Shubham (Sky) • Purple Cap winner (12 wickets).
+                  <p className="text-[11px] font-sans text-purple-300/90 bg-purple-950/20 p-2 rounded border border-purple-800/30">
+                    Skyshot strike bowler &amp; Purple Cap winner (12 wickets across 8 matches).
                   </p>
                 )}
                 {isJay && (
                   <p className="text-[11px] font-sans text-slate-300 bg-slate-900/40 p-2 rounded border border-slate-700/40">
-                    Tournament record holder: 146 runs in a single innings vs Skyshot.
+                    Knights owner &amp; team captain • Tournament record: 146 runs in a single innings vs Skyshot.
                   </p>
                 )}
                 {isDharm && (

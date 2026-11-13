@@ -54,7 +54,7 @@ describe('APL Stage 2D.2 — Owners Chronicle (/owners)', () => {
     expect(html).toContain('Documentary Archive • APL Season 1');
   });
 
-  it('2. should present all four cousin owners, their franchises, and honorary captain avatars', () => {
+  it('2. should present all four cousin owners, their franchises, and actual team captains', () => {
     const html = renderWithProviders(<OwnersPage />);
 
     // Four Cousin Owners
@@ -73,22 +73,21 @@ describe('APL Stage 2D.2 — Owners Chronicle (/owners)', () => {
     expect(html).toContain('SKYSHOT');
     expect(html).toContain('KNIGHTS');
 
-    // Honorary Captain Avatars
-    expect(html).toContain('Rohit Sharma');
-    expect(html).toContain('MS Dhoni');
-    expect(html).toContain('Jos Buttler');
-    expect(html).toContain('Shubman Gill');
+    // Actual Team Captains
+    expect(html).toContain('King');
+    expect(html).toContain('Stark');
+    expect(html).toContain('Shubham');
+    expect(html).toContain('Jay');
 
-    // Explicit Avatar Distinction
-    expect(html).toContain('Archival Identity Protocol • Honorary Captain Avatars');
-    expect(html).toContain('honorary in-game captain avatars');
-    expect(html).toContain('Professional international players did not participate');
+    // Explicit Identity Protocol
+    expect(html).toContain('Archival Identity Protocol • Team Captains & Ownership');
+    expect(html).toContain('On-field tactical leadership and team captaincy were executed by the actual in-game captains');
 
-    // Neutral descriptions for all four honorary captains
-    expect(html).toContain('Honorary in-game captain avatar selected by Dharm.');
-    expect(html).toContain('Honorary in-game captain avatar selected by Umang.');
-    expect(html).toContain('Honorary in-game captain avatar selected by Shubham.');
-    expect(html).toContain('Honorary in-game captain avatar selected by Jay.');
+    // Descriptions for all four team captains
+    expect(html).toContain('Championship-winning captain of Authors.');
+    expect(html).toContain('Top-order batsman and on-field captain of Champions.');
+    expect(html).toContain('On-field team captain and franchise owner of Skyshot.');
+    expect(html).toContain('Franchise owner, record-holder, and on-field captain of Knights.');
 
     // Negative assertions: Ensure NO invented captain-selection rationales appear
     expect(html).not.toContain('calculated batting aggression');
@@ -133,20 +132,21 @@ describe('APL Stage 2D.2 — Owners Chronicle (/owners)', () => {
     expect(html).toContain(expectedUmangDisclosure);
   });
 
-  it('5. should verify Shubham chapter, dual gameplay characters, and no third-place claim for Skyshot', () => {
+  it('5. should verify Shubham chapter, single gameplay character, and no third-place claim for Skyshot', () => {
     const html = renderWithProviders(<OwnersPage />);
 
     expect(html).toContain('Regular-Season Pacesetter');
     expect(html).toContain('1st Place (League Stage Topper)');
     expect(html).toContain('4 Wins – 2 Losses (8 Pts)');
-    expect(html).toContain('Purple Cap with 12 wickets');
 
-    // Dual in-game characters
-    expect(html).toContain('Dual In-Game Gameplay Characters');
+    // Single in-game character
+    expect(html).toContain('In-Game Player Identity');
     expect(html).toContain('134 Runs (1 Fifty)');
-    expect(html).toContain('12 Wickets • Purple Cap Winner');
     expect(html).toContain('shubham_bat');
-    expect(html).toContain('sky');
+
+    // N. Sky and Purple Cap must NOT be in Shubham's owner chapter
+    expect(html).not.toContain('Dual In-Game Gameplay Characters');
+    expect(html).not.toContain('12 Wickets • Purple Cap Winner');
 
     // Skyshot is NEVER designated as 3rd Place
     expect(html).toContain('Regular Season Topper • Playoff Semi-Finalist');

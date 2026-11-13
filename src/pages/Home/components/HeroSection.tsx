@@ -54,7 +54,7 @@ export const HeroSection: React.FC = () => {
             {/* Editorial Lead Copy */}
             <p className="text-sm sm:text-base lg:text-lg text-[#A69F92] font-sans leading-relaxed max-w-xl">
               What began as late-night PC cricket matches between four cousins transformed into a full
-              fifteen-match championship. Four drafted squads, four international captain avatars, and an
+              fifteen-match championship. Four drafted squads, four fierce franchise rivalries, and an
               unforgettable chase of 226 on championship night.
             </p>
 

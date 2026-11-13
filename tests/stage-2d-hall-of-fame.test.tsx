@@ -109,10 +109,13 @@ describe('APL Stage 2D.3 — Hall of Fame (/hall-of-fame)', () => {
     expect(html).toContain('146 (Jay, Match 3)');
     expect(html).toContain('4th Place (2–4, 4 Pts)');
 
-    // Explicit Avatar Protocol
-    expect(html).toContain('Archival Identity Protocol • In-Game Honorary Captain Avatars');
-    expect(html).toContain('Professional international cricketers');
-    expect(html).toContain('did not participate');
+    // Explicit Team Captain & Ownership Protocol
+    expect(html).toContain('Archival Identity Protocol • Team Captains & Ownership');
+    expect(html).toContain('Tactical leadership and on-field captaincy were executed by the actual in-game captains');
+    expect(html).toContain('Team Captain: King');
+    expect(html).toContain('Team Captain: Stark');
+    expect(html).toContain('Team Captain: Shubham');
+    expect(html).toContain('Team Captain: Jay');
   });
 
   it('4. should verify Golden Caps monuments for Orange Cap (A. King, 527) and Purple Cap (N. Sky, 12)', () => {

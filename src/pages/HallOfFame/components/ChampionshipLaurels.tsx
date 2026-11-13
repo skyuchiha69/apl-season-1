@@ -13,7 +13,7 @@ export const ChampionshipLaurels: React.FC = () => {
       teamName: 'AUTHORS',
       ownerName: 'Dharm',
       ownerNickname: 'Green',
-      captainAvatar: 'Rohit Sharma',
+      teamCaptain: 'King',
       keyFeat: 'Chased 226/7 in 19.2 overs to win Grand Final by 3 wickets',
       narrative:
         'Guided by franchise founder and bowler Dharm, Authors navigated an even 3–3 regular season before peaking in the postseason. After eliminating table-toppers Skyshot in Semi-Final 2, Authors achieved the defining chase of Season 1—hunting down 226 against Champions with four deliveries remaining to claim the inaugural APL title.',
@@ -34,7 +34,7 @@ export const ChampionshipLaurels: React.FC = () => {
       teamName: 'CHAMPIONS',
       ownerName: 'Umang',
       ownerNickname: 'UB',
-      captainAvatar: 'MS Dhoni',
+      teamCaptain: 'Stark',
       keyFeat: 'Posted 225 runs in back-to-back playoff fixtures',
       narrative:
         'Tactically constructed by Umang, Champions established themselves as the tournament’s premier high-scoring machine. Champions posted 225 runs in both playoff matches: defending 225 by 10 runs in Semi-Final 1 to knock out regular-season leaders Skyshot, then posting 225/8 in a thrilling Grand Final.',
@@ -55,7 +55,7 @@ export const ChampionshipLaurels: React.FC = () => {
       teamName: 'SKYSHOT',
       ownerName: 'Shubham',
       ownerNickname: 'Sky',
-      captainAvatar: 'Jos Buttler',
+      teamCaptain: 'Shubham',
       keyFeat: 'Topped the 12-match regular season with 4 wins and 8 points',
       narrative:
         'Spearheaded by Shubham, Skyshot dominated the double-round-robin regular season, finishing clear at the summit of the league table with four victories. While their campaign concluded in the semi-finals, Skyshot set the gold standard of league consistency and secured the tournament Purple Cap via N. Sky.',
@@ -76,7 +76,7 @@ export const ChampionshipLaurels: React.FC = () => {
       teamName: 'KNIGHTS',
       ownerName: 'Jay',
       ownerNickname: 'Red',
-      captainAvatar: 'Shubman Gill',
+      teamCaptain: 'Jay',
       keyFeat: 'Highest individual score (146) and team total (291) in APL history',
       narrative:
         'Spearheaded by franchise owner and premier batsman Jay, Knights delivered the most electrifying individual batting masterclass of Season 1. In Match 3 against Skyshot, Jay smashed an all-time tournament record 146 runs, propelling Knights to an immortal 291 team score before concluding their campaign in the league stage.',
@@ -134,7 +134,7 @@ export const ChampionshipLaurels: React.FC = () => {
                     <span>Owner: <strong>{l.ownerName}</strong> ({l.ownerNickname})</span>
                   </div>
                   <div className="text-[10px] font-mono text-[#87968B] mt-1">
-                    Honorary Captain Avatar: {l.captainAvatar}
+                    Team Captain: {l.teamCaptain}
                   </div>
                 </div>
               </div>
@@ -171,9 +171,9 @@ export const ChampionshipLaurels: React.FC = () => {
           <Info className="w-4 h-4 text-[#B99A5B] shrink-0 mt-0.5" />
           <div>
             <strong className="text-[#EAE4D8] font-mono uppercase tracking-wider block mb-0.5">
-              Archival Identity Protocol • In-Game Honorary Captain Avatars
+              Archival Identity Protocol • Team Captains &amp; Ownership
             </strong>
-            The four APL franchises were solely owned, managed, and contested by the four real-life cousins (Dharm, Umang, Shubham, Jay). Professional international cricketers (Rohit Sharma, MS Dhoni, Jos Buttler, Shubman Gill) were selected strictly as honorary in-game digital avatar representations and did not participate in the private tournament.
+            The four APL franchises were solely owned, managed, and contested by the four real-life cousins (Dharm, Umang, Shubham, Jay). Tactical leadership and on-field captaincy were executed by the actual in-game captains (King, Stark, Shubham, Jay), while international cricketers represent owner personal favorites and inspirations.
           </div>
         </div>
       </div>

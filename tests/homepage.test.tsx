@@ -92,11 +92,11 @@ describe('APL Visual Identity & Editorial Homepage Tests', () => {
     expect(html).toContain('Shubham (Sky)');
     expect(html).toContain('Jay');
 
-    // Check captain identities
-    expect(html).toContain('Rohit Sharma');
-    expect(html).toContain('MS Dhoni');
-    expect(html).toContain('Jos Buttler');
-    expect(html).toContain('Shubman Gill');
+    // Check team captains
+    expect(html).toContain('King');
+    expect(html).toContain('Stark');
+    expect(html).toContain('Shubham');
+    expect(html).toContain('Jay');
   });
 
   it('should render the Legacy section with the origin narrative and victory asset', () => {

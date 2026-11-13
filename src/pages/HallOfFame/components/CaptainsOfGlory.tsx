@@ -148,7 +148,7 @@ export const CaptainsOfGlory: React.FC = () => {
 
             {/* Editorial Narrative */}
             <p className="text-sm text-[#A69F92] leading-relaxed font-sans mb-6">
-              Representing the bowling persona of cousin owner Shubham, N. Sky dominated the tournament wickets ledger
+              As Skyshot&apos;s premier strike bowler, N. Sky dominated the tournament wickets ledger
               from wire to wire. Capturing 12 wickets across eight appearances, Sky recorded two separate four-wicket hauls
               to power Skyshot to the top of the regular-season table and secure the definitive Season 1 Purple Cap.
             </p>

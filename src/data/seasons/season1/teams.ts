@@ -15,8 +15,8 @@ export const season1Teams: Record<TeamId, Team> = {
       note: 'The tactician behind the inaugural champions. Masterminded the dramatic 226 chase in the final to seal APL Season 1 glory.'
     },
     captain: {
-      name: 'Rohit Sharma',
-      realLifeCounterpart: 'Rohit Sharma',
+      name: 'King',
+      realLifeCounterpart: 'A. King',
       teamId: 'authors'
     },
     theme: {
@@ -51,8 +51,8 @@ export const season1Teams: Record<TeamId, Team> = {
       note: 'Fierce competitor who propelled Champions straight to the final with a sensational 10-run defense in Semi-Final 1.'
     },
     captain: {
-      name: 'MS Dhoni',
-      realLifeCounterpart: 'MS Dhoni',
+      name: 'Stark',
+      realLifeCounterpart: 'T. Stark',
       teamId: 'champions'
     },
     theme: {
@@ -84,11 +84,11 @@ export const season1Teams: Record<TeamId, Team> = {
       teamId: 'skyshot',
       favouriteColor: 'Blue',
       favouriteCricketer: 'Jos Buttler',
-      note: 'Dominant league topper with 4 wins and Purple Cap winner with 12 wickets. Set the tournament benchmark from match one.'
+      note: 'Dominant league topper who captained Skyshot to 4 regular-season wins and 1st place in the standings. Set the tournament benchmark from match one.'
     },
     captain: {
-      name: 'Jos Buttler',
-      realLifeCounterpart: 'Jos Buttler',
+      name: 'Shubham',
+      realLifeCounterpart: 'Shubham',
       teamId: 'skyshot'
     },
     theme: {
@@ -123,8 +123,8 @@ export const season1Teams: Record<TeamId, Team> = {
       note: 'Architect of the tournament’s highest individual score (146) and the record team total of 291 against Skyshot.'
     },
     captain: {
-      name: 'Shubman Gill',
-      realLifeCounterpart: 'Shubman Gill',
+      name: 'Jay',
+      realLifeCounterpart: 'Jay',
       teamId: 'knights'
     },
     theme: {

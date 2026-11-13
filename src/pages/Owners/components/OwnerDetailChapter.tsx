@@ -17,7 +17,7 @@ interface OwnerChapterData {
   regularSeasonRank: string;
   favoriteColor: string;
   favoriteCricketer: string;
-  captainAvatar: {
+  teamCaptain: {
     name: string;
     note: string;
   };
@@ -157,17 +157,17 @@ export const OwnerDetailChapter: React.FC<OwnerDetailChapterProps> = ({ owner })
                 </div>
               </div>
 
-              {/* Honorary Avatar Box */}
+              {/* Team Captain Box */}
               <div className="pt-3 border-t border-[#EAE4D8]/10">
                 <div className="flex items-start gap-2.5 p-3 rounded bg-[#090C0B]/60 border border-[#EAE4D8]/10 text-xs">
                   <Award className="w-4 h-4 text-[#B99A5B] flex-shrink-0 mt-0.5" />
                   <div>
                     <div className="font-mono text-[11px] text-[#87968B] uppercase tracking-wider mb-0.5">
-                      Honorary Captain Avatar
+                      Team Captain
                     </div>
-                    <div className="font-semibold text-[#EAE4D8]">{owner.captainAvatar.name}</div>
+                    <div className="font-semibold text-[#EAE4D8]">{owner.teamCaptain.name}</div>
                     <p className="text-[11px] text-[#87968B] mt-1 leading-normal font-sans">
-                      {owner.captainAvatar.note}
+                      {owner.teamCaptain.note}
                     </p>
                   </div>
                 </div>

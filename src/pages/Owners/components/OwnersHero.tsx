@@ -18,8 +18,8 @@ export const OwnersHero: React.FC<OwnersHeroProps> = ({ teams }) => {
       badge: 'Inaugural Champions',
       finish: 'CHAMPIONS • Won Final by 3 Wickets',
       regularSeason: '3W – 3L (Tied 2nd, 6 pts)',
-      captainAvatar: 'Rohit Sharma',
-      avatarNote: 'Honorary in-game captain avatar selected by Dharm.',
+      teamCaptain: 'King',
+      captainNote: 'Official on-field captain King (A. King).',
       favoriteColor: 'Green',
       anchor: '#owner-dharm',
     },
@@ -33,8 +33,8 @@ export const OwnersHero: React.FC<OwnersHeroProps> = ({ teams }) => {
       badge: 'Runners-Up',
       finish: 'RUNNERS-UP • Defended 225 in SF1',
       regularSeason: '3W – 3L (Tied 2nd, 6 pts)',
-      captainAvatar: 'MS Dhoni',
-      avatarNote: 'Honorary in-game captain avatar selected by Umang.',
+      teamCaptain: 'Stark',
+      captainNote: 'Official on-field captain Stark (T. Stark).',
       favoriteColor: 'Red',
       anchor: '#owner-umang',
     },
@@ -48,8 +48,8 @@ export const OwnersHero: React.FC<OwnersHeroProps> = ({ teams }) => {
       badge: 'League Topper • Semi-Finalist',
       finish: 'SEMI-FINALIST • Regular Season 1st',
       regularSeason: '4W – 2L (1st Place, 8 pts)',
-      captainAvatar: 'Jos Buttler',
-      avatarNote: 'Honorary in-game captain avatar selected by Shubham.',
+      teamCaptain: 'Shubham',
+      captainNote: 'Official on-field captain and owner Shubham.',
       favoriteColor: 'Blue',
       anchor: '#owner-shubham',
     },
@@ -63,8 +63,8 @@ export const OwnersHero: React.FC<OwnersHeroProps> = ({ teams }) => {
       badge: 'Record Setters',
       finish: 'LEAGUE STAGE • 146 HS & 291 Total',
       regularSeason: '2W – 4L (4th Place, 4 pts)',
-      captainAvatar: 'Shubman Gill',
-      avatarNote: 'Honorary in-game captain avatar selected by Jay.',
+      teamCaptain: 'Jay',
+      captainNote: 'Official on-field captain and owner Jay.',
       favoriteColor: 'Black',
       anchor: '#owner-jay',
     },
@@ -122,22 +122,21 @@ export const OwnersHero: React.FC<OwnersHeroProps> = ({ teams }) => {
             </p>
           </div>
 
-          {/* Explicit Avatar Identity Distinction Banner */}
+          {/* Explicit Captain & Identity Protocol Banner */}
           <div className="mt-8 p-4 sm:p-5 rounded-lg bg-[#0E1626]/80 border border-[#B99A5B]/30 relative overflow-hidden">
             <div className="flex items-start gap-3.5">
               <Award className="w-5 h-5 text-[#B99A5B] flex-shrink-0 mt-0.5" />
               <div className="text-xs sm:text-sm text-[#87968B] leading-relaxed">
                 <span className="font-semibold text-[#B99A5B] uppercase tracking-wider block font-mono text-xs mb-1">
-                  Archival Identity Protocol • Honorary Captain Avatars
+                  Archival Identity Protocol • Team Captains &amp; Ownership
                 </span>
-                The professional international cricketers associated with each franchise—
-                <strong className="text-[#EAE4D8]"> Rohit Sharma</strong> (Authors),
-                <strong className="text-[#EAE4D8]"> MS Dhoni</strong> (Champions),
-                <strong className="text-[#EAE4D8]"> Jos Buttler</strong> (Skyshot), and
-                <strong className="text-[#EAE4D8]"> Shubman Gill</strong> (Knights)—were strictly selected as{' '}
-                <strong className="text-[#EAE4D8]">honorary in-game captain avatars</strong> to lead digital lineups.
-                Professional international players did not participate in the private family tournament; tactical leadership,
-                squad assembly, and in-game decisions were executed exclusively by the four cousin owners.
+                On-field tactical leadership and team captaincy were executed by the actual in-game captains—
+                <strong className="text-[#EAE4D8]"> King</strong> (Authors),
+                <strong className="text-[#EAE4D8]"> Stark</strong> (Champions),
+                <strong className="text-[#EAE4D8]"> Shubham</strong> (Skyshot), and
+                <strong className="text-[#EAE4D8]"> Jay</strong> (Knights).
+                Professional international cricketers represent owner personal favorites and inspirations; all squad assembly,
+                tactical decisions, and competitive matches were driven by the four cousin architects.
               </div>
             </div>
           </div>
@@ -217,8 +216,8 @@ export const OwnersHero: React.FC<OwnersHeroProps> = ({ teams }) => {
                     <span className="font-mono text-[#EAE4D8]">{owner.regularSeason}</span>
                   </div>
                   <div className="pt-2 border-t border-[#EAE4D8]/10 flex items-center justify-between text-[#87968B]">
-                    <span>Honorary Avatar:</span>
-                    <span className="text-[#B99A5B] font-medium">{owner.captainAvatar}</span>
+                    <span>Team Captain:</span>
+                    <span className="text-[#B99A5B] font-medium">{owner.teamCaptain}</span>
                   </div>
                 </div>
 

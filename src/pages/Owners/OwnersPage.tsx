@@ -25,9 +25,9 @@ export const OwnersPage: React.FC = () => {
       regularSeasonRank: 'Tied 2nd (League Stage)',
       favoriteColor: 'Green',
       favoriteCricketer: 'Rohit Sharma',
-      captainAvatar: {
-        name: 'Rohit Sharma',
-        note: 'Honorary in-game captain avatar selected by Dharm.',
+      teamCaptain: {
+        name: 'King',
+        note: 'Championship-winning captain of Authors.',
       },
       narrativeOverview: [
         'Dharm masterminded Authors’ path through an intensely competitive Season 1 campaign. Navigating an even 3–3 regular-season run that left Authors tied for second place on 6 points, his side peaked at the defining moment of the tournament.',
@@ -70,9 +70,9 @@ export const OwnersPage: React.FC = () => {
       regularSeasonRank: 'Tied 2nd (League Stage)',
       favoriteColor: 'Red',
       favoriteCricketer: 'MS Dhoni',
-      captainAvatar: {
-        name: 'MS Dhoni',
-        note: 'Honorary in-game captain avatar selected by Umang.',
+      teamCaptain: {
+        name: 'Stark',
+        note: 'Top-order batsman and on-field captain of Champions.',
       },
       narrativeOverview: [
         'Umang constructed Champions as a high-octane powerhouse capable of setting imposing totals. Champions posted 225 runs in both of their playoff matches, establishing one of the most formidable scoring records of the entire tournament.',
@@ -106,40 +106,32 @@ export const OwnersPage: React.FC = () => {
       regularSeasonRank: '1st Place (League Stage Topper)',
       favoriteColor: 'Blue',
       favoriteCricketer: 'Jos Buttler',
-      captainAvatar: {
-        name: 'Jos Buttler',
-        note: 'Honorary in-game captain avatar selected by Shubham.',
+      teamCaptain: {
+        name: 'Shubham',
+        note: 'On-field team captain and franchise owner of Skyshot.',
       },
       narrativeOverview: [
-        'Shubham established Skyshot as the gold standard of regular-season play. Skyshot dominated the 12-match double-round-robin phase, collecting four victories (8 points) to finish clear at the top of the league table.',
-        'Throughout Season 1, Shubham’s bowling persona N. Sky led the tournament bowling charts, capturing the prestigious Purple Cap with 12 wickets across 8 matches. Skyshot concluded the tournament as proud regular-season champions and playoff semi-finalists.',
+        'Shubham established Skyshot as the gold standard of regular-season play. Serving as both franchise owner and on-field team captain, he led Skyshot through the 12-match double-round-robin phase with four victories (8 points) to finish clear at the top of the league table.',
+        'At the crease, Shubham anchored the top order with 134 tournament runs across 8 matches, including a match-winning half-century (51). Skyshot concluded the tournament as proud regular-season champions and playoff semi-finalists.',
       ],
       keyMilestones: [
-        'Topped the regular-season standings with 4 wins and 8 points (highest win rate in the league stage).',
-        'Captured the APL Season 1 Purple Cap with 12 wickets across 8 matches via N. Sky.',
-        'Recorded multiple 4-wicket match hauls with N. Sky (best match bowling 4 wickets, achieved twice).',
+        'Captained Skyshot to the top of the regular-season standings with 4 wins and 8 points (highest win rate in the league stage).',
+        'Contributed 134 tournament runs across 8 matches as franchise owner and captain, including a high score of 51.',
         'Defeated eventual champions Authors twice during the regular season (Matches 6 & 12).',
         'Official finish verified as Regular-Season League Topper and Playoff Semi-Finalist.',
       ],
       inGameIdentity: {
-        type: 'dual' as const,
-        title: 'Dual In-Game Gameplay Characters',
+        type: 'single' as const,
+        title: 'In-Game Player Identity',
         detailsNote:
-          'Shubham is associated with two distinct in-game gameplay characters in the surviving match records. Their statistics represent separate recorded player roles and are not merged.',
+          'Shubham took the field for Skyshot as an official in-game top-order batsman and team captain.',
         players: [
           {
             id: 'shubham_bat',
             name: 'Shubham',
-            role: 'Top-Order Batsman • Owner',
+            role: 'Top-Order Batsman • Owner & Captain',
             headlineStat: '134 Runs (1 Fifty)',
-            breakdown: 'Highest Score: 51 • Innings: [51, 0, 32, 20, 19, 12, 0, 0]',
-          },
-          {
-            id: 'sky',
-            name: 'N. Sky',
-            role: 'All-Rounder • Owner (Purple Cap)',
-            headlineStat: '12 Wickets • Purple Cap Winner',
-            breakdown: 'Innings Wickets: [1, 0, 4, 1, 4, 0, 1, 1] • Runs: 23 (HS 20)',
+            breakdown: 'Highest Score: 51 • Innings: [51, 0, 32, 20, 19, 12, 0, 0] Across 8 Matches',
           },
         ],
       },
@@ -158,9 +150,9 @@ export const OwnersPage: React.FC = () => {
       regularSeasonRank: '4th Place (League Stage)',
       favoriteColor: 'Black',
       favoriteCricketer: 'Shubman Gill',
-      captainAvatar: {
-        name: 'Shubman Gill',
-        note: 'Honorary in-game captain avatar selected by Jay.',
+      teamCaptain: {
+        name: 'Jay',
+        note: 'Franchise owner, record-holder, and on-field captain of Knights.',
       },
       narrativeOverview: [
         'Jay powered Knights with breathtaking individual batting brilliance that defined the historical record book of APL Season 1. While Knights faced a challenging league campaign finishing fourth on 4 points, Jay produced the tournament’s most electrifying batting exhibitions.',

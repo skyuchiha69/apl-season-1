@@ -40,8 +40,8 @@ export const LegacySection: React.FC = () => {
                 championship tournament: the <strong>Ashes Premier League (APL)</strong>.
               </p>
               <p>
-                Each cousin took command of a franchise, drafted their 11-player squad, selected an international
-                icon as their captain identity, and competed across 12 relentless double-round-robin fixtures.
+                Each cousin took command of a franchise, drafted their 11-player squad, appointed their team captain,
+                and competed across 12 relentless double-round-robin fixtures.
                 Every ball and boundary was contested over Google Meet screen shares, filled with tactical bowling changes,
                 high-stakes banter, and unforgettable cousin rivalries.
               </p>

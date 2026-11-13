@@ -10,7 +10,7 @@ export const FranchisesLineup: React.FC = () => {
       name: 'AUTHORS',
       tagline: 'The Championship Strategists',
       owner: 'Dharm',
-      captainIdentity: 'Rohit Sharma',
+      captainIdentity: 'King',
       accentColor: '#00E676',
       borderClass: 'border-emerald-500/40 hover:border-emerald-400',
       badgeBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
@@ -24,7 +24,7 @@ export const FranchisesLineup: React.FC = () => {
       name: 'CHAMPIONS',
       tagline: 'The High-Octane Finalists',
       owner: 'Umang (UB)',
-      captainIdentity: 'MS Dhoni',
+      captainIdentity: 'Stark',
       accentColor: '#FF2E4D',
       borderClass: 'border-rose-500/40 hover:border-rose-400',
       badgeBg: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
@@ -38,28 +38,28 @@ export const FranchisesLineup: React.FC = () => {
       name: 'SKYSHOT',
       tagline: 'The League-Stage Pace Setters',
       owner: 'Shubham (Sky)',
-      captainIdentity: 'Jos Buttler',
+      captainIdentity: 'Shubham',
       accentColor: '#00D2FF',
       borderClass: 'border-cyan-500/40 hover:border-cyan-400',
       badgeBg: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
-      standing: '3rd Place • Semi-Finalist',
-      championshipNote: 'Table-toppers in early league stages with dominant NRR',
+      standing: '1st in League • Semi-Finalist',
+      championshipNote: 'Table-toppers in regular season with 4 wins (8 pts)',
       isChampion: false,
-      description: 'Aggressive strokeplay and tactical bowling variations made Shubham’s team the early favorites.',
+      description: 'Aggressive strokeplay and tactical bowling variations made Shubham’s team the regular-season league leaders.',
     },
     {
       id: 'knights',
       name: 'KNIGHTS',
       tagline: 'The Relentless Contenders',
       owner: 'Jay',
-      captainIdentity: 'Shubman Gill',
+      captainIdentity: 'Jay',
       accentColor: '#E2E8F0',
       borderClass: 'border-slate-400/40 hover:border-slate-300',
       badgeBg: 'bg-slate-400/20 text-slate-200 border-slate-400/30',
       standing: '4th Place • League Contender',
-      championshipNote: 'Scored crucial upset wins and fought down to the wire',
+      championshipNote: 'Scored crucial upset wins and set the 291 all-time team record',
       isChampion: false,
-      description: 'Disciplined and tenacious, Jay’s Knights produced intense, low-margin thrillers across the regular season.',
+      description: 'Disciplined and tenacious, Jay’s Knights produced intense, record-shattering performances across the regular season.',
     },
   ];
 
@@ -88,7 +88,7 @@ export const FranchisesLineup: React.FC = () => {
             </h2>
           </div>
           <p className="text-[10px] sm:text-xs text-[#87968B] font-mono max-w-md text-left md:text-right uppercase tracking-wider">
-            DISTINCT IDENTITIES • COUSIN OWNERS • SELECTED CAPTAIN AVATARS
+            DISTINCT IDENTITIES • COUSIN OWNERS • TEAM CAPTAINS
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export const FranchisesLineup: React.FC = () => {
         <div className="mb-6 sm:mb-10 p-3.5 sm:p-4 rounded-lg bg-[#090C0B] border-l-2 border-[#B99A5B] text-[11px] sm:text-xs text-[#A69F92] font-mono flex items-start space-x-2.5 sm:space-x-3 leading-relaxed">
           <UserCheck className="w-4 h-4 text-[#B99A5B] shrink-0 mt-0.5" />
           <span>
-            <strong className="text-[#EAE4D8]">Distinct Identity Architecture:</strong> The four cousins are the real-life strategic franchise owners, managers, and competitors. International cricketers (Rohit Sharma, MS Dhoni, Jos Buttler, Shubman Gill) serve as honorary digital captain avatars selected by each owner, not literal tournament participants.
+            <strong className="text-[#EAE4D8]">Distinct Identity Architecture:</strong> The four cousins are the real-life strategic franchise owners, managers, and competitors. On the field, the franchises were led by their actual in-game captains: King (Authors), Stark (Champions), Shubham (Skyshot), and Jay (Knights).
           </span>
         </div>
 
@@ -122,7 +122,7 @@ export const FranchisesLineup: React.FC = () => {
                   <span className="text-emerald-400 font-bold text-sm">{championsTeam.owner}</span>
                 </div>
                 <div>
-                  <span className="text-[#87968B] uppercase block text-[10px]">Captain Identity:</span>
+                  <span className="text-[#87968B] uppercase block text-[10px]">Team Captain:</span>
                   <span className="text-[#EAE4D8] font-bold text-sm">{championsTeam.captainIdentity}</span>
                 </div>
               </div>
@@ -171,7 +171,7 @@ export const FranchisesLineup: React.FC = () => {
                     <strong className="text-[#EAE4D8] text-xs sm:text-sm">{team.owner}</strong>
                   </div>
                   <div>
-                    <span className="text-[9px] sm:text-[10px] text-[#87968B] uppercase block">Captain Identity:</span>
+                    <span className="text-[9px] sm:text-[10px] text-[#87968B] uppercase block">Team Captain:</span>
                     <span className="text-[#A69F92] text-xs sm:text-sm">{team.captainIdentity}</span>
                   </div>
                 </div>

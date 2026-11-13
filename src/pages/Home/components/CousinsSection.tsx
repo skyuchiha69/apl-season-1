@@ -37,14 +37,14 @@ const cousinsData: CousinProfile[] = [
     seasonFinish: '1st Place • APL Champions',
     ownerPlayerRole: 'Franchise Owner & Championship Bowler',
     playerStats: [
-      { label: 'Role', value: 'Bowler / Skipper' },
+      { label: 'Role', value: 'Bowler • Owner' },
       { label: 'Season Wickets', value: '5 Wickets' },
       { label: 'Final Bowling', value: '1/36 (4.0 ov)' },
       { label: 'Key Chase', value: '226/7 in 19.2 ov' },
     ],
     captainIdentity: {
-      name: 'Rohit Sharma',
-      roleNote: 'Honorary Captain Avatar • Selected by Dharm for calculated batting aggression and ice-cold tactical composure.',
+      name: 'King',
+      roleNote: 'Team Captain • Authors on-field captain, tournament Orange Cap winner with 527 runs.',
     },
     narrative:
       'The tactical mastermind behind Authors’ historic championship run. Dharm anchored his bowling attack with 5 verified tournament wickets and constructed a batting order capable of chasing down 226 in the Grand Final decider.',
@@ -59,7 +59,7 @@ const cousinsData: CousinProfile[] = [
     teamBadge: 'Grand Finalists',
     teamAccent: '#FF2E4D',
     seasonFinish: '2nd Place • Runners-Up',
-    ownerPlayerRole: 'Franchise Owner & Battle-Hardened Player',
+    ownerPlayerRole: 'Franchise Owner & Tactical Architect',
     playerStats: [
       { label: 'Role', value: 'Tactical Leader' },
       { label: 'SF1 Defense', value: 'Defended 225 (Won by 10)' },
@@ -67,8 +67,8 @@ const cousinsData: CousinProfile[] = [
       { label: 'Squad Fifties', value: '8 Team 50s' },
     ],
     captainIdentity: {
-      name: 'MS Dhoni',
-      roleNote: 'Honorary Captain Avatar • Selected by Umang for legendary match-finishing acumen and fearless big-match pressure.',
+      name: 'Stark',
+      roleNote: 'Team Captain • Champions on-field captain and top-order batsman (112 HS).',
     },
     narrative:
       'A ferocious on-field competitor whose Champions team set the standard for high-octane batting totals. Umang steered his squad through a 10-run defense in Semi-Final 1 and delivered a monstrous 225 in the final.',
@@ -82,21 +82,21 @@ const cousinsData: CousinProfile[] = [
     teamName: 'SKYSHOT',
     teamBadge: 'Regular Season Toppers',
     teamAccent: '#00D2FF',
-    seasonFinish: '3rd Place • League Leaders (8 pts)',
-    ownerPlayerRole: 'Franchise Owner & Dual-Threat All-Rounder',
+    seasonFinish: '1st in League • Semi-Finalist (8 pts)',
+    ownerPlayerRole: 'Franchise Owner & Team Captain',
     playerStats: [
-      { label: 'Role', value: 'Top-Order / All-Rounder' },
-      { label: 'Purple Cap', value: '12 Wickets (No. 1)' },
+      { label: 'Role', value: 'Top-Order Batsman & Captain' },
       { label: 'Batter Runs', value: '134 Runs' },
-      { label: 'League Record', value: '4 Wins (1st)' },
+      { label: 'Highest Score', value: '51 (1 Fifty)' },
+      { label: 'League Record', value: '4 Wins (1st Place)' },
     ],
     captainIdentity: {
-      name: 'Jos Buttler',
-      roleNote: 'Honorary Captain Avatar • Selected by Shubham for explosive 360-degree shotmaking and modern white-ball dynamism.',
+      name: 'Shubham',
+      roleNote: 'Team Captain • Led Skyshot on the field to 1st place in the regular-season standings.',
     },
     narrative:
-      'The dominant regular-season pacesetter. As owner and star player, Shubham clinched the tournament Purple Cap with 12 wickets and notched 134 batter runs, steering Skyshot to four league wins and first place.',
-    tacticalSignature: 'Dominant net run rate aggression, dual-threat all-round performance, and tactical bowling variations.',
+      'The dominant regular-season pacesetter. As franchise owner and on-field team captain, Shubham steered Skyshot to four league wins and first place in the regular-season standings with 134 batter runs, including a match-winning 51.',
+    tacticalSignature: 'Dominant league-stage command, top-order batting stability, and disciplined captaincy rotations.',
   },
   {
     id: 'jay',
@@ -107,19 +107,19 @@ const cousinsData: CousinProfile[] = [
     teamBadge: 'Record Breaker',
     teamAccent: '#E2E8F0',
     seasonFinish: '4th Place • Individual Record Holder',
-    ownerPlayerRole: 'Franchise Owner & Premier Record Batsman',
+    ownerPlayerRole: 'Franchise Owner & Team Captain',
     playerStats: [
-      { label: 'Role', value: 'Star Batsman' },
+      { label: 'Role', value: 'Star Batsman & Captain' },
       { label: 'Tournament Record', value: '146 Runs (Match 3)' },
       { label: 'Team Record', value: '291 Total vs Skyshot' },
       { label: 'Season Runs', value: '245 Runs' },
     ],
     captainIdentity: {
-      name: 'Shubman Gill',
-      roleNote: 'Honorary Captain Avatar • Selected by Jay for classical strokeplay, timing, and textbook high-impact stroke execution.',
+      name: 'Jay',
+      roleNote: 'Team Captain • Knights on-field captain and holder of the all-time tournament record score (146).',
     },
     narrative:
-      'Author of the greatest individual batting masterclass in APL history. Jay decimated Skyshot with an astonishing 146 runs in Match 3, driving Knights to the league-record total of 291 in a single innings.',
+      'Author of the greatest individual batting masterclass in APL history. As franchise owner and team captain, Jay decimated Skyshot with an astonishing 146 runs in Match 3, driving Knights to the league-record total of 291 in a single innings.',
     tacticalSignature: 'High-risk, monumental ceiling batting assaults that produced the tournament’s all-time record score.',
   },
 ];
@@ -167,14 +167,13 @@ export const CousinsSection: React.FC = () => {
           <UserCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#B99A5B] shrink-0 mt-0.5" aria-hidden="true" />
           <div className="space-y-1">
             <p className="font-mono text-xs text-[#EAE4D8] font-semibold uppercase tracking-wider">
-              Dual Identity & Honorary Avatar Architecture:
+              Franchise Ownership &amp; On-Field Team Captaincy:
             </p>
             <p className="text-[11px] sm:text-xs sm:text-sm leading-relaxed">
               The four cousins—<strong>Shubham</strong>, <strong>Jay</strong>, <strong>Dharm</strong>, and{' '}
-              <strong>Umang</strong>—are the real-life strategic franchise owners, managers, and active in-game players who
-              drafted every squad and contested every ball. Selected international cricket icons (Rohit Sharma, MS Dhoni,
-              Jos Buttler, Shubman Gill) serve strictly as <em>honorary digital captain avatars</em> chosen by each cousin,
-              and did not literally participate in the tournament.
+              <strong>Umang</strong>—are the real-life strategic franchise owners and tacticians who drafted every squad and contested every ball.
+              On the field, the franchises were led by their actual in-game captains: <strong>King</strong> (Authors), <strong>Stark</strong> (Champions),
+              <strong>Shubham</strong> (Skyshot), and <strong>Jay</strong> (Knights).
             </p>
           </div>
         </div>
@@ -251,7 +250,7 @@ export const CousinsSection: React.FC = () => {
                   <div className="flex items-center justify-between text-xs font-mono gap-2">
                     <span className="text-[#87968B] uppercase tracking-wider flex items-center gap-1.5 text-[10px] sm:text-xs">
                       <Shield className="w-3.5 h-3.5 text-[#B99A5B] shrink-0" />
-                      Captain Identity
+                      Team Captain
                     </span>
                     <span className="text-[#B99A5B] font-bold text-[11px] sm:text-xs shrink-0">{cousin.captainIdentity.name}</span>
                   </div>

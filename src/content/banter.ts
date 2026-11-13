@@ -222,7 +222,7 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'skyshot',
         teamName: 'SKYSHOT',
         teamColor: '#00D2FF',
-        message: 'I still hold the Purple Cap with twelve wickets. If we hadn’t left those ten runs out there in Semi-Final 1, Authors would have had to chase 226 against my bowling attack instead.',
+        message: 'Skyshot still took the Purple Cap with N. Sky’s twelve wickets and topped the regular season. If we hadn’t left those ten runs out there in Semi-Final 1, Authors would have had to chase 226 against our attack instead.',
         verifiedContext: 'Season 1 Honors: N. Sky won the Purple Cap with 12 tournament wickets'
       },
       {
@@ -233,7 +233,7 @@ export const rivalryCategories: BanterCategory[] = [
         teamId: 'knights',
         teamName: 'KNIGHTS',
         teamColor: '#F8FAFC',
-        message: 'Purple Cap looks great in your trophy cabinet, Sky. Shame the actual championship wasn’t available in your size. Dharm chased 226, UB defended 225 once, and I hit 146. You’re holding a cap and watching the celebration. Roll on Season 2.',
+        message: 'N. Sky’s Purple Cap looks great in Skyshot’s cabinet, Sky. Shame the actual championship wasn’t available in your size. Dharm chased 226, UB defended 225 once, and I hit 146. You’re holding regular-season points and watching the celebration. Roll on Season 2.',
         verifiedContext: 'Ashes Premier League Season 1 conclusion'
       }
     ]
