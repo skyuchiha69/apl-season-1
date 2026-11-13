@@ -11,7 +11,7 @@ export const App: React.FC = () => {
     <ThemeProvider>
       <SeasonProvider>
         <BrowserRouter>
-          <div className="flex flex-col min-h-screen bg-[#0A0B10] text-slate-100">
+          <div className="flex flex-col min-h-screen bg-[#090C0B] text-[#EAE4D8]">
             <Header />
             <main className="flex-grow">
               <AppRouter />

@@ -1,18 +1,43 @@
 import React from 'react';
 import { HeroSection } from './components/HeroSection';
+import { SeasonStatsStrip } from './components/SeasonStatsStrip';
+import { ChampionshipFeature } from './components/ChampionshipFeature';
+import { FranchisesLineup } from './components/FranchisesLineup';
+import { CousinsSection } from './components/CousinsSection';
+import { RivalryRoomSection } from './components/RivalryRoomSection';
 import { LegacySection } from './components/LegacySection';
 
-export const HomePage: React.FC = () => {
+import { BanterCategoryId } from '../../content/banter';
+
+interface HomePageProps {
+  initialCategory?: BanterCategoryId;
+}
+
+export const HomePage: React.FC<HomePageProps> = ({ initialCategory }) => {
   return (
-    <div className="flex flex-col min-h-screen bg-[#08090C] text-slate-100">
-      {/* Milestone 2A: Hero Section */}
+    <div className="flex flex-col bg-[#090C0B] text-[#EAE4D8]">
+      {/* Editorial Hero Opening Sequence */}
       <HeroSection />
 
-      {/* Milestone 2A: Legacy Section */}
+      {/* Broadcast-Grade Tournament Statistics Ledger */}
+      <SeasonStatsStrip />
+
+      {/* The Climax Feature: The Authors 226 Chase */}
+      <ChampionshipFeature />
+
+      {/* The Four Franchises Editorial Lineup */}
+      <FranchisesLineup />
+
+      {/* The Four Cousins: Strategic Owners & Active Players */}
+      <CousinsSection />
+
+      {/* The Rivalry Room: Interactive Banter & Verified Match Lore */}
+      <RivalryRoomSection initialCategory={initialCategory} />
+
+      {/* The Emotional Origin Narrative */}
       <LegacySection />
     </div>
   );
 };
 
 export default HomePage;
-

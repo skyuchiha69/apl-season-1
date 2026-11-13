@@ -1,57 +1,60 @@
 /* ========================================================
-   APL THEME SYSTEM — CSS CUSTOM PROPERTIES
+   APL THEME SYSTEM — EDITORIAL CRICKET ARCHIVE
    ======================================================== */
 
 :root {
-  --apl-gold: #F5B800;
-  --apl-gold-glow: rgba(245, 184, 0, 0.25);
+  --apl-brass: #B99A5B;
+  --apl-ivory: #EAE4D8;
+  --apl-forest: #0B1512;
+  --apl-nearblack: #090C0B;
+  --apl-sage: #87968B;
+  --apl-muted: #A69F92;
   
-  /* Default Neutral League Theme */
-  --theme-primary: #F5B800;
-  --theme-secondary: #0A0B10;
-  --theme-accent: #FFD54F;
-  --theme-glow: rgba(245, 184, 0, 0.2);
-  --theme-surface: #12151E;
-  --theme-border: rgba(245, 184, 0, 0.3);
+  /* Default Neutral Editorial Archive Theme */
+  --theme-primary: #B99A5B;
+  --theme-secondary: #0B1512;
+  --theme-accent: #D4BA7E;
+  --theme-glow: rgba(185, 154, 91, 0.12);
+  --theme-surface: #111815;
+  --theme-border: rgba(234, 228, 216, 0.12);
 }
 
 /* AUTHORS — Emerald Prestige & Championship Forest */
 [data-theme="authors"], .theme-authors {
   --theme-primary: #00E676;
-  --theme-secondary: #062E19;
-  --theme-accent: #F5B800;
-  --theme-glow: rgba(0, 230, 118, 0.25);
-  --theme-surface: #0B1C14;
-  --theme-border: rgba(0, 230, 118, 0.35);
+  --theme-secondary: #081B13;
+  --theme-accent: #B99A5B;
+  --theme-glow: rgba(0, 230, 118, 0.15);
+  --theme-surface: #0E1F18;
+  --theme-border: rgba(0, 230, 118, 0.25);
 }
 
-/* CHAMPIONS — Crimson Fire & Deep Maroon */
+/* CHAMPIONS — Crimson Fire & Deep Charcoal */
 [data-theme="champions"], .theme-champions {
   --theme-primary: #FF2E4D;
-  --theme-secondary: #3B000C;
-  --theme-accent: #FFAA00;
-  --theme-glow: rgba(255, 46, 77, 0.25);
+  --theme-secondary: #1F0A10;
+  --theme-accent: #B99A5B;
+  --theme-glow: rgba(255, 46, 77, 0.15);
   --theme-surface: #1C0F14;
-  --theme-border: rgba(255, 46, 77, 0.35);
+  --theme-border: rgba(255, 46, 77, 0.25);
 }
 
 /* SKYSHOT — High-Altitude Electric Cyan & Navy */
 [data-theme="skyshot"], .theme-skyshot {
   --theme-primary: #00D2FF;
-  --theme-secondary: #0A192F;
+  --theme-secondary: #081420;
   --theme-accent: #38BDF8;
-  --theme-glow: rgba(0, 210, 255, 0.25);
-  --theme-surface: #0E1626;
-  --theme-border: rgba(0, 210, 255, 0.35);
+  --theme-glow: rgba(0, 210, 255, 0.15);
+  --theme-surface: #0B1724;
+  --theme-border: rgba(0, 210, 255, 0.25);
 }
 
 /* KNIGHTS — Obsidian Steel & Platinum */
 [data-theme="knights"], .theme-knights {
-  --theme-primary: #F8FAFC;
-  --theme-secondary: #0F172A;
+  --theme-primary: #E2E8F0;
+  --theme-secondary: #0D1117;
   --theme-accent: #94A3B8;
-  --theme-glow: rgba(248, 250, 252, 0.2);
-  --theme-surface: #14171F;
-  --theme-border: rgba(248, 250, 252, 0.25);
+  --theme-glow: rgba(226, 232, 240, 0.12);
+  --theme-surface: #141820;
+  --theme-border: rgba(226, 232, 240, 0.2);
 }
-

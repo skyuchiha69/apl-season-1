@@ -6,65 +6,61 @@
 
 @layer base {
   body {
-    @apply bg-[#08090C] text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-amber-400 selection:text-black;
+    @apply bg-[#090C0B] text-[#EAE4D8] font-sans antialiased overflow-x-hidden selection:bg-[#B99A5B] selection:text-[#090C0B];
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-white;
+    @apply font-display tracking-tight text-[#EAE4D8];
   }
 }
 
-/* Atmospheric Stadium Lighting & Backgrounds */
-.bg-stadium-night {
-  background-color: #08090C;
+/* Atmospheric Editorial Lighting & Backgrounds */
+.bg-editorial-forest {
+  background-color: #090C0B;
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(245, 184, 0, 0.12), transparent 75%),
-    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(14, 22, 38, 0.5), transparent 80%);
+    radial-gradient(ellipse 90% 60% at 50% -15%, rgba(11, 21, 18, 0.95), transparent 85%),
+    radial-gradient(ellipse 60% 40% at 85% 20%, rgba(185, 154, 91, 0.05), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 15% 80%, rgba(135, 150, 139, 0.04), transparent 75%);
 }
 
-.stadium-floodlight-beam {
-  background: radial-gradient(ellipse 50% 70% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, rgba(245, 184, 0, 0.04) 40%, transparent 80%);
+.bg-editorial-paper {
+  background-color: #0D1310;
+  border: 1px solid rgba(234, 228, 216, 0.08);
 }
 
-.stadium-pitch-glow {
-  background: radial-gradient(circle at 50% 50%, rgba(0, 230, 118, 0.04) 0%, transparent 70%);
+.bg-editorial-card {
+  background-color: #111815;
+  border: 1px solid rgba(234, 228, 216, 0.08);
 }
 
-/* Premium Sports Card & Border Treatments */
-.stadium-card {
-  background-color: #0F121A;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+/* Restrained Brass Accent Borders */
+.border-brass-subtle {
+  border-color: rgba(185, 154, 91, 0.3);
 }
 
-.stadium-card-gold {
-  background: linear-gradient(145deg, #121520 0%, #0A0D14 100%);
-  border: 1px solid rgba(245, 184, 0, 0.25);
-  box-shadow: 0 15px 35px -10px rgba(245, 184, 0, 0.15);
+.border-brass-focus {
+  border-color: #B99A5B;
 }
 
-.gold-border-glow {
-  border: 1px solid rgba(245, 184, 0, 0.35);
-  box-shadow: 0 0 20px rgba(245, 184, 0, 0.15);
+/* Editorial Rules */
+.editorial-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(234, 228, 216, 0.15) 30%, rgba(185, 154, 91, 0.3) 50%, rgba(234, 228, 216, 0.15) 70%, transparent 100%);
 }
 
-/* Subtle Floodlight Pulse Animation */
-@keyframes floodlight-pulse {
+.editorial-rule-left {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(185, 154, 91, 0.5) 0%, rgba(234, 228, 216, 0.12) 60%, transparent 100%);
+}
+
+/* Subtle Floodlight & Pulse */
+@keyframes atmospheric-drift {
   0%, 100% { opacity: 0.85; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.02); }
 }
 
-@keyframes subtle-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-
-.animate-floodlight {
-  animation: floodlight-pulse 6s ease-in-out infinite;
-}
-
-.animate-subtle-bounce {
-  animation: subtle-bounce 2s ease-in-out infinite;
+.animate-atmospheric {
+  animation: atmospheric-drift 8s ease-in-out infinite;
 }
 
 /* Accessibility: Strict Prefers-Reduced-Motion Override */
