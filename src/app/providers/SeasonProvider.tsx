@@ -1,21 +1,24 @@
 import React, { createContext, useContext, useState } from 'react';
-import { SeasonData } from '../../data/types';
+import { SeasonData, SeasonId } from '../../data/types';
 import { availableSeasons, defaultSeason } from '../../data';
 
-interface SeasonContextType {
-  activeSeasonId: string;
+export interface SeasonContextType {
+  activeSeasonId: SeasonId;
   seasonData: SeasonData;
-  setSeasonId: (seasonId: string) => void;
-  availableSeasonIds: string[];
+  setSeasonId: (seasonId: SeasonId) => void;
+  availableSeasonIds: SeasonId[];
 }
 
 const SeasonContext = createContext<SeasonContextType | undefined>(undefined);
 
-export const SeasonProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [activeSeasonId, setActiveSeasonId] = useState<string>('season-1');
+export const SeasonProvider: React.FC<{
+  children: React.ReactNode;
+  initialSeasonId?: SeasonId;
+}> = ({ children, initialSeasonId = 'season-1' }) => {
+  const [activeSeasonId, setActiveSeasonId] = useState<SeasonId>(initialSeasonId);
 
   const seasonData = availableSeasons[activeSeasonId] || defaultSeason;
-  const availableSeasonIds = Object.keys(availableSeasons);
+  const availableSeasonIds = Object.keys(availableSeasons) as SeasonId[];
 
   return (
     <SeasonContext.Provider
@@ -31,10 +34,27 @@ export const SeasonProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   );
 };
 
-export function useSeason() {
+export function useSeason(): SeasonContextType {
   const context = useContext(SeasonContext);
   if (!context) {
     throw new Error('useSeason must be used within a SeasonProvider');
+  }
+  return context;
+}
+
+/**
+ * Safe consumer hook for components that can render with default Season 1 data
+ * when rendered outside a SeasonProvider tree, such as in isolated unit tests.
+ */
+export function useSeasonOptional(): SeasonContextType {
+  const context = useContext(SeasonContext);
+  if (!context) {
+    return {
+      activeSeasonId: 'season-1',
+      seasonData: defaultSeason,
+      setSeasonId: () => {},
+      availableSeasonIds: ['season-1', 'season-2'] as SeasonId[],
+    };
   }
   return context;
 }

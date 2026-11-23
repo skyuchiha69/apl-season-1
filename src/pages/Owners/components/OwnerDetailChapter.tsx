@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, User, Award, ArrowRight, Info, Target } from 'lucide-react';
 import { Team } from '../../../data/types';
+import { useSeasonOptional } from '../../../app/providers/SeasonProvider';
 
 interface OwnerChapterData {
   id: string;
@@ -43,6 +44,9 @@ interface OwnerDetailChapterProps {
 }
 
 export const OwnerDetailChapter: React.FC<OwnerDetailChapterProps> = ({ owner }) => {
+  const { activeSeasonId } = useSeasonOptional();
+  const recordLabel = activeSeasonId === 'season-2' ? 'Season 2 Record' : 'Season 1 Record';
+
   return (
     <article
       id={`owner-${owner.id}`}
@@ -181,7 +185,7 @@ export const OwnerDetailChapter: React.FC<OwnerDetailChapterProps> = ({ owner })
                   <Shield className="w-3.5 h-3.5" />
                   <span>{owner.inGameIdentity.title}</span>
                 </span>
-                <span className="text-[11px] font-mono text-[#87968B]">Season 1 Record</span>
+                <span className="text-[11px] font-mono text-[#87968B]">{recordLabel}</span>
               </div>
 
               {/* Case 1: Undocumented (Umang) */}

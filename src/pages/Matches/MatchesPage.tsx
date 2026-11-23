@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSeason } from '../../app/providers/SeasonProvider';
 import { Container } from '../../components/layout/Container';
 import { PlayoffBracket } from './components/PlayoffBracket';
 import { FinalScorecardDetail } from './components/FinalScorecardDetail';
@@ -6,6 +7,9 @@ import { LeagueFixturesGrid } from './components/LeagueFixturesGrid';
 import { Calendar, Trophy, FileText, Layers } from 'lucide-react';
 
 export const MatchesPage: React.FC = () => {
+  const { seasonData, activeSeasonId } = useSeason();
+  const isSeason1 = activeSeasonId === 'season-1';
+
   return (
     <div className="min-h-screen bg-[#090C0B] text-[#EAE4D8] selection:bg-[#B99A5B]/30">
       {/* Editorial Page Hero Header */}
@@ -19,7 +23,11 @@ export const MatchesPage: React.FC = () => {
         <Container className="relative z-10 space-y-4">
           <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#B99A5B]">
             <Calendar className="w-3.5 h-3.5 text-[#B99A5B] shrink-0" aria-hidden="true" />
-            <span>APL Season 1 • Official Match Centre & Scorecard Archive</span>
+            <span>
+              {isSeason1
+                ? 'APL Season 1 • Official Match Centre & Scorecard Archive'
+                : `APL ${seasonData.name} • Official Match Centre & Fixture Archive`}
+            </span>
           </div>
 
           <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black uppercase text-[#EAE4D8] tracking-tight leading-[0.95]">
@@ -27,8 +35,9 @@ export const MatchesPage: React.FC = () => {
           </h1>
 
           <p className="max-w-3xl text-sm sm:text-base text-[#A69F92] font-sans leading-relaxed">
-            The full chronological tournament chronicle: twelve hard-fought league rounds, the drama of the
-            semi-final knockouts, and the unforgettable 226 chase in the Grand Final.
+            {isSeason1
+              ? 'The full chronological tournament chronicle: twelve hard-fought league rounds, the drama of the semi-final knockouts, and the unforgettable 226 chase in the Grand Final.'
+              : 'The full chronological tournament chronicle: twelve intense regular-season rounds, the qualifier and knockout playoffs, and Skyshot’s championship triumph in the Grand Final.'}
           </p>
 
           {/* Quick-Jump Section Navigation Strip */}
@@ -48,7 +57,7 @@ export const MatchesPage: React.FC = () => {
               className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#14201A] border border-[#EAE4D8]/10 text-[#87968B] hover:text-[#EAE4D8] hover:border-[#EAE4D8]/30 transition-all min-h-[44px]"
             >
               <FileText className="w-3.5 h-3.5 text-[#B99A5B]" />
-              <span>Grand Final Scorecard</span>
+              <span>{isSeason1 ? 'Grand Final Scorecard' : 'Grand Final Outcome'}</span>
             </a>
             <a
               href="#league-fixtures"

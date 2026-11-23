@@ -5,9 +5,13 @@ import { OrangeCapSection } from './components/OrangeCapSection';
 import { PurpleCapSection } from './components/PurpleCapSection';
 import { RecordsGrid } from './components/RecordsGrid';
 import { ReconciliationLedger } from './components/ReconciliationLedger';
+import { useSeason } from '../../app/providers/SeasonProvider';
 import { BarChart3, Shield, Flame, Target, Zap, Scale } from 'lucide-react';
 
 export const StatsPage: React.FC = () => {
+  const { activeSeasonId } = useSeason();
+  const isSeason1 = activeSeasonId === 'season-1';
+
   return (
     <div className="min-h-screen bg-[#090C0B] text-[#EAE4D8] selection:bg-[#B99A5B]/30">
       {/* Editorial Page Hero Header */}
@@ -21,7 +25,11 @@ export const StatsPage: React.FC = () => {
         <Container className="relative z-10 space-y-4">
           <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#B99A5B]">
             <BarChart3 className="w-3.5 h-3.5 text-[#B99A5B] shrink-0" aria-hidden="true" />
-            <span>APL Season 1 • Official Statistics & Records Archive</span>
+            <span>
+              {isSeason1
+                ? 'APL Season 1 • Official Statistics & Records Archive'
+                : 'APL Season 2 • Official Statistics & Records Archive'}
+            </span>
           </div>
 
           <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black uppercase text-[#EAE4D8] tracking-tight leading-[0.95]">
@@ -29,8 +37,9 @@ export const StatsPage: React.FC = () => {
           </h1>
 
           <p className="max-w-3xl text-sm sm:text-base text-[#A69F92] font-sans leading-relaxed">
-            The complete historical performance records of the inaugural Ashes Premier League. Every run, dismissal,
-            and milestone recorded from the 12-match regular season through to the championship decider.
+            {isSeason1
+              ? 'The complete historical performance records of the inaugural Ashes Premier League. Every run, dismissal, and milestone recorded from the 12-match regular season through to the championship decider.'
+              : 'The complete historical performance records of the second Ashes Premier League tournament. Every run, dismissal, and milestone recorded from the 12-match regular season through to Skyshot’s championship triumph.'}
           </p>
 
           {/* Quick-Jump Section Navigation Strip */}

@@ -1,8 +1,12 @@
 import React from 'react';
 import { Container } from '../../../components/layout/Container';
 import { Shield, Calendar, Award, Target } from 'lucide-react';
+import { useSeasonOptional } from '../../../app/providers/SeasonProvider';
 
 export const SeasonStatsStrip: React.FC = () => {
+  const { activeSeasonId } = useSeasonOptional();
+  const isSeason1 = activeSeasonId === 'season-1';
+
   const stats = [
     {
       num: '04',
@@ -17,23 +21,29 @@ export const SeasonStatsStrip: React.FC = () => {
       icon: Calendar,
     },
     {
-      num: '5,945',
+      num: isSeason1 ? '5,945' : '5,681',
       label: 'Official Recorded Batter Runs',
       detail: 'Official aggregate across all recorded innings',
       icon: Target,
       highlight: true,
     },
     {
-      num: '101',
+      num: isSeason1 ? '101' : '117',
       label: 'Bowler Wickets',
-      detail: '100% verified dismissals recorded in dataset',
+      detail: isSeason1
+        ? '100% verified dismissals recorded in dataset'
+        : '100% verified dismissals across 21 recorded bowlers',
       icon: Award,
     },
   ];
 
   return (
     <section
-      aria-label="Season 1 Tournament Aggregate Statistics"
+      aria-label={
+        isSeason1
+          ? 'Season 1 Tournament Aggregate Statistics'
+          : 'Season 2 Tournament Aggregate Statistics'
+      }
       className="bg-[#0B1512] border-b border-[#EAE4D8]/10 py-6 sm:py-10"
     >
       <Container>
@@ -72,8 +82,21 @@ export const SeasonStatsStrip: React.FC = () => {
 
         {/* Archival Reconciliation Ledger Note */}
         <div className="mt-5 sm:mt-8 pt-3 sm:pt-4 border-t border-[#EAE4D8]/5 flex flex-col sm:flex-row sm:items-center justify-between text-[10px] sm:text-[11px] font-mono text-[#87968B] gap-1.5 sm:gap-2 leading-relaxed break-words">
-          <span>STATISTICAL RECONCILIATION: 5,945 RECORDED BATTER RUNS (5,930 INNINGS + 13 RECONSTRUCTED + 2 UNATTRIBUTED AGGREGATE ADJUSTMENT)</span>
-          <span className="text-[#B99A5B] shrink-0">MATHEMATICALLY BALANCED</span>
+          {isSeason1 ? (
+            <>
+              <span>
+                STATISTICAL RECONCILIATION: 5,945 RECORDED BATTER RUNS (5,930 INNINGS + 13 RECONSTRUCTED + 2 UNATTRIBUTED AGGREGATE ADJUSTMENT)
+              </span>
+              <span className="text-[#B99A5B] shrink-0">MATHEMATICALLY BALANCED</span>
+            </>
+          ) : (
+            <>
+              <span>
+                STATISTICAL RECONCILIATION: 5,681 RECORDED BATTER RUNS (8 BATTING DISCREPANCIES DOCUMENTED) • 117 BOWLER WICKETS (0 DISCREPANCIES)
+              </span>
+              <span className="text-[#B99A5B] shrink-0">AUDITED ARCHIVAL BALANCE</span>
+            </>
+          )}
         </div>
       </Container>
     </section>

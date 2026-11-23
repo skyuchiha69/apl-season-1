@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSeason } from '../../../app/providers/SeasonProvider';
 import { Team, Player, PlayerRole } from '../../../data/types';
 import { Users, ChevronDown, ChevronUp, Info } from 'lucide-react';
 
@@ -8,6 +9,8 @@ interface SquadRosterProps {
 }
 
 export const SquadRoster: React.FC<SquadRosterProps> = ({ team, players }) => {
+  const { seasonData } = useSeason();
+  const isSeason1 = seasonData.seasonId === 'season-1';
   const [selectedRole, setSelectedRole] = useState<'all' | PlayerRole>('all');
   const [expandedPlayerId, setExpandedPlayerId] = useState<string | null>(null);
 
@@ -43,10 +46,10 @@ export const SquadRoster: React.FC<SquadRosterProps> = ({ team, players }) => {
         <div className="space-y-1">
           <div className="flex items-center space-x-2 text-xs font-mono tracking-wider text-[#B99A5B] uppercase font-semibold">
             <Users className="w-4 h-4 text-[#B99A5B]" />
-            <span>Official Squad Roster • 11 Verified Players</span>
+            <span>Official Squad Roster • {players.length} Verified Players</span>
           </div>
           <h3 className="text-2xl sm:text-3xl font-black text-[#EAE4D8] font-display uppercase tracking-tight">
-            The {team.name} XI
+            The {team.name} {isSeason1 ? 'XI' : 'Squad'}
           </h3>
           <p className="text-xs text-[#87968B] font-sans">
             Verified tournament player profiles, match innings statistics, and career contributions.
@@ -124,8 +127,8 @@ export const SquadRoster: React.FC<SquadRosterProps> = ({ team, players }) => {
         </div>
       </div>
 
-      {/* Umang Franchise Ownership Context (for Champions) */}
-      {team.id === 'champions' && (
+      {/* Umang Franchise Ownership Context (for Champions in Season 1) */}
+      {team.id === 'champions' && isSeason1 && (
         <div className="p-4 rounded-xl bg-[#0E1713] border border-[#B99A5B]/30 flex items-start space-x-3 text-xs font-sans text-[#A69F92] leading-relaxed">
           <Info className="w-4 h-4 text-[#B99A5B] shrink-0 mt-0.5" />
           <div className="space-y-1">
@@ -204,25 +207,55 @@ export const SquadRoster: React.FC<SquadRosterProps> = ({ team, players }) => {
                 </div>
 
                 {/* Identity Clarification Notes */}
-                {isShubhamBat && (
-                  <p className="text-[11px] font-sans text-cyan-300/90 bg-cyan-950/20 p-2 rounded border border-cyan-800/30">
-                    Franchise owner and on-field team captain for Skyshot • 134 runs, 1 fifty.
-                  </p>
+                {isSeason1 ? (
+                  <>
+                    {isShubhamBat && (
+                      <p className="text-[11px] font-sans text-cyan-300/90 bg-cyan-950/20 p-2 rounded border border-cyan-800/30">
+                        Franchise owner and on-field team captain for Skyshot • 134 runs, 1 fifty.
+                      </p>
+                    )}
+                    {isSkyBowler && (
+                      <p className="text-[11px] font-sans text-purple-300/90 bg-purple-950/20 p-2 rounded border border-purple-800/30">
+                        Skyshot strike bowler &amp; Purple Cap winner (12 wickets across 8 matches).
+                      </p>
+                    )}
+                    {isJay && (
+                      <p className="text-[11px] font-sans text-slate-300 bg-slate-900/40 p-2 rounded border border-slate-700/40">
+                        Knights owner &amp; team captain • Tournament record: 146 runs in a single innings vs Skyshot.
+                      </p>
+                    )}
+                    {isDharm && (
+                      <p className="text-[11px] font-sans text-emerald-300/90 bg-emerald-950/20 p-2 rounded border border-emerald-800/30">
+                        Authors champion bowler: 5 verified tournament wickets (4 league + 1 Grand Final).
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {isShubhamBat && (
+                      <p className="text-[11px] font-sans text-cyan-300/90 bg-cyan-950/20 p-2 rounded border border-cyan-800/30">
+                        Franchise owner and on-field team captain for Skyshot • 304 runs, 1 century • Season 2 Champion.
+                      </p>
+                    )}
+                    {isJay && (
+                      <p className="text-[11px] font-sans text-slate-300 bg-slate-900/40 p-2 rounded border border-slate-700/40">
+                        Knights owner &amp; team captain • 322 runs, 4 fifties • Grand Finalist.
+                      </p>
+                    )}
+                    {isDharm && (
+                      <p className="text-[11px] font-sans text-emerald-300/90 bg-emerald-950/20 p-2 rounded border border-emerald-800/30">
+                        Transferred to Knights for Season 2 • 10 wickets (T-3rd Purple Cap).
+                      </p>
+                    )}
+                  </>
                 )}
-                {isSkyBowler && (
-                  <p className="text-[11px] font-sans text-purple-300/90 bg-purple-950/20 p-2 rounded border border-purple-800/30">
-                    Skyshot strike bowler &amp; Purple Cap winner (12 wickets across 8 matches).
-                  </p>
-                )}
-                {isJay && (
-                  <p className="text-[11px] font-sans text-slate-300 bg-slate-900/40 p-2 rounded border border-slate-700/40">
-                    Knights owner &amp; team captain • Tournament record: 146 runs in a single innings vs Skyshot.
-                  </p>
-                )}
-                {isDharm && (
-                  <p className="text-[11px] font-sans text-emerald-300/90 bg-emerald-950/20 p-2 rounded border border-emerald-800/30">
-                    Authors champion bowler: 5 verified tournament wickets (4 league + 1 Grand Final).
-                  </p>
+
+                {/* Archival Roster / Anomaly Notes */}
+                {player.stats.anomalyNote && (
+                  <div className="text-[10px] font-sans text-[#A69F92] bg-[#14201A] p-2 rounded border border-[#EAE4D8]/10 leading-relaxed">
+                    <strong className="text-[#B99A5B] font-mono uppercase block">Archival Note:</strong>
+                    {player.stats.anomalyNote}
+                  </div>
                 )}
 
                 {/* Primary Stats Grid */}

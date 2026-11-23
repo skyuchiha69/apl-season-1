@@ -1,6 +1,9 @@
 export type TeamId = 'authors' | 'champions' | 'skyshot' | 'knights';
 
-export type PlayerRole = 'batsman' | 'bowler' | 'all-rounder' | 'wicket-keeper';
+export type SeasonId = 'season-1' | 'season-2';
+export const AVAILABLE_SEASON_IDS: readonly SeasonId[] = ['season-1', 'season-2'] as const;
+
+export type PlayerRole = 'batsman' | 'bowler' | 'all-rounder' | 'wicket-keeper' | 'unspecified';
 
 export interface ReconstructedRunMetadata {
   sourceRuns: number;               // 119 (Authoritative printed total from PDF Page 6)
@@ -21,6 +24,29 @@ export interface AggregateReconciliation {
   officialRecordedBowlerWickets: number;      // 101
   notes: string;
 }
+
+export interface BattingDiscrepancyRecord {
+  playerId: string;
+  playerName: string;
+  teamId: TeamId;
+  sourcePage: number;
+  rawNotation: string;           // Exact verbatim string from PDF (e.g. "4 + 0 + 1 + 1 + = 7")
+  recordedSequence: number[];    // Verified numerical terms [4, 0, 1, 1]
+  sequenceSum: number;           // Arithmetic sum of recorded terms (6)
+  officialPrintedTotal: number;  // Official printed score sheet total (7)
+  delta: number;                 // officialPrintedTotal - sequenceSum (+1)
+  notes: string;
+}
+
+export interface Season2Reconciliation {
+  seasonId: 'season-2';
+  totalBowlerWickets: number;
+  bowlerWicketsDiscrepancies: 0;
+  battingDiscrepancies: BattingDiscrepancyRecord[];
+  notes: string;
+}
+
+export type SeasonReconciliation = AggregateReconciliation | Season2Reconciliation;
 
 export interface Owner {
   id: string;
@@ -55,10 +81,11 @@ export interface PlayerStats {
   oversFinal?: number;
   runsConcededFinal?: number;
   wicketsFinal?: number;
-  // Reconstruction metadata
+  // Reconstruction metadata (Season 1)
   reconstruction?: ReconstructedRunMetadata;
-  // Discrepancy indicator note (e.g. for Summers 17 vs sum 16)
+  // Discrepancy indicator note (e.g. for Summers 17 vs sum 16 or Season 2 notes)
   anomalyNote?: string;
+  hasDiscrepancy?: boolean;
 }
 
 export interface Player {
@@ -92,9 +119,10 @@ export interface Team {
   theme: TeamTheme;
   squad: Player[];
   leagueRecord: {
-    played: 6;
+    played: number;
     won: number;
     lost: number;
+    tied?: number;
     points: number;
     position: 1 | 2 | 3 | 4;
   };
@@ -131,15 +159,20 @@ export interface MatchInnings {
   bowling: ScorecardBowler[];
 }
 
-export type MatchStage = 'LEAGUE' | 'SEMI_FINAL_1' | 'SEMI_FINAL_2' | 'FINAL';
+export type MatchStage =
+  | 'LEAGUE'
+  | 'SEMI_FINAL_1'
+  | 'SEMI_FINAL_2'
+  | 'SEMI_FINAL'
+  | 'QUALIFIER'
+  | 'FINAL';
 
-export interface Match {
+interface MatchBase {
   id: number;
   matchNumber: number;
   stage: MatchStage;
   homeTeamId: TeamId;
   awayTeamId: TeamId;
-  winnerTeamId: TeamId;
   margin?: string;
   tossInfo?: string;
   detailsKnown: boolean;
@@ -147,6 +180,19 @@ export interface Match {
   secondInnings?: MatchInnings;
   screenshotUrl?: string;
 }
+
+export interface DecidedMatch extends MatchBase {
+  isTie?: false;
+  winnerTeamId: TeamId;
+}
+
+export interface TiedMatch extends MatchBase {
+  isTie: true;
+  winnerTeamId?: never;
+  tiedTeamIds: [TeamId, TeamId];
+}
+
+export type Match = DecidedMatch | TiedMatch;
 
 export interface SeasonRecord {
   id: string;
@@ -160,7 +206,7 @@ export interface SeasonRecord {
 }
 
 export interface SeasonData {
-  seasonId: 'season-1';
+  seasonId: SeasonId;
   name: string;
   subtitle: string;
   year: number;
@@ -169,6 +215,5 @@ export interface SeasonData {
   players: Player[];
   matches: Match[];
   records: SeasonRecord[];
-  reconciliation: AggregateReconciliation;
+  reconciliation: SeasonReconciliation;
 }
-

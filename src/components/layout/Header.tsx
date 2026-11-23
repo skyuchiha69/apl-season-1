@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Container } from './Container';
 import { useTheme } from '../../app/providers/ThemeProvider';
+import { useSeason } from '../../app/providers/SeasonProvider';
+import { SeasonSelector } from './SeasonSelector';
 import { Menu, X } from 'lucide-react';
 import { TeamId } from '../../data/types';
 
@@ -9,6 +11,7 @@ export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { currentTheme, setTheme } = useTheme();
+  const { activeSeasonId } = useSeason();
 
   const navLinks = [
     { label: 'Chronicle', path: '/' },
@@ -35,10 +38,18 @@ export const Header: React.FC = () => {
           <div className="flex items-center space-x-2 sm:space-x-3 overflow-hidden">
             <span className="text-[#B99A5B] font-bold truncate">APL ARCHIVE</span>
             <span className="hidden xs:inline text-[#EAE4D8]/20">•</span>
-            <span className="hidden xs:inline text-[#A69F92]">SEASON 01</span>
+            <SeasonSelector variant="masthead" />
             <span className="hidden md:inline text-[#EAE4D8]/20">•</span>
-            <span className="hidden md:inline text-[#EAE4D8]">
-              CHAMPIONS: <strong className="text-emerald-400 font-semibold">AUTHORS</strong> (226/7 in 19.2 ov)
+            <span className="hidden md:inline text-[#EAE4D8] truncate">
+              {activeSeasonId === 'season-1' ? (
+                <>
+                  CHAMPIONS: <strong className="text-emerald-400 font-semibold">AUTHORS</strong> (226/7 in 19.2 ov)
+                </>
+              ) : (
+                <>
+                  CHAMPIONS: <strong className="text-cyan-400 font-semibold">SKYSHOT</strong> (Won Final vs Knights)
+                </>
+              )}
             </span>
           </div>
 
@@ -134,6 +145,12 @@ export const Header: React.FC = () => {
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-[#EAE4D8]/10 bg-[#0B1512] px-4 py-6 space-y-4 shadow-2xl animate-fadeIn">
+          {/* Season Selector in Mobile Drawer */}
+          <div className="pb-3 border-b border-[#EAE4D8]/10 flex items-center justify-between">
+            <span className="text-[11px] font-mono text-[#87968B] uppercase tracking-wider">Tournament Season</span>
+            <SeasonSelector variant="drawer" />
+          </div>
+
           <nav className="flex flex-col space-y-3" aria-label="Mobile navigation">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
@@ -155,7 +172,11 @@ export const Header: React.FC = () => {
           </nav>
 
           <div className="pt-4 border-t border-[#EAE4D8]/10 text-[11px] font-mono text-[#87968B] flex items-center justify-between">
-            <span>INAUGURAL CHAMPIONS: AUTHORS</span>
+            <span>
+              {activeSeasonId === 'season-1'
+                ? 'INAUGURAL CHAMPIONS: AUTHORS'
+                : 'SEASON 2 CHAMPIONS: SKYSHOT'}
+            </span>
             <span className="text-[#B99A5B]">2024 ARCHIVE</span>
           </div>
         </div>

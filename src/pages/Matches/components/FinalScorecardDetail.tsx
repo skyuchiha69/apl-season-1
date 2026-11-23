@@ -8,7 +8,92 @@ export const FinalScorecardDetail: React.FC = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   if (!finalMatch || !finalMatch.firstInnings || !finalMatch.secondInnings) {
-    return null;
+    const winnerTeam = finalMatch?.winnerTeamId ? seasonData.teams[finalMatch.winnerTeamId] : null;
+    const runnerUpTeamId = finalMatch
+      ? (finalMatch.winnerTeamId === finalMatch.homeTeamId ? finalMatch.awayTeamId : finalMatch.homeTeamId)
+      : null;
+    const runnerUpTeam = runnerUpTeamId ? seasonData.teams[runnerUpTeamId] : null;
+
+    return (
+      <section
+        id="final-scorecard"
+        aria-labelledby="scorecard-heading"
+        className="py-10 sm:py-16 border-b border-[#EAE4D8]/10 relative overflow-hidden"
+      >
+        <div className="space-y-8">
+          {/* Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#EAE4D8]/10 pb-4">
+            <div className="space-y-1">
+              <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono tracking-widest text-[#B99A5B] uppercase font-semibold">
+                <Trophy className="w-3.5 h-3.5 text-[#B99A5B] shrink-0" aria-hidden="true" />
+                <span>The Defining Climax • Season 2 Championship Decider</span>
+              </div>
+              <h2
+                id="scorecard-heading"
+                className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#EAE4D8] uppercase font-display tracking-tight"
+              >
+                Grand Final Championship Outcome
+              </h2>
+            </div>
+            <div className="font-mono text-xs text-[#87968B] text-left sm:text-right">
+              <span>Match 15 • Grand Final</span>
+              <span className="block text-cyan-400 font-bold">Season 2 Championship Decider</span>
+            </div>
+          </div>
+
+          {/* Championship Outcome Feature Card */}
+          <div className="rounded-xl bg-[#111815] border border-[#EAE4D8]/12 p-5 sm:p-7 shadow-xl space-y-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#EAE4D8]/10 pb-5">
+              <div className="space-y-1.5">
+                <div className="flex items-center space-x-2">
+                  <span className="bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 px-2 py-0.5 rounded font-mono font-bold uppercase text-[10px] tracking-wider">
+                    Official Decider Result
+                  </span>
+                  <span className="text-xs font-mono text-[#87968B]">
+                    APL Season 2 Grand Final
+                  </span>
+                </div>
+                <h3 className="font-display font-black text-2xl sm:text-3xl text-[#EAE4D8] tracking-tight">
+                  {winnerTeam ? `${winnerTeam.name.toUpperCase()} DEFEATED ${runnerUpTeam?.name.toUpperCase() ?? 'KNIGHTS'}` : 'SKYSHOT DEFEATED KNIGHTS'}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#A69F92] font-sans">
+                  {`${winnerTeam?.name ?? 'Skyshot'} captured the APL Season 2 Championship trophy, crowning their campaign after direct qualification from Match 13.`}
+                </p>
+              </div>
+
+              <div className="p-4 rounded-xl bg-[#14201A] border border-cyan-500/30 text-center shrink-0">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-300 block mb-0.5 font-bold">
+                  Season 2 Champions
+                </span>
+                <span className="font-display font-black text-2xl text-[#EAE4D8] block">
+                  {winnerTeam?.name ?? 'SKYSHOT'}
+                </span>
+                <span className="text-[11px] font-mono text-[#87968B]">
+                  Owner: {winnerTeam?.owner.name ?? 'Shubham'}
+                </span>
+              </div>
+            </div>
+
+            {/* Archival Disclosure Note */}
+            <div className="p-4 rounded-xl bg-[#15231C] border border-[#B99A5B]/30 flex items-start space-x-3.5">
+              <AlertCircle className="w-5 h-5 text-[#B99A5B] shrink-0 mt-0.5" aria-hidden="true" />
+              <div className="space-y-1 text-xs text-[#A69F92] font-sans leading-relaxed">
+                <strong className="text-[#EAE4D8] font-mono uppercase block text-[11px] tracking-wide">
+                  Archival Disclosure • Surviving Tournament Records:
+                </strong>
+                <p>
+                  Official match-by-match innings scorecards, balls faced, boundaries hit, and individual bowling figures
+                  for Match 15 were not recorded in the surviving Season 2 tournament archive.
+                  The Grand Final outcome (<strong className="text-[#EAE4D8]">Skyshot defeating Knights</strong>)
+                  is verified across all official tournament standings, match sequences, and championship honors.
+                  To preserve 100% archival integrity, no speculative runs or ball counts are invented.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   const { firstInnings, secondInnings } = finalMatch;

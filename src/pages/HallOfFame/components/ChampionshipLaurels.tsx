@@ -1,8 +1,12 @@
 import React from 'react';
 import { Trophy, Shield, Info } from 'lucide-react';
+import { useSeasonOptional } from '../../../app/providers/SeasonProvider';
 
 export const ChampionshipLaurels: React.FC = () => {
-  const laurels = [
+  const { activeSeasonId } = useSeasonOptional();
+  const isSeason2 = activeSeasonId === 'season-2';
+
+  const laurelsSeason1 = [
     {
       id: 'authors',
       status: 'INAUGURAL CHAMPIONS',
@@ -89,6 +93,95 @@ export const ChampionshipLaurels: React.FC = () => {
     },
   ];
 
+  const laurelsSeason2 = [
+    {
+      id: 'skyshot',
+      status: 'APL SEASON 2 CHAMPIONS',
+      badge: 'APL Season 2 Title Holder',
+      accentColor: '#00D2FF',
+      bgGradient: 'from-[#0A161A] via-[#091014] to-[#090C0B]',
+      borderColor: 'border-[#00D2FF]/30',
+      teamName: 'SKYSHOT',
+      ownerName: 'Shubham',
+      ownerNickname: 'Sky',
+      teamCaptain: 'Shubham',
+      keyFeat: 'Won Grand Final by 4 wickets vs Knights to claim APL Season 2 title',
+      narrative:
+        'Spearheaded by franchise owner and on-field captain Shubham, Skyshot completed the championship march. After qualifying 2nd with 7 points (3–2–1) and advancing through the playoff Qualifier, Skyshot chased down Knights in the Grand Final to claim their maiden APL title, with Shubham amassing 304 tournament runs and a historic 114 century.',
+      metrics: [
+        { label: 'Final Result', value: 'Won by 4 Wickets' },
+        { label: 'Playoff Journey', value: 'Qualifier & Final Champions' },
+        { label: 'Regular Season', value: '3–2–1 (7 Pts, 2nd Place)' },
+        { label: 'Key Captain Knock', value: 'Shubham 114 Century' },
+      ],
+    },
+    {
+      id: 'knights',
+      status: 'RUNNERS-UP / FINALISTS',
+      badge: 'Grand Finalist • Playoff Resurgence',
+      accentColor: '#F8FAFC',
+      bgGradient: 'from-[#141618] via-[#0E1012] to-[#090C0B]',
+      borderColor: 'border-[#F8FAFC]/25',
+      teamName: 'KNIGHTS',
+      ownerName: 'Jay',
+      ownerNickname: 'Red',
+      teamCaptain: 'Jay',
+      keyFeat: 'Upset regular-season leaders Champions in Semi-Final; set tournament records 319 & 161',
+      narrative:
+        'Led by franchise owner and captain Jay, Knights produced an unforgettable playoff resurgence. After a hard-fought 3–3 regular season, Knights toppled league-leaders Champions in the Semi-Final to reach the Grand Final. The campaign was highlighted by an all-time tournament record 319 team total and Pointer\'s tournament-high 161 individual innings.',
+      metrics: [
+        { label: 'Final Finish', value: 'Runners-Up' },
+        { label: 'Semi-Final', value: 'Eliminated Champions' },
+        { label: 'Tournament Record Total', value: '319 vs Champions' },
+        { label: 'Individual Record', value: 'Pointer 161 Runs' },
+      ],
+    },
+    {
+      id: 'champions',
+      status: 'LEAGUE STAGE TOPPERS',
+      badge: '1st in League (9 Pts) • Cap Sweepers',
+      accentColor: '#FF2E4D',
+      bgGradient: 'from-[#1A0A0E] via-[#14090C] to-[#090C0B]',
+      borderColor: 'border-[#FF2E4D]/30',
+      teamName: 'CHAMPIONS',
+      ownerName: 'Umang',
+      ownerNickname: 'UB',
+      teamCaptain: 'Tony',
+      keyFeat: 'Topped regular season with 9 points (4–1–1) and swept both Golden Caps',
+      narrative:
+        'Masterminded by founder Umang and captained on-field by Tony, Champions dominated the Season 2 regular season with only a single defeat in six league games. Champions swept both premier individual honors with Orange Cap winner Harvey (446 runs) and Purple Cap bowler Silver (12 wickets) before bowing out in the semi-finals.',
+      metrics: [
+        { label: 'League Finish', value: '1st Place (9 Pts)' },
+        { label: 'League Record', value: '4 Wins – 1 Loss – 1 Tie' },
+        { label: 'Season Orange Cap', value: 'Harvey (446 Runs)' },
+        { label: 'Season Purple Cap', value: 'Silver (12 Wickets)' },
+      ],
+    },
+    {
+      id: 'authors',
+      status: 'REBUILDING DEFENDING CHAMPIONS',
+      badge: '4th Place • Founding Franchise',
+      accentColor: '#00E676',
+      bgGradient: 'from-[#0A1A12] via-[#09140E] to-[#090C0B]',
+      borderColor: 'border-[#00E676]/30',
+      teamName: 'AUTHORS',
+      ownerName: 'Dharm',
+      ownerNickname: 'Green',
+      teamCaptain: 'King',
+      keyFeat: 'Inaugural champions navigated a rebuilding transition; owner Dharm starred on loan for Knights',
+      narrative:
+        'Under on-field captain A. King, defending champions Authors navigated a transitional Season 2 campaign (1W–5L, 2 pts). Founding franchise owner Dharm transferred to Knights as an active frontline bowler, claiming the tournament-best single match bowling figures of 4 wickets vs Champions and 10 wickets overall.',
+      metrics: [
+        { label: 'League Finish', value: '4th Place (2 Pts, 1–5)' },
+        { label: 'On-Field Captain', value: 'King (A. King)' },
+        { label: 'Owner Dual-Role', value: 'Dharm (10 Wkts for Knights)' },
+        { label: 'Tournament Best Spell', value: 'Dharm 4 Wkts' },
+      ],
+    },
+  ];
+
+  const laurels = isSeason2 ? laurelsSeason2 : laurelsSeason1;
+
   return (
     <section id="championship-laurels" className="py-12 lg:py-16 border-b border-[#EAE4D8]/10 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -96,15 +189,15 @@ export const ChampionshipLaurels: React.FC = () => {
         <div className="max-w-3xl mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAE4D8]/5 border border-[#EAE4D8]/15 text-[#B99A5B] text-xs font-mono uppercase tracking-widest mb-3">
             <Trophy className="w-3.5 h-3.5" />
-            <span>Season Honors & Franchise Laurels</span>
+            <span>Season Honors &amp; Franchise Laurels</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-[#EAE4D8] tracking-tight mb-4">
-            THE FOUR PILLARS OF SEASON 1
+            {isSeason2 ? 'THE FOUR PILLARS OF SEASON 2' : 'THE FOUR PILLARS OF SEASON 1'}
           </h2>
           <p className="text-base text-[#87968B] leading-relaxed font-sans">
-            Every franchise in APL Season 1 carved its permanent mark into the league chronicle. From Authors’ historic
-            championship chase to Knights’ record-breaking scoring exhibition, these four franchises anchored the
-            inaugural tournament.
+            {isSeason2
+              ? 'Every franchise in APL Season 2 carved its permanent mark into the league chronicle. From Skyshot’s maiden championship crowning to Knights’ 319-run record total and Champions’ dominant 9-point regular season, these four franchises anchored the second tournament.'
+              : 'Every franchise in APL Season 1 carved its permanent mark into the league chronicle. From Authors’ historic championship chase to Knights’ record-breaking scoring exhibition, these four franchises anchored the inaugural tournament.'}
           </p>
         </div>
 
@@ -173,7 +266,7 @@ export const ChampionshipLaurels: React.FC = () => {
             <strong className="text-[#EAE4D8] font-mono uppercase tracking-wider block mb-0.5">
               Archival Identity Protocol • Team Captains &amp; Ownership
             </strong>
-            The four APL franchises were solely owned, managed, and contested by the four real-life cousins (Dharm, Umang, Shubham, Jay). Tactical leadership and on-field captaincy were executed by the actual in-game captains (King, Stark, Shubham, Jay), while international cricketers represent owner personal favorites and inspirations.
+            The four APL franchises were solely owned, managed, and contested by the four real-life cousins (Dharm, Umang, Shubham, Jay). Tactical leadership and on-field captaincy were executed by the actual in-game captains ({isSeason2 ? 'King, Tony, Shubham, Jay' : 'King, Stark, Shubham, Jay'}), while international cricketers represent owner personal favorites and inspirations.
           </div>
         </div>
       </div>

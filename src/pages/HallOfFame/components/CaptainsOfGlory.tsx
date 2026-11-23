@@ -1,7 +1,11 @@
 import React from 'react';
 import { Flame, Target, Info, Sparkles } from 'lucide-react';
+import { useSeasonOptional } from '../../../app/providers/SeasonProvider';
 
 export const CaptainsOfGlory: React.FC = () => {
+  const { activeSeasonId } = useSeasonOptional();
+  const isSeason2 = activeSeasonId === 'season-2';
+
   return (
     <section id="golden-caps" className="py-12 lg:py-16 border-b border-[#EAE4D8]/10 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,17 +16,18 @@ export const CaptainsOfGlory: React.FC = () => {
             <span>Individual Major Honors</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-[#EAE4D8] tracking-tight mb-4">
-            THE GOLDEN CAPS OF SEASON 1
+            {isSeason2 ? 'THE GOLDEN CAPS OF SEASON 2' : 'THE GOLDEN CAPS OF SEASON 1'}
           </h2>
           <p className="text-base text-[#87968B] leading-relaxed font-sans">
-            The two supreme individual performance honors of the inaugural tournament. Across eight matches from the
-            opening day through the championship decider, these two titans set the statistical benchmark of APL Season 1.
+            {isSeason2
+              ? 'The two supreme individual performance honors of Season 2. Across eight matches from the opening round to the championship final, Champions swept both premier statistical honors, setting the individual benchmark of APL Season 2.'
+              : 'The two supreme individual performance honors of the inaugural tournament. Across eight matches from the opening day through the championship decider, these two titans set the statistical benchmark of APL Season 1.'}
           </p>
         </div>
 
         {/* Two Monumental Golden Cap Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* ORANGE CAP: A. KING */}
+          {/* ORANGE CAP */}
           <div className="rounded-2xl p-7 sm:p-8 bg-gradient-to-br from-[#1C1309] via-[#120F0B] to-[#090C0B] border border-amber-500/40 shadow-2xl relative overflow-hidden">
             {/* Top Cap Ribbon */}
             <div className="flex items-center justify-between border-b border-amber-500/20 pb-4 mb-6">
@@ -30,7 +35,9 @@ export const CaptainsOfGlory: React.FC = () => {
                 <Flame className="w-3.5 h-3.5 text-amber-400" />
                 <span>Orange Cap Winner • Most Runs</span>
               </div>
-              <span className="text-xs font-mono text-[#87968B]">Official Season 1 Honor</span>
+              <span className="text-xs font-mono text-[#87968B]">
+                {isSeason2 ? 'Official Season 2 Honor' : 'Official Season 1 Honor'}
+              </span>
             </div>
 
             {/* Giant Stat Display */}
@@ -40,46 +47,60 @@ export const CaptainsOfGlory: React.FC = () => {
                   Tournament Aggregate Runs
                 </div>
                 <div className="text-5xl sm:text-6xl font-display font-black text-amber-400 tracking-tight leading-none">
-                  527
+                  {isSeason2 ? '446' : '527'}
                 </div>
                 <h3 className="text-2xl font-display font-black text-[#EAE4D8] mt-2">
-                  A. King
+                  {isSeason2 ? 'Harvey' : 'A. King'}
                 </h3>
                 <div className="text-xs font-mono text-emerald-400 font-semibold mt-0.5">
-                  AUTHORS • Top-Order Batsman
+                  {isSeason2 ? 'CHAMPIONS • Top-Order Batsman' : 'AUTHORS • Top-Order Batsman'}
                 </div>
               </div>
               <div className="p-3.5 rounded-xl bg-[#090C0B]/60 border border-amber-500/20 text-right">
                 <div className="text-[10px] font-mono text-[#87968B] uppercase">Matches Contested</div>
                 <div className="text-xl font-bold font-mono text-[#EAE4D8]">8 Matches</div>
-                <div className="text-[10px] font-mono text-amber-400 mt-1">2 Hundreds • 3 Fifties</div>
+                <div className="text-[10px] font-mono text-amber-400 mt-1">
+                  {isSeason2 ? '2 Hundreds • 2 Fifties' : '2 Hundreds • 3 Fifties'}
+                </div>
               </div>
             </div>
 
             {/* Editorial Narrative */}
             <p className="text-sm text-[#A69F92] leading-relaxed font-sans mb-6">
-              A. King produced the most dominant run-scoring campaign in APL history. Amassing 527 runs across eight matches,
-              King surpassed all tournament peers with three half-centuries and two magnificent centuries: 105 in league play
-              and a match-defining 108 off 54 balls in the Grand Final to anchor Authors’ historic 226 chase.
+              {isSeason2
+                ? 'Harvey delivered the premier run-scoring campaign of APL Season 2, accumulating 446 runs across eight matches for Champions. Spearheading Champions to top spot in the regular season, Harvey struck two half-centuries and two centuries (108 and 112) with a tournament average of 55.75.'
+                : 'A. King produced the most dominant run-scoring campaign in APL history. Amassing 527 runs across eight matches, King surpassed all tournament peers with three half-centuries and two magnificent centuries: 105 in league play and a match-defining 108 off 54 balls in the Grand Final to anchor Authors’ historic 226 chase.'}
             </p>
 
             {/* Innings Sequence Visual */}
             <div className="p-4 rounded-xl bg-[#090C0B]/50 border border-[#EAE4D8]/10 mb-6">
               <div className="flex items-center justify-between text-xs font-mono text-[#87968B] mb-2">
                 <span>Recorded Innings Sequence (8 Matches):</span>
-                <span className="text-amber-400 font-bold">HS: 108</span>
+                <span className="text-amber-400 font-bold">{isSeason2 ? 'HS: 112' : 'HS: 108'}</span>
               </div>
               <div className="grid grid-cols-8 gap-1.5 text-center font-mono text-xs">
-                {[
-                  { r: 94, t: '50' },
-                  { r: 81, t: '50' },
-                  { r: 71, t: '50' },
-                  { r: 40, t: '' },
-                  { r: 3, t: '' },
-                  { r: 25, t: '' },
-                  { r: 105, t: '100' },
-                  { r: 108, t: '100' },
-                ].map((inn, idx) => (
+                {(isSeason2
+                  ? [
+                      { r: 6, t: '' },
+                      { r: 34, t: '' },
+                      { r: 108, t: '100' },
+                      { r: 54, t: '50' },
+                      { r: 42, t: '' },
+                      { r: 56, t: '50' },
+                      { r: 34, t: '' },
+                      { r: 112, t: '100' },
+                    ]
+                  : [
+                      { r: 94, t: '50' },
+                      { r: 81, t: '50' },
+                      { r: 71, t: '50' },
+                      { r: 40, t: '' },
+                      { r: 3, t: '' },
+                      { r: 25, t: '' },
+                      { r: 105, t: '100' },
+                      { r: 108, t: '100' },
+                    ]
+                ).map((inn, idx) => (
                   <div
                     key={idx}
                     className={`p-2 rounded ${
@@ -107,12 +128,12 @@ export const CaptainsOfGlory: React.FC = () => {
 
             {/* Archival Milestone Note */}
             <div className="pt-4 border-t border-amber-500/20 text-xs font-mono text-[#87968B] flex items-center justify-between">
-              <span>Grand Final Decider: 108 (54 balls)</span>
-              <span className="text-amber-400 font-bold">527 Tournament Total</span>
+              <span>{isSeason2 ? 'Tournament High Score: 112' : 'Grand Final Decider: 108 (54 balls)'}</span>
+              <span className="text-amber-400 font-bold">{isSeason2 ? '446 Tournament Total' : '527 Tournament Total'}</span>
             </div>
           </div>
 
-          {/* PURPLE CAP: N. SKY */}
+          {/* PURPLE CAP */}
           <div className="rounded-2xl p-7 sm:p-8 bg-gradient-to-br from-[#120B1C] via-[#0D0A14] to-[#090C0B] border border-purple-500/40 shadow-2xl relative overflow-hidden">
             {/* Top Cap Ribbon */}
             <div className="flex items-center justify-between border-b border-purple-500/20 pb-4 mb-6">
@@ -120,7 +141,9 @@ export const CaptainsOfGlory: React.FC = () => {
                 <Target className="w-3.5 h-3.5 text-purple-400" />
                 <span>Purple Cap Winner • Most Wickets</span>
               </div>
-              <span className="text-xs font-mono text-[#87968B]">Official Season 1 Honor</span>
+              <span className="text-xs font-mono text-[#87968B]">
+                {isSeason2 ? 'Official Season 2 Honor' : 'Official Season 1 Honor'}
+              </span>
             </div>
 
             {/* Giant Stat Display */}
@@ -133,47 +156,61 @@ export const CaptainsOfGlory: React.FC = () => {
                   12
                 </div>
                 <h3 className="text-2xl font-display font-black text-[#EAE4D8] mt-2">
-                  N. Sky
+                  {isSeason2 ? 'Silver' : 'N. Sky'}
                 </h3>
                 <div className="text-xs font-mono text-cyan-400 font-semibold mt-0.5">
-                  SKYSHOT • All-Rounder / Strike Bowler
+                  {isSeason2 ? 'CHAMPIONS • Strike Bowler / All-Rounder' : 'SKYSHOT • All-Rounder / Strike Bowler'}
                 </div>
               </div>
               <div className="p-3.5 rounded-xl bg-[#090C0B]/60 border border-purple-500/20 text-right">
                 <div className="text-[10px] font-mono text-[#87968B] uppercase">Matches Contested</div>
                 <div className="text-xl font-bold font-mono text-[#EAE4D8]">8 Matches</div>
-                <div className="text-[10px] font-mono text-purple-400 mt-1">Two 4-Wicket Hauls</div>
+                <div className="text-[10px] font-mono text-purple-400 mt-1">
+                  {isSeason2 ? 'Wickets in All 8 Matches' : 'Two 4-Wicket Hauls'}
+                </div>
               </div>
             </div>
 
             {/* Editorial Narrative */}
             <p className="text-sm text-[#A69F92] leading-relaxed font-sans mb-6">
-              As Skyshot&apos;s premier strike bowler, N. Sky dominated the tournament wickets ledger
-              from wire to wire. Capturing 12 wickets across eight appearances, Sky recorded two separate four-wicket hauls
-              to power Skyshot to the top of the regular-season table and secure the definitive Season 1 Purple Cap.
+              {isSeason2
+                ? 'Silver anchored Champions’ table-topping bowling attack throughout APL Season 2. Claiming 12 wickets across eight appearances, Silver struck in every single match he contested—highlighted by a crucial 3-wicket spell against Skyshot—to secure the definitive Season 2 Purple Cap.'
+                : 'As Skyshot\'s premier strike bowler, N. Sky dominated the tournament wickets ledger from wire to wire. Capturing 12 wickets across eight appearances, Sky recorded two separate four-wicket hauls to power Skyshot to the top of the regular-season table and secure the definitive Season 1 Purple Cap.'}
             </p>
 
             {/* Wickets Sequence Visual */}
             <div className="p-4 rounded-xl bg-[#090C0B]/50 border border-[#EAE4D8]/10 mb-6">
               <div className="flex items-center justify-between text-xs font-mono text-[#87968B] mb-2">
                 <span>Recorded Wickets Sequence (8 Matches):</span>
-                <span className="text-purple-400 font-bold">Best Match Bowling: 4/x</span>
+                <span className="text-purple-400 font-bold">{isSeason2 ? 'Best Match Bowling: 3 Wkts' : 'Best Match Bowling: 4/x'}</span>
               </div>
               <div className="grid grid-cols-8 gap-1.5 text-center font-mono text-xs">
-                {[
-                  { w: 1, t: '' },
-                  { w: 0, t: '' },
-                  { w: 4, t: '4w' },
-                  { w: 1, t: '' },
-                  { w: 4, t: '4w' },
-                  { w: 0, t: '' },
-                  { w: 1, t: '' },
-                  { w: 1, t: '' },
-                ].map((inn, idx) => (
+                {(isSeason2
+                  ? [
+                      { w: 1, t: '' },
+                      { w: 1, t: '' },
+                      { w: 1, t: '' },
+                      { w: 2, t: '' },
+                      { w: 2, t: '' },
+                      { w: 3, t: '3w' },
+                      { w: 1, t: '' },
+                      { w: 1, t: '' },
+                    ]
+                  : [
+                      { w: 1, t: '' },
+                      { w: 0, t: '' },
+                      { w: 4, t: '4w' },
+                      { w: 1, t: '' },
+                      { w: 4, t: '4w' },
+                      { w: 0, t: '' },
+                      { w: 1, t: '' },
+                      { w: 1, t: '' },
+                    ]
+                ).map((inn, idx) => (
                   <div
                     key={idx}
                     className={`p-2 rounded ${
-                      inn.t === '4w'
+                      inn.t === '4w' || inn.t === '3w'
                         ? 'bg-purple-500/20 border border-purple-500/50 text-purple-300 font-bold'
                         : inn.w > 0
                         ? 'bg-[#14201A] border border-cyan-500/30 text-cyan-300 font-semibold'
@@ -187,7 +224,7 @@ export const CaptainsOfGlory: React.FC = () => {
               </div>
               <div className="flex items-center gap-3 mt-2 text-[10px] font-mono text-[#87968B]">
                 <span className="flex items-center gap-1">
-                  <span className="w-2 h-2 rounded bg-purple-500/30 border border-purple-500"></span> 4-Wicket Haul (4w)
+                  <span className="w-2 h-2 rounded bg-purple-500/30 border border-purple-500"></span> {isSeason2 ? '3-Wicket Haul (3w)' : '4-Wicket Haul (4w)'}
                 </span>
                 <span className="flex items-center gap-1">
                   <span className="w-2 h-2 rounded bg-cyan-500/30 border border-cyan-500"></span> Wicket Taken
@@ -197,7 +234,7 @@ export const CaptainsOfGlory: React.FC = () => {
 
             {/* Archival Milestone Note */}
             <div className="pt-4 border-t border-purple-500/20 text-xs font-mono text-[#87968B] flex items-center justify-between">
-              <span>Multiple 4-Wicket Hauls (Achieved Twice)</span>
+              <span>{isSeason2 ? 'Wickets in All 8 Tournament Fixtures' : 'Multiple 4-Wicket Hauls (Achieved Twice)'}</span>
               <span className="text-purple-400 font-bold">12 Tournament Wickets</span>
             </div>
           </div>
@@ -210,7 +247,9 @@ export const CaptainsOfGlory: React.FC = () => {
             <strong className="text-[#EAE4D8] font-mono uppercase tracking-wider block mb-0.5">
               Archival Integrity Protocol • Official Statistical Cap Honors
             </strong>
-            The Orange Cap (527 runs by A. King) and Purple Cap (12 wickets by N. Sky) represent the documented Golden Cap honors preserved in the APL Season 1 archive. The archive records no unofficial overall series player award, and A. King’s 108 in the final is documented as a featured batting milestone rather than a formal post-match Player of the Match trophy.
+            {isSeason2
+              ? 'The Orange Cap (446 runs by Harvey) and Purple Cap (12 wickets by Silver) represent the verified Golden Cap honors preserved in the APL Season 2 archive. Champions achieved the sole clean sweep of both seasonal individual cap honors in APL history. The archive records no unofficial overall series player award.'
+              : 'The Orange Cap (527 runs by A. King) and Purple Cap (12 wickets by N. Sky) represent the documented Golden Cap honors preserved in the APL Season 1 archive. The archive records no unofficial overall series player award, and A. King’s 108 in the final is documented as a featured batting milestone rather than a formal post-match Player of the Match trophy.'}
           </div>
         </div>
       </div>

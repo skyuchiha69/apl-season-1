@@ -64,13 +64,16 @@ export const TeamMatchHistory: React.FC<TeamMatchHistoryProps> = ({ teamId, matc
       <div className="space-y-3">
         {teamMatches.map((match) => {
           const opponentId = match.homeTeamId === teamId ? match.awayTeamId : match.homeTeamId;
-          const isWinner = match.winnerTeamId === teamId;
+          const isTie = match.isTie === true;
+          const isWinner = !isTie && match.winnerTeamId === teamId;
           const isFinal = match.stage === 'FINAL';
-          const isPlayoff = match.stage === 'SEMI_FINAL_1' || match.stage === 'SEMI_FINAL_2' || isFinal;
+          const isPlayoff = match.stage !== 'LEAGUE';
 
           let stageLabel = 'League Stage';
           if (match.stage === 'SEMI_FINAL_1') stageLabel = 'Semi-Final 1';
           if (match.stage === 'SEMI_FINAL_2') stageLabel = 'Semi-Final 2';
+          if (match.stage === 'QUALIFIER') stageLabel = 'Qualifier';
+          if (match.stage === 'SEMI_FINAL') stageLabel = 'Semi-Final';
           if (match.stage === 'FINAL') stageLabel = 'Championship Final';
 
           return (
@@ -79,6 +82,8 @@ export const TeamMatchHistory: React.FC<TeamMatchHistoryProps> = ({ teamId, matc
               className={`p-4 rounded-xl border transition-colors flex flex-col md:flex-row md:items-center justify-between gap-4 ${
                 isFinal
                   ? 'bg-[#121F17] border-[#B99A5B]/40 ring-1 ring-[#B99A5B]/20'
+                  : isTie
+                  ? 'bg-[#0E1713] border-[#EAE4D8]/10 hover:border-amber-500/30'
                   : isWinner
                   ? 'bg-[#0E1713] border-[#EAE4D8]/10 hover:border-emerald-500/30'
                   : 'bg-[#0E1713] border-[#EAE4D8]/10 hover:border-rose-500/30'
@@ -131,7 +136,7 @@ export const TeamMatchHistory: React.FC<TeamMatchHistoryProps> = ({ teamId, matc
                     )}
                     {match.margin && (
                       <p className="font-sans text-xs text-[#B99A5B] font-semibold">
-                        {getTeamName(match.winnerTeamId)} won {match.margin}
+                        {isTie ? 'Match Tied' : `${match.winnerTeamId ? getTeamName(match.winnerTeamId) : ''} won ${match.margin}`}
                       </p>
                     )}
                   </div>
@@ -141,7 +146,11 @@ export const TeamMatchHistory: React.FC<TeamMatchHistoryProps> = ({ teamId, matc
                       Official Scorecard Unrecorded in Surviving Archive
                     </p>
                     <p className="font-sans text-[11px] text-[#A69F92]">
-                      Result Verified: <strong className={getTeamAccentClass(match.winnerTeamId)}>{getTeamName(match.winnerTeamId)}</strong> won
+                      {isTie ? (
+                        <>Result Verified: <strong className="text-amber-400">Match Tied</strong> (1 Point Each)</>
+                      ) : (
+                        <>Result Verified: <strong className={match.winnerTeamId ? getTeamAccentClass(match.winnerTeamId) : ''}>{match.winnerTeamId ? getTeamName(match.winnerTeamId) : ''}</strong> won</>
+                      )}
                     </p>
                   </div>
                 )}
@@ -151,12 +160,16 @@ export const TeamMatchHistory: React.FC<TeamMatchHistoryProps> = ({ teamId, matc
               <div className="flex items-center space-x-3 shrink-0 self-start md:self-auto">
                 <span
                   className={`inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider ${
-                    isWinner
+                    isTie
+                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                      : isWinner
                       ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
                       : 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
                   }`}
                 >
-                  {isWinner ? (
+                  {isTie ? (
+                    <span>TIED</span>
+                  ) : isWinner ? (
                     <>
                       <CheckCircle2 className="w-3.5 h-3.5" />
                       <span>WON</span>

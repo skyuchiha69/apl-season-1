@@ -3,9 +3,10 @@ import { useSeason } from '../../../app/providers/SeasonProvider';
 import { Flame, Award, AlertCircle } from 'lucide-react';
 
 export const OrangeCapSection: React.FC = () => {
-  const { seasonData } = useSeason();
+  const { seasonData, activeSeasonId } = useSeason();
+  const isSeason1 = activeSeasonId === 'season-1';
 
-  // Filter only players with recorded batting runs (exactly 30 verified batters)
+  // Filter only players with recorded batting runs
   const batters = seasonData.players
     .filter((p) => p.stats.runs !== undefined)
     .sort((a, b) => (b.stats.runs ?? 0) - (a.stats.runs ?? 0));
@@ -53,7 +54,7 @@ export const OrangeCapSection: React.FC = () => {
             </h2>
           </div>
           <p className="text-xs font-mono text-[#87968B] max-w-sm text-left sm:text-right">
-            Official recorded totals across all 30 tournament batters.
+            {`Official recorded totals across all ${batters.length} tournament batters.`}
           </p>
         </div>
 
@@ -138,17 +139,17 @@ export const OrangeCapSection: React.FC = () => {
           })}
         </div>
 
-        {/* Complete 30-Player Leaderboard Table */}
+        {/* Complete Tournament Leaderboard Table */}
         <div className="space-y-3">
           <div className="flex items-center justify-between text-xs font-mono text-[#87968B]">
-            <span className="uppercase tracking-wider">Complete Tournament Batting Register (30 Players)</span>
+            <span className="uppercase tracking-wider">{`Complete Tournament Batting Register (${batters.length} Players)`}</span>
             <span>Scroll horizontally on mobile →</span>
           </div>
 
           <div className="rounded-xl border border-[#EAE4D8]/10 bg-[#0E1713] overflow-hidden shadow-xl">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-[620px]">
-                <caption className="sr-only">APL Season 1 Complete Batting Leaderboard</caption>
+                <caption className="sr-only">APL {seasonData.name} Complete Batting Leaderboard</caption>
                 <thead>
                   <tr className="bg-[#14201A] border-b border-[#EAE4D8]/10 text-[10px] sm:text-xs font-mono text-[#B99A5B] uppercase tracking-wider">
                     <th scope="col" className="py-3 px-4 w-14 text-center">Rank</th>
@@ -200,6 +201,14 @@ export const OrangeCapSection: React.FC = () => {
                                 *Recon
                               </span>
                             )}
+                            {player.stats.hasDiscrepancy && (
+                              <span
+                                title="Archival notation discrepancy between printed total and innings sequence"
+                                className="text-[9px] font-mono px-1 py-0.2 bg-amber-500/20 text-amber-300 rounded"
+                              >
+                                *Audit
+                              </span>
+                            )}
                           </div>
                         </td>
                         <td className="py-3 px-4 font-mono text-xs uppercase text-[#87968B]">
@@ -239,8 +248,10 @@ export const OrangeCapSection: React.FC = () => {
             <p>
               Ball-by-ball data and balls faced were not recorded for regular-season matches. Strike rates and other
               derived batting metrics are therefore unavailable. Missing values are preserved as unrecorded rather
-              than coerced to zero. Winsmoke's reconstructed +13 runs represents an unprinted 6th match score in
-              aggregate accounting and is not presented as an individual verified innings performance.
+              than coerced to zero.{' '}
+              {isSeason1
+                ? "Winsmoke's reconstructed +13 runs represents an unprinted 6th match score in aggregate accounting and is not presented as an individual verified innings performance."
+                : 'Official printed tournament totals differ from raw per-innings match score sums across 8 player records, creating a net ledger variance of -3 runs (+1 Bruce, -22 Gunther, -7 Overton, -11 Pointer, +24 Jacobs, +7 Haan, +4 Mario, +1 Bumba). Official printed tournament totals are preserved as primary archival records, and per-match sequences are maintained without truncation.'}
             </p>
           </div>
         </div>

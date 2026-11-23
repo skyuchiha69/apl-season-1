@@ -2,9 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '../../../components/layout/Container';
 import { Trophy, Shield, ArrowUpRight, UserCheck } from 'lucide-react';
+import { useSeasonOptional } from '../../../app/providers/SeasonProvider';
 
 export const FranchisesLineup: React.FC = () => {
-  const franchises = [
+  const { activeSeasonId } = useSeasonOptional();
+  const isSeason1 = activeSeasonId === 'season-1';
+
+  const season1Franchises = [
     {
       id: 'authors',
       name: 'AUTHORS',
@@ -63,6 +67,66 @@ export const FranchisesLineup: React.FC = () => {
     },
   ];
 
+  const season2Franchises = [
+    {
+      id: 'skyshot',
+      name: 'SKYSHOT',
+      tagline: 'The Season 2 Champions',
+      owner: 'Shubham (Sky)',
+      captainIdentity: 'Shubham',
+      accentColor: '#00D2FF',
+      borderClass: 'border-cyan-500/40 hover:border-cyan-400',
+      badgeBg: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
+      standing: '1st Place • Season 2 Champions',
+      championshipNote: 'Won Qualifier (M13) & Final (M15) to lift the championship',
+      isChampion: true,
+      description: 'Steered by owner-captain Shubham, Skyshot followed a 7-point regular season with a flawless postseason sweep to claim their inaugural APL title.',
+    },
+    {
+      id: 'knights',
+      name: 'KNIGHTS',
+      tagline: 'The Grand Finalists',
+      owner: 'Jay',
+      captainIdentity: 'Jay',
+      accentColor: '#E2E8F0',
+      borderClass: 'border-slate-400/40 hover:border-slate-300',
+      badgeBg: 'bg-slate-400/20 text-slate-200 border-slate-400/30',
+      standing: '2nd Place • Grand Finalists',
+      championshipNote: 'Defeated Champions in Semi-Final • 3rd in League (6 pts)',
+      isChampion: false,
+      description: 'Led by Jay, Knights produced electrifying milestones including Pointer’s tournament-record 161 runs and Dharm’s 4-wicket masterclass.',
+    },
+    {
+      id: 'champions',
+      name: 'CHAMPIONS',
+      tagline: 'The Regular Season Table Toppers',
+      owner: 'Umang (UB)',
+      captainIdentity: 'Tony',
+      accentColor: '#FF2E4D',
+      borderClass: 'border-rose-500/40 hover:border-rose-400',
+      badgeBg: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
+      standing: '1st in League • Semi-Finalist',
+      championshipNote: 'Topped regular season with 9 pts (4W–1L–1T) • Orange & Purple Caps',
+      isChampion: false,
+      description: 'Dominant across the regular season with 9 points, Umang’s Champions swept both individual cap honors with Harvey (446 runs) and Silver (12 wickets).',
+    },
+    {
+      id: 'authors',
+      name: 'AUTHORS',
+      tagline: 'The Inaugural Champions',
+      owner: 'Dharm',
+      captainIdentity: 'King',
+      accentColor: '#00E676',
+      borderClass: 'border-emerald-500/40 hover:border-emerald-400',
+      badgeBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+      standing: '4th Place • League Contender',
+      championshipNote: '4th in regular season with 2 pts (1 win)',
+      isChampion: false,
+      description: 'The inaugural champions battled through a grueling title defense campaign, with Dharm transferring as player to Knights and Silva leading squad run tallies.',
+    },
+  ];
+
+  const franchises = isSeason1 ? season1Franchises : season2Franchises;
   const championsTeam = franchises[0];
   const otherTeams = franchises.slice(1);
 
@@ -96,16 +160,36 @@ export const FranchisesLineup: React.FC = () => {
         <div className="mb-6 sm:mb-10 p-3.5 sm:p-4 rounded-lg bg-[#090C0B] border-l-2 border-[#B99A5B] text-[11px] sm:text-xs text-[#A69F92] font-mono flex items-start space-x-2.5 sm:space-x-3 leading-relaxed">
           <UserCheck className="w-4 h-4 text-[#B99A5B] shrink-0 mt-0.5" />
           <span>
-            <strong className="text-[#EAE4D8]">Distinct Identity Architecture:</strong> The four cousins are the real-life strategic franchise owners, managers, and competitors. On the field, the franchises were led by their actual in-game captains: King (Authors), Stark (Champions), Shubham (Skyshot), and Jay (Knights).
+            {isSeason1 ? (
+              <>
+                <strong className="text-[#EAE4D8]">Distinct Identity Architecture:</strong> The four cousins are the real-life strategic franchise owners, managers, and competitors. On the field, the franchises were led by their actual in-game captains: King (Authors), Stark (Champions), Shubham (Skyshot), and Jay (Knights).
+              </>
+            ) : (
+              <>
+                <strong className="text-[#EAE4D8]">Distinct Identity Architecture:</strong> The four cousins are the real-life strategic franchise owners, managers, and competitors. On the field, the franchises were led by their actual in-game captains: Shubham (Skyshot), Jay (Knights), Tony (Champions), and King (Authors).
+              </>
+            )}
           </span>
         </div>
 
-        {/* Tier 1 Feature: AUTHORS (The Champions Spotlight) */}
-        <div className="mb-6 sm:mb-8 rounded-xl bg-gradient-to-r from-[#0C2016] via-[#111815] to-[#0D1411] border border-emerald-500/30 p-4 sm:p-6 lg:p-8 shadow-xl">
+        {/* Tier 1 Feature: The Champions Spotlight */}
+        <div
+          className={`mb-6 sm:mb-8 rounded-xl p-4 sm:p-6 lg:p-8 shadow-xl ${
+            isSeason1
+              ? 'bg-gradient-to-r from-[#0C2016] via-[#111815] to-[#0D1411] border border-emerald-500/30'
+              : 'bg-gradient-to-r from-[#081C24] via-[#111815] to-[#0D1411] border border-cyan-500/30'
+          }`}
+        >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-center">
             <div className="lg:col-span-8 space-y-3">
               <div className="flex flex-wrap items-center gap-2.5">
-                <span className="inline-flex items-center space-x-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] sm:text-xs font-mono uppercase font-bold tracking-wider">
+                <span
+                  className={`inline-flex items-center space-x-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-mono uppercase font-bold tracking-wider ${
+                    isSeason1
+                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                      : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
+                  }`}
+                >
                   <Trophy className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                   <span>{championsTeam.standing}</span>
                 </span>
@@ -119,7 +203,13 @@ export const FranchisesLineup: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs font-mono pt-1 text-[#A69F92]">
                 <div>
                   <span className="text-[#87968B] uppercase block text-[10px]">Franchise Owner:</span>
-                  <span className="text-emerald-400 font-bold text-sm">{championsTeam.owner}</span>
+                  <span
+                    className={`font-bold text-sm ${
+                      isSeason1 ? 'text-emerald-400' : 'text-cyan-400'
+                    }`}
+                  >
+                    {championsTeam.owner}
+                  </span>
                 </div>
                 <div>
                   <span className="text-[#87968B] uppercase block text-[10px]">Team Captain:</span>
@@ -135,7 +225,13 @@ export const FranchisesLineup: React.FC = () => {
             <div className="lg:col-span-4 flex flex-col justify-center items-start lg:items-end w-full">
               <div className="p-3 sm:p-4 rounded-lg bg-black/40 border border-white/5 w-full text-left lg:text-right font-mono text-xs space-y-1">
                 <span className="text-[10px] text-[#87968B] uppercase block">Championship Milestone</span>
-                <span className="text-emerald-400 font-bold block text-xs sm:text-sm">{championsTeam.championshipNote}</span>
+                <span
+                  className={`font-bold block text-xs sm:text-sm ${
+                    isSeason1 ? 'text-emerald-400' : 'text-cyan-400'
+                  }`}
+                >
+                  {championsTeam.championshipNote}
+                </span>
               </div>
             </div>
           </div>

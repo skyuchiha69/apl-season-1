@@ -1,14 +1,26 @@
 import React from 'react';
 import { Award, Trophy, Flame, Target, Zap, Shield, ChevronDown } from 'lucide-react';
+import { useSeasonOptional } from '../../../app/providers/SeasonProvider';
 
 export const HallOfFameHero: React.FC = () => {
-  const milestoneCounters = [
-    { label: 'Championship Crown', value: '1', sub: 'Authors (226 Chase)', color: '#00E676' },
-    { label: 'Golden Cap Winners', value: '2', sub: 'King (527) • Sky (12)', color: '#B99A5B' },
-    { label: 'Historic Centuries', value: '6', sub: 'Across 5 Batsmen', color: '#F59E0B' },
-    { label: 'Tournament Hat-Trick', value: '1', sub: 'S. Parker (Champions)', color: '#FF2E4D' },
-    { label: 'Record Team Total', value: '291', sub: 'Knights vs Skyshot', color: '#F8FAFC' },
-  ];
+  const { activeSeasonId } = useSeasonOptional();
+  const isSeason2 = activeSeasonId === 'season-2';
+
+  const milestoneCounters = isSeason2
+    ? [
+        { label: 'Championship Crown', value: '1', sub: 'Skyshot (Final: 4 Wkts)', color: '#00D2FF' },
+        { label: 'Golden Cap Winners', value: '2', sub: 'Harvey (446) • Silver (12)', color: '#B99A5B' },
+        { label: 'Historic Centuries', value: '7', sub: 'Across 4 Batsmen', color: '#F59E0B' },
+        { label: 'Best Match Bowling', value: '4 Wkts', sub: 'Dharm (Knights vs Champions)', color: '#00E676' },
+        { label: 'Record Team Total', value: '319', sub: 'Knights vs Champions', color: '#F8FAFC' },
+      ]
+    : [
+        { label: 'Championship Crown', value: '1', sub: 'Authors (226 Chase)', color: '#00E676' },
+        { label: 'Golden Cap Winners', value: '2', sub: 'King (527) • Sky (12)', color: '#B99A5B' },
+        { label: 'Historic Centuries', value: '6', sub: 'Across 5 Batsmen', color: '#F59E0B' },
+        { label: 'Tournament Hat-Trick', value: '1', sub: 'S. Parker (Champions)', color: '#FF2E4D' },
+        { label: 'Record Team Total', value: '291', sub: 'Knights vs Skyshot', color: '#F8FAFC' },
+      ];
 
   const quickNav = [
     { label: 'Championship Laurels', href: '#championship-laurels', icon: Trophy, color: '#00E676' },
@@ -31,7 +43,7 @@ export const HallOfFameHero: React.FC = () => {
         <div className="flex flex-wrap items-center gap-2 mb-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#111815] border border-[#B99A5B]/30 text-[#B99A5B] text-xs font-mono uppercase tracking-widest shadow-sm">
             <Award className="w-3.5 h-3.5 text-[#B99A5B]" />
-            <span>APL Season 1 • Official Archive Sanctuary</span>
+            <span>{isSeason2 ? 'APL Season 2 • Official Archive Sanctuary' : 'APL Season 1 • Official Archive Sanctuary'}</span>
           </div>
           <span className="text-[#87968B] text-xs font-mono hidden sm:inline">•</span>
           <span className="text-[#87968B] text-xs font-mono tracking-wider">
@@ -44,13 +56,13 @@ export const HallOfFameHero: React.FC = () => {
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-black text-[#EAE4D8] tracking-tight uppercase leading-[0.95]">
             THE IMMORTALS <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B99A5B] via-[#EAE4D8] to-[#B99A5B]">
-              OF SEASON 1
+              {isSeason2 ? 'OF SEASON 2' : 'OF SEASON 1'}
             </span>
           </h1>
           <p className="text-base sm:text-lg text-[#A69F92] leading-relaxed font-sans max-w-3xl">
-            The official memorial of the inaugural Ashes Premier League campaign. Enshrining the championship-winning
-            dynasty, Orange and Purple Cap titans, the exclusive Century Club, and the immortal bowling feats that forged
-            the competitive benchmark of private cousin cricket.
+            {isSeason2
+              ? 'The official memorial of the Ashes Premier League Season 2 campaign. Enshrining Skyshot’s championship coronation, Champions’ clean sweep of both Golden Caps (Harvey & Silver), the elite 7-Century Club, Pointer’s tournament-record 161, and Knights’ monumental 319 team total.'
+              : 'The official memorial of the inaugural Ashes Premier League campaign. Enshrining the championship-winning dynasty, Orange and Purple Cap titans, the exclusive Century Club, and the immortal bowling feats that forged the competitive benchmark of private cousin cricket.'}
           </p>
         </div>
 

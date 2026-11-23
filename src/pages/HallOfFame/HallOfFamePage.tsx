@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSeasonOptional } from '../../app/providers/SeasonProvider';
 import { HallOfFameHero } from './components/HallOfFameHero';
 import { ChampionshipLaurels } from './components/ChampionshipLaurels';
 import { CaptainsOfGlory } from './components/CaptainsOfGlory';
@@ -9,6 +10,9 @@ import { ExtremeRecords } from './components/ExtremeRecords';
 import { Award, ArrowRight, Shield, Calendar, BarChart3, Users } from 'lucide-react';
 
 export const HallOfFamePage: React.FC = () => {
+  const { activeSeasonId } = useSeasonOptional();
+  const isSeason2 = activeSeasonId === 'season-2';
+
   return (
     <main className="min-h-screen bg-[#090C0B] text-[#EAE4D8] selection:bg-[#B99A5B]/20 selection:text-[#B99A5B]">
       {/* 1. Hero & Archival Milestone Counters */}
@@ -20,13 +24,13 @@ export const HallOfFamePage: React.FC = () => {
       {/* 3. The Golden Caps (Orange & Purple Immortals) */}
       <CaptainsOfGlory />
 
-      {/* 4. The Century Club (6 Historic Hundreds) */}
+      {/* 4. The Century Club (6 or 7 Historic Hundreds) */}
       <TheCenturyClub />
 
-      {/* 5. Historic Bowling Feats (Hat-Trick, 5/x Hauls & T-4 Tie) */}
+      {/* 5. Historic Bowling Feats (Hauls & Purple Cap Hierarchy) */}
       <HistoricBowlingHauls />
 
-      {/* 6. Extreme Records (291, The Championship Chase 226/7, 122) */}
+      {/* 6. Extreme Records (Scoring Benchmarks & Extremes) */}
       <ExtremeRecords />
 
       {/* 7. Commemorative Epilogue & Archive Navigation */}
@@ -41,9 +45,9 @@ export const HallOfFamePage: React.FC = () => {
               A Living Room Dynasty Preserved Forever
             </h2>
             <p className="text-sm text-[#A69F92] leading-relaxed font-sans">
-              From living room shouting matches to private digital scorecards, APL Season 1 captured the competitive spirit
-              of four cousins who refused to treat cricket as just a game. These records remain the permanent historical
-              foundation of the Legends Legacy.
+              {isSeason2
+                ? 'From living room shouting matches to private digital scorecards, APL Season 2 elevated the competitive spirit of four cousins across 15 intense fixtures. These records celebrate Skyshot’s championship crown, Champions’ Golden Cap sweep, and the permanent milestones of Season 2.'
+                : 'From living room shouting matches to private digital scorecards, APL Season 1 captured the competitive spirit of four cousins who refused to treat cricket as just a game. These records remain the permanent historical foundation of the Legends Legacy.'}
             </p>
           </div>
 
@@ -109,7 +113,9 @@ export const HallOfFamePage: React.FC = () => {
                 Statistics Hub
               </div>
               <p className="text-xs text-[#87968B] mt-1 font-sans">
-                Review the points table and the 5,945-run audit ledger.
+                {isSeason2
+                  ? 'Review the points table and the 5,681-run audit ledger.'
+                  : 'Review the points table and the 5,945-run audit ledger.'}
               </p>
             </Link>
           </div>

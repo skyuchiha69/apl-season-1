@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, BarChart3, Calendar, ArrowRight, Heart } from 'lucide-react';
+import { useSeasonOptional } from '../../../app/providers/SeasonProvider';
 
 export const OwnersLegacyEpilogue: React.FC = () => {
+  const { activeSeasonId } = useSeasonOptional();
+  const isSeason2 = activeSeasonId === 'season-2';
   return (
     <footer className="py-16 lg:py-20 relative overflow-hidden bg-[#090C0B]/90 border-t border-[#EAE4D8]/10">
       {/* Background ambient gold glow */}
@@ -23,17 +26,30 @@ export const OwnersLegacyEpilogue: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-[#EAE4D8] tracking-tight">
             MORE THAN A LEAGUE: A LIVING ROOM DYNASTY
           </h2>
-          <p className="max-w-3xl mx-auto text-base sm:text-lg text-[#87968B] leading-relaxed font-sans">
-            APL Season 1 began as a private family experiment—four cousins connected over Google Meet, each backing
-            their handpicked squad to claim bragging rights. What emerged was a fiercely contested, unforgettable
-            historical tournament that produced 5,945 official batter runs, 101 bowler wickets, a record-shattering 146 by Jay,
-            a high-octane 225 defense by Umang, dominant regular-season pacesetting by Shubham, and a legendary 226 chase
-            by Dharm to crown Authors the inaugural champions.
-          </p>
-          <p className="max-w-2xl mx-auto text-sm text-[#87968B] font-sans">
-            Every match, run, and wicket recorded in this archive remains a permanent testament to the sportsmanship,
-            fierce banter, and unbreakable family bond of the four founding architects.
-          </p>
+          {isSeason2 ? (
+            <>
+              <p className="max-w-3xl mx-auto text-base sm:text-lg text-[#87968B] leading-relaxed font-sans">
+                APL Season 2 elevated the living room rivalry into a full-scale tactical campaign across 15 intense fixtures (including one tied regular-season classic). The tournament produced 5,681 official batter runs, 117 bowler wickets, a tournament-record 161 by Pointer, a monumental 319 team total by Knights, a league-leading regular season by Umang&apos;s Champions (9 pts), a tournament-best 4-wicket bowling spell by Dharm for Knights, and an unforgettable championship crowning for Shubham, who captained Skyshot to the title with a tournament-defining 114 century.
+              </p>
+              <p className="max-w-2xl mx-auto text-sm text-[#87968B] font-sans">
+                All 8 clerical batting discrepancies from the official scorebook are preserved and disclosed losslessly in the digital ledger, honoring the four cousins&apos; shared sportsmanship and competitive legacy.
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="max-w-3xl mx-auto text-base sm:text-lg text-[#87968B] leading-relaxed font-sans">
+                APL Season 1 began as a private family experiment—four cousins connected over Google Meet, each backing
+                their handpicked squad to claim bragging rights. What emerged was a fiercely contested, unforgettable
+                historical tournament that produced 5,945 official batter runs, 101 bowler wickets, a record-shattering 146 by Jay,
+                a high-octane 225 defense by Umang, dominant regular-season pacesetting by Shubham, and a legendary 226 chase
+                by Dharm to crown Authors the inaugural champions.
+              </p>
+              <p className="max-w-2xl mx-auto text-sm text-[#87968B] font-sans">
+                Every match, run, and wicket recorded in this archive remains a permanent testament to the sportsmanship,
+                fierce banter, and unbreakable family bond of the four founding architects.
+              </p>
+            </>
+          )}
         </div>
 
         {/* Four Cousins Roll Call Strip */}
@@ -41,7 +57,7 @@ export const OwnersLegacyEpilogue: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#00E676]" />
             <span className="text-[#EAE4D8] font-bold">Dharm</span>
-            <span>(Authors)</span>
+            <span>{isSeason2 ? '(Authors Founder • Knights)' : '(Authors)'}</span>
           </div>
           <span className="text-[#EAE4D8]/20">•</span>
           <div className="flex items-center gap-2">
@@ -53,13 +69,13 @@ export const OwnersLegacyEpilogue: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#00D2FF]" />
             <span className="text-[#EAE4D8] font-bold">Shubham</span>
-            <span>(Skyshot)</span>
+            <span>{isSeason2 ? '(Skyshot • Champions)' : '(Skyshot)'}</span>
           </div>
           <span className="text-[#EAE4D8]/20">•</span>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#F8FAFC]" />
             <span className="text-[#EAE4D8] font-bold">Jay</span>
-            <span>(Knights)</span>
+            <span>{isSeason2 ? '(Knights • Runners-Up)' : '(Knights)'}</span>
           </div>
         </div>
 
@@ -109,7 +125,7 @@ export const OwnersLegacyEpilogue: React.FC = () => {
               Statistics Hub
             </div>
             <p className="text-xs text-[#87968B] mt-1 font-sans">
-              Examine the Orange Cap, Purple Cap, and 5,945-run reconciliation ledger.
+              Examine the Orange Cap, Purple Cap, and {isSeason2 ? '5,681' : '5,945'}-run reconciliation ledger.
             </p>
           </Link>
         </div>

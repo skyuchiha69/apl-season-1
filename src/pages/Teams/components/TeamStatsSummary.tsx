@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSeason } from '../../../app/providers/SeasonProvider';
 import { Team, Player } from '../../../data/types';
 import { Trophy, Award, TrendingUp, Target, BarChart2, AlertCircle } from 'lucide-react';
 
@@ -7,45 +8,79 @@ interface TeamStatsSummaryProps {
   players?: Player[];
 }
 
-export const TeamStatsSummary: React.FC<TeamStatsSummaryProps> = ({ team, players: _players }) => {
+export const TeamStatsSummary: React.FC<TeamStatsSummaryProps> = ({ team, players }) => {
+  const { seasonData } = useSeason();
+  const isSeason1 = seasonData.seasonId === 'season-1';
+
   // Verified Top Run Scorer & Wicket Taker per franchise
   let topRunScorer = { name: '—', runs: '—' };
   let topWicketTaker = { name: '—', wickets: '—' };
 
-  if (team.id === 'authors') {
-    topRunScorer = { name: 'A. King', runs: '527' };
-    topWicketTaker = { name: 'T. Askin', wickets: '7' };
-  } else if (team.id === 'champions') {
-    topRunScorer = { name: 'S. Harvy', runs: '360' };
-    topWicketTaker = { name: 'S. Parker', wickets: '8' };
-  } else if (team.id === 'skyshot') {
-    topRunScorer = { name: 'V. Lalouch', runs: '372' };
-    topWicketTaker = { name: 'N. Sky', wickets: '12' };
-  } else if (team.id === 'knights') {
-    topRunScorer = { name: 'Jay', runs: '245' };
-    topWicketTaker = { name: 'Winsmoke / Turner', wickets: '4 each' };
+  if (isSeason1) {
+    if (team.id === 'authors') {
+      topRunScorer = { name: 'A. King', runs: '527' };
+      topWicketTaker = { name: 'T. Askin', wickets: '7' };
+    } else if (team.id === 'champions') {
+      topRunScorer = { name: 'S. Harvy', runs: '360' };
+      topWicketTaker = { name: 'S. Parker', wickets: '8' };
+    } else if (team.id === 'skyshot') {
+      topRunScorer = { name: 'V. Lalouch', runs: '372' };
+      topWicketTaker = { name: 'N. Sky', wickets: '12' };
+    } else if (team.id === 'knights') {
+      topRunScorer = { name: 'Jay', runs: '245' };
+      topWicketTaker = { name: 'Winsmoke / Turner', wickets: '4 each' };
+    }
+  } else if (players && players.length > 0) {
+    const batters = players.filter((p) => (p.stats.runs ?? 0) > 0);
+    if (batters.length > 0) {
+      const topBatter = [...batters].sort((a, b) => (b.stats.runs ?? 0) - (a.stats.runs ?? 0))[0];
+      topRunScorer = { name: topBatter.name, runs: String(topBatter.stats.runs ?? 0) };
+    }
+
+    const bowlers = players.filter((p) => (p.stats.wickets ?? 0) > 0);
+    if (bowlers.length > 0) {
+      const sortedBowlers = [...bowlers].sort((a, b) => (b.stats.wickets ?? 0) - (a.stats.wickets ?? 0));
+      const maxW = sortedBowlers[0].stats.wickets ?? 0;
+      const topList = sortedBowlers.filter((p) => (p.stats.wickets ?? 0) === maxW);
+      if (topList.length === 1) {
+        topWicketTaker = { name: topList[0].name, wickets: String(maxW) };
+      } else {
+        topWicketTaker = {
+          name: topList.map((p) => p.name).join(' / '),
+          wickets: `${maxW} each`,
+        };
+      }
+    }
   }
 
-  // Team High and Low scores (only Knights are recorded in records.ts)
+  // Team High and Low scores (only Knights are recorded in records.ts for Season 1)
   const isKnights = team.id === 'knights';
-  const highestTeamScore = isKnights ? '291' : '—';
-  const lowestTeamScore = isKnights ? '122' : '—';
+  const highestTeamScore = isSeason1 && isKnights ? '291' : '—';
+  const lowestTeamScore = isSeason1 && isKnights ? '122' : '—';
 
   // Standings tied-2nd resolution
-  const isTiedSecond = team.id === 'authors' || team.id === 'champions';
-  const standingDisplay =
-    team.id === 'skyshot'
+  const isTiedSecond = isSeason1 && (team.id === 'authors' || team.id === 'champions');
+  const standingDisplay = isSeason1
+    ? team.id === 'skyshot'
       ? '1st'
       : isTiedSecond
       ? 'T-2nd'
-      : '4th';
+      : '4th'
+    : `${team.leagueRecord.position}${team.leagueRecord.position === 1 ? 'st' : team.leagueRecord.position === 2 ? 'nd' : team.leagueRecord.position === 3 ? 'rd' : 'th'}`;
 
-  const standingLabel =
-    team.id === 'skyshot'
+  const standingLabel = isSeason1
+    ? team.id === 'skyshot'
       ? 'Regular Season Table Toppers'
       : isTiedSecond
       ? 'Tied Second (Shared Standings)'
-      : 'League Stage';
+      : 'League Stage'
+    : team.leagueRecord.position === 1
+    ? 'Regular Season Table Toppers'
+    : team.leagueRecord.position === 2
+    ? 'Playoff Qualifier'
+    : team.leagueRecord.position === 3
+    ? 'Playoff Contenders'
+    : 'League Stage';
 
   return (
     <div className="py-8 sm:py-10 border-b border-[#EAE4D8]/10 space-y-6">
@@ -53,7 +88,7 @@ export const TeamStatsSummary: React.FC<TeamStatsSummaryProps> = ({ team, player
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div className="flex items-center space-x-2 text-xs font-mono tracking-wider text-[#B99A5B] uppercase font-semibold">
           <BarChart2 className="w-4 h-4 text-[#B99A5B]" />
-          <span>Season 1 Ledger • Performance Summary</span>
+          <span>{isSeason1 ? 'Season 1 Ledger • Performance Summary' : `${seasonData.name} Ledger • Performance Summary`}</span>
         </div>
         <span className="text-[11px] font-mono text-[#87968B] uppercase">
           12 Regular Season Rounds + Playoffs
@@ -188,7 +223,7 @@ export const TeamStatsSummary: React.FC<TeamStatsSummaryProps> = ({ team, player
               {highestTeamScore}
             </h4>
             <p className="font-sans text-[11px] text-[#87968B]">
-              {isKnights
+              {isSeason1 && isKnights
                 ? 'Tournament Record vs Skyshot'
                 : 'Not recorded in the available league archive.'}
             </p>
@@ -208,7 +243,7 @@ export const TeamStatsSummary: React.FC<TeamStatsSummaryProps> = ({ team, player
               {lowestTeamScore}
             </h4>
             <p className="font-sans text-[11px] text-[#87968B]">
-              {isKnights
+              {isSeason1 && isKnights
                 ? 'Season Low Recorded in League'
                 : 'Not recorded in the available league archive.'}
             </p>

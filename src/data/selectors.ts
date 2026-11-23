@@ -1,4 +1,4 @@
-import { SeasonData, TeamId, Player, Match } from './types';
+import { SeasonData, TeamId, Player, Match, AggregateReconciliation, Season2Reconciliation } from './types';
 
 export interface StandingsRow {
   teamId: TeamId;
@@ -6,17 +6,18 @@ export interface StandingsRow {
   played: number;
   won: number;
   lost: number;
+  tied: number;
   points: number;
   position: number;
   playoffStatus: string;
 }
 
 export function getPointsTable(season: SeasonData): StandingsRow[] {
-  const standings: Record<TeamId, { played: number; won: number; lost: number; points: number }> = {
-    authors: { played: 0, won: 0, lost: 0, points: 0 },
-    champions: { played: 0, won: 0, lost: 0, points: 0 },
-    skyshot: { played: 0, won: 0, lost: 0, points: 0 },
-    knights: { played: 0, won: 0, lost: 0, points: 0 },
+  const standings: Record<TeamId, { played: number; won: number; lost: number; tied: number; points: number }> = {
+    authors: { played: 0, won: 0, lost: 0, tied: 0, points: 0 },
+    champions: { played: 0, won: 0, lost: 0, tied: 0, points: 0 },
+    skyshot: { played: 0, won: 0, lost: 0, tied: 0, points: 0 },
+    knights: { played: 0, won: 0, lost: 0, tied: 0, points: 0 },
   };
 
   // Only count LEAGUE stage matches
@@ -24,11 +25,19 @@ export function getPointsTable(season: SeasonData): StandingsRow[] {
   leagueMatches.forEach((m) => {
     standings[m.homeTeamId].played += 1;
     standings[m.awayTeamId].played += 1;
-    standings[m.winnerTeamId].won += 1;
-    standings[m.winnerTeamId].points += 2;
 
-    const loserId = m.winnerTeamId === m.homeTeamId ? m.awayTeamId : m.homeTeamId;
-    standings[loserId].lost += 1;
+    if (m.isTie) {
+      standings[m.homeTeamId].tied += 1;
+      standings[m.homeTeamId].points += 1;
+      standings[m.awayTeamId].tied += 1;
+      standings[m.awayTeamId].points += 1;
+    } else {
+      standings[m.winnerTeamId].won += 1;
+      standings[m.winnerTeamId].points += 2;
+
+      const loserId = m.winnerTeamId === m.homeTeamId ? m.awayTeamId : m.homeTeamId;
+      standings[loserId].lost += 1;
+    }
   });
 
   const sorted = Object.entries(standings)
@@ -100,16 +109,23 @@ export function getHeadToHeadRecord(season: SeasonData, teamA: TeamId, teamB: Te
 
   let teamAWins = 0;
   let teamBWins = 0;
+  let ties = 0;
 
   matches.forEach((m) => {
-    if (m.winnerTeamId === teamA) teamAWins += 1;
-    if (m.winnerTeamId === teamB) teamBWins += 1;
+    if (m.isTie) {
+      ties += 1;
+    } else if (m.winnerTeamId === teamA) {
+      teamAWins += 1;
+    } else if (m.winnerTeamId === teamB) {
+      teamBWins += 1;
+    }
   });
 
   return {
     total: matches.length,
     teamAWins,
     teamBWins,
+    ties,
     matches
   };
 }
@@ -130,17 +146,33 @@ export function getAggregateAccounting(season: SeasonData) {
     0
   );
 
+  if (season.seasonId === 'season-1') {
+    const recon = season.reconciliation as AggregateReconciliation;
+    return {
+      sourceInningsAggregate: recon.sourceInningsAggregate, // 5930
+      rawInningsSum, // 5931
+      winsmokeReconstruction: recon.winsmokeReconstruction, // 13
+      remainingAggregateAdjustment: recon.remainingAggregateAdjustment, // 2
+      totalBatterRunsOfficial, // 5945
+      officialRecordedBatterAggregate: recon.officialRecordedBatterAggregate, // 5945
+      reconciledSum:
+        recon.sourceInningsAggregate +
+        recon.winsmokeReconstruction +
+        recon.remainingAggregateAdjustment, // 5945
+      totalBowlerWickets // 101
+    };
+  }
+
+  // Season 2 and future seasons
+  const recon = season.reconciliation as Season2Reconciliation;
   return {
-    sourceInningsAggregate: season.reconciliation.sourceInningsAggregate, // 5930
-    rawInningsSum, // 5931
-    winsmokeReconstruction: season.reconciliation.winsmokeReconstruction, // 13
-    remainingAggregateAdjustment: season.reconciliation.remainingAggregateAdjustment, // 2
-    totalBatterRunsOfficial, // 5945
-    officialRecordedBatterAggregate: season.reconciliation.officialRecordedBatterAggregate, // 5945
-    reconciledSum:
-      season.reconciliation.sourceInningsAggregate +
-      season.reconciliation.winsmokeReconstruction +
-      season.reconciliation.remainingAggregateAdjustment, // 5945
-    totalBowlerWickets // 101
+    sourceInningsAggregate: rawInningsSum,
+    rawInningsSum,
+    winsmokeReconstruction: 0,
+    remainingAggregateAdjustment: 0,
+    totalBatterRunsOfficial,
+    officialRecordedBatterAggregate: totalBatterRunsOfficial,
+    reconciledSum: totalBatterRunsOfficial,
+    totalBowlerWickets: recon?.totalBowlerWickets ?? totalBowlerWickets
   };
 }

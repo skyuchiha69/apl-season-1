@@ -36,6 +36,8 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
     }));
   };
 
+  const isSeason2 = season.seasonId === 'season-2';
+
   const pairs: OwnerPairConfig[] = [
     {
       id: 'dharm-umang',
@@ -53,7 +55,7 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
         teamName: 'CHAMPIONS',
         accentColor: '#FF2E4D',
       },
-      subtitle: 'The Championship Decider Rivalry',
+      subtitle: isSeason2 ? 'League Clashes (Champions 2–0)' : 'The Championship Decider Rivalry',
     },
     {
       id: 'dharm-shubham',
@@ -71,7 +73,7 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
         teamName: 'SKYSHOT',
         accentColor: '#00D2FF',
       },
-      subtitle: 'League Sweep vs Semi-Final 2 Playoff Upset',
+      subtitle: isSeason2 ? 'League Clashes (Skyshot 2–0)' : 'League Sweep vs Semi-Final 2 Playoff Upset',
     },
     {
       id: 'dharm-jay',
@@ -89,7 +91,7 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
         teamName: 'KNIGHTS',
         accentColor: '#F8FAFC',
       },
-      subtitle: 'The Pure League Clash',
+      subtitle: isSeason2 ? 'Split Honours in League Stage (1–1)' : 'The Pure League Clash',
     },
     {
       id: 'umang-shubham',
@@ -107,7 +109,7 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
         teamName: 'SKYSHOT',
         accentColor: '#00D2FF',
       },
-      subtitle: 'Semi-Final 1 Thriller (10-Run Defense)',
+      subtitle: isSeason2 ? 'Match 2 Tied Thriller & Playoff Qualifier' : 'Semi-Final 1 Thriller (10-Run Defense)',
     },
     {
       id: 'umang-jay',
@@ -125,7 +127,7 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
         teamName: 'KNIGHTS',
         accentColor: '#F8FAFC',
       },
-      subtitle: 'Split Honours in League Stage',
+      subtitle: isSeason2 ? '319 Record Clash & Playoff Semi-Final' : 'Split Honours in League Stage',
     },
     {
       id: 'shubham-jay',
@@ -143,7 +145,7 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
         teamName: 'KNIGHTS',
         accentColor: '#F8FAFC',
       },
-      subtitle: 'The 146 & 291 Scoring Exhibition',
+      subtitle: isSeason2 ? 'The Grand Final Championship Decider' : 'The 146 & 291 Scoring Exhibition',
     },
   ];
 
@@ -156,6 +158,10 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
         return 'Semi-Final 1';
       case 'SEMI_FINAL_2':
         return 'Semi-Final 2';
+      case 'SEMI_FINAL':
+        return 'Semi-Final';
+      case 'QUALIFIER':
+        return 'Qualifier';
       case 'FINAL':
         return 'Grand Final';
       default:
@@ -165,27 +171,87 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
 
   // Helper to safely describe match outcome deriving all values from match records
   const renderMatchDetail = (m: Match) => {
-    const winnerTeam = season.teams[m.winnerTeamId];
-    const winnerName = winnerTeam?.name || m.winnerTeamId.toUpperCase();
-
-    // Stage: FINAL with complete two-innings scorecard
-    if (m.stage === 'FINAL' && m.detailsKnown && m.firstInnings && m.secondInnings) {
-      const firstTeam = season.teams[m.firstInnings.teamId];
-      const secondTeam = season.teams[m.secondInnings.teamId];
-      const firstName = firstTeam?.name || m.firstInnings.teamId.toUpperCase();
-      const secondName = secondTeam?.name || m.secondInnings.teamId.toUpperCase();
-
+    if (m.isTie) {
+      const homeTeam = season.teams[m.homeTeamId];
+      const awayTeam = season.teams[m.awayTeamId];
       return (
-        <div className="space-y-1">
-          <div className="font-mono text-xs text-[#EAE4D8]">
-            {firstName} {m.firstInnings.runs}/{m.firstInnings.wickets} ({m.firstInnings.overs.toFixed(1)} ov) vs{' '}
-            {secondName} {m.secondInnings.runs}/{m.secondInnings.wickets} ({m.secondInnings.overs.toFixed(1)} ov)
+        <div className="space-y-0.5">
+          <div className="font-mono text-xs text-amber-400 font-bold">
+            Match Tied (1 Point Each)
           </div>
-          <div className="text-[11px] font-mono text-[#00E676]">
-            {winnerName} won {m.margin ? m.margin : ''} • Complete scorecard preserved
+          <div className="text-[11px] text-[#87968B] font-mono flex items-center gap-1">
+            <Info className="w-3 h-3 text-[#87968B]" />
+            <span>Official regular-season result recorded as a tie between {homeTeam?.name} and {awayTeam?.name}</span>
           </div>
         </div>
       );
+    }
+
+    const winnerTeam = season.teams[m.winnerTeamId];
+    const winnerName = winnerTeam?.name || m.winnerTeamId.toUpperCase();
+
+    // Stage: QUALIFIER (Season 2 Playoff)
+    if (m.stage === 'QUALIFIER') {
+      return (
+        <div className="space-y-1">
+          <div className="font-mono text-xs text-[#00D2FF] font-bold">
+            Qualifier: {winnerName} won and advanced to Grand Final
+          </div>
+          <div className="text-[11px] text-[#87968B] font-mono flex items-center gap-1">
+            <Info className="w-3 h-3 text-[#87968B]" />
+            <span>Playoff result verified; detailed scorecard unrecorded in archive</span>
+          </div>
+        </div>
+      );
+    }
+
+    // Stage: SEMI_FINAL (Season 2 Playoff)
+    if (m.stage === 'SEMI_FINAL') {
+      return (
+        <div className="space-y-1">
+          <div className="font-mono text-xs text-[#CBD5E1] font-bold">
+            Semi-Final: {winnerName} won and advanced to Grand Final
+          </div>
+          <div className="text-[11px] text-[#87968B] font-mono flex items-center gap-1">
+            <Info className="w-3 h-3 text-[#87968B]" />
+            <span>Playoff result verified; detailed scorecard unrecorded in archive</span>
+          </div>
+        </div>
+      );
+    }
+
+    // Stage: FINAL
+    if (m.stage === 'FINAL') {
+      if (m.detailsKnown && m.firstInnings && m.secondInnings) {
+        const firstTeam = season.teams[m.firstInnings.teamId];
+        const secondTeam = season.teams[m.secondInnings.teamId];
+        const firstName = firstTeam?.name || m.firstInnings.teamId.toUpperCase();
+        const secondName = secondTeam?.name || m.secondInnings.teamId.toUpperCase();
+
+        return (
+          <div className="space-y-1">
+            <div className="font-mono text-xs text-[#EAE4D8]">
+              {firstName} {m.firstInnings.runs}/{m.firstInnings.wickets} ({m.firstInnings.overs.toFixed(1)} ov) vs{' '}
+              {secondName} {m.secondInnings.runs}/{m.secondInnings.wickets} ({m.secondInnings.overs.toFixed(1)} ov)
+            </div>
+            <div className="text-[11px] font-mono text-[#00E676]">
+              {winnerName} won {m.margin ? m.margin : ''} • Complete scorecard preserved
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div className="space-y-1">
+            <div className="font-mono text-xs text-[#00E676] font-bold">
+              Grand Final: {winnerName} won by 4 wickets
+            </div>
+            <div className="text-[11px] text-[#87968B] font-mono flex items-center gap-1">
+              <Info className="w-3 h-3 text-[#B99A5B]" />
+              <span>Championship coronation verified; individual scorebook unrecorded in archive</span>
+            </div>
+          </div>
+        );
+      }
     }
 
     // Stage: SEMI_FINAL_1 (10-run margin grounded in match result)
@@ -354,7 +420,8 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
 
                     <div className="space-y-2.5">
                       {h2h.matches.map((m) => {
-                        const winnerTeam = season.teams[m.winnerTeamId];
+                        const isTie = m.isTie === true;
+                        const winnerTeam = !isTie && m.winnerTeamId ? season.teams[m.winnerTeamId] : null;
                         const isPlayoff = m.stage !== 'LEAGUE';
 
                         return (
@@ -384,12 +451,12 @@ export const OwnersRivalryMatrix: React.FC<OwnersRivalryMatrixProps> = ({ season
                               </div>
 
                               <div className="flex items-center gap-1.5 font-mono text-[11px]">
-                                <span className="text-[#87968B]">Winner:</span>
+                                <span className="text-[#87968B]">{isTie ? 'Result:' : 'Winner:'}</span>
                                 <span
                                   className="font-bold"
-                                  style={{ color: winnerTeam?.theme.primaryColor || '#EAE4D8' }}
+                                  style={{ color: isTie ? '#B99A5B' : winnerTeam?.theme.primaryColor || '#EAE4D8' }}
                                 >
-                                  {winnerTeam?.name || m.winnerTeamId.toUpperCase()}
+                                  {isTie ? 'Tie' : winnerTeam?.name || m.winnerTeamId.toUpperCase()}
                                 </span>
                               </div>
                             </div>

@@ -4,7 +4,8 @@ import { getMatchesByStage } from '../../../data/selectors';
 import { Calendar, CheckCircle2, Zap } from 'lucide-react';
 
 export const LeagueFixturesGrid: React.FC = () => {
-  const { seasonData } = useSeason();
+  const { seasonData, activeSeasonId } = useSeason();
+  const isSeason1 = activeSeasonId === 'season-1';
   const leagueMatches = getMatchesByStage(seasonData, 'LEAGUE');
 
   return (
@@ -38,19 +39,26 @@ export const LeagueFixturesGrid: React.FC = () => {
           {leagueMatches.map((m) => {
             const teamA = seasonData.teams[m.homeTeamId];
             const teamB = seasonData.teams[m.awayTeamId];
-            const winner = seasonData.teams[m.winnerTeamId];
-            const isMatch3 = m.matchNumber === 3;
+            const isTie = m.isTie === true;
+            const winner = !isTie && m.winnerTeamId ? seasonData.teams[m.winnerTeamId] : null;
+            const isSeason1Match3 = isSeason1 && m.matchNumber === 3;
 
             let winnerAccent = 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30';
-            if (m.winnerTeamId === 'authors') winnerAccent = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30';
-            else if (m.winnerTeamId === 'champions') winnerAccent = 'text-rose-400 bg-rose-500/10 border-rose-500/30';
-            else if (m.winnerTeamId === 'knights') winnerAccent = 'text-slate-300 bg-slate-500/10 border-slate-500/30';
+            if (isTie) {
+              winnerAccent = 'text-amber-400 bg-amber-500/10 border-amber-500/30';
+            } else if (m.winnerTeamId === 'authors') {
+              winnerAccent = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30';
+            } else if (m.winnerTeamId === 'champions') {
+              winnerAccent = 'text-rose-400 bg-rose-500/10 border-rose-500/30';
+            } else if (m.winnerTeamId === 'knights') {
+              winnerAccent = 'text-slate-300 bg-slate-500/10 border-slate-500/30';
+            }
 
             return (
               <div
                 key={m.id}
                 className={`rounded-xl p-4 sm:p-5 bg-[#0E1713] border transition-all flex flex-col justify-between ${
-                  isMatch3
+                  isSeason1Match3
                     ? 'border-amber-500/50 shadow-amber-950/20 shadow-lg'
                     : 'border-[#EAE4D8]/10 hover:border-[#EAE4D8]/20'
                 }`}
@@ -70,12 +78,12 @@ export const LeagueFixturesGrid: React.FC = () => {
                     <div className="flex items-center justify-between">
                       <span
                         className={`font-display font-bold text-base ${
-                          m.winnerTeamId === teamA.id ? 'text-[#EAE4D8] font-black' : 'text-[#87968B]'
+                          !isTie && m.winnerTeamId === teamA.id ? 'text-[#EAE4D8] font-black' : 'text-[#87968B]'
                         }`}
                       >
                         {teamA.name}
                       </span>
-                      {m.winnerTeamId === teamA.id && (
+                      {!isTie && m.winnerTeamId === teamA.id && (
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" aria-label="Winner" />
                       )}
                     </div>
@@ -83,12 +91,12 @@ export const LeagueFixturesGrid: React.FC = () => {
                     <div className="flex items-center justify-between">
                       <span
                         className={`font-display font-bold text-base ${
-                          m.winnerTeamId === teamB.id ? 'text-[#EAE4D8] font-black' : 'text-[#87968B]'
+                          !isTie && m.winnerTeamId === teamB.id ? 'text-[#EAE4D8] font-black' : 'text-[#87968B]'
                         }`}
                       >
                         {teamB.name}
                       </span>
-                      {m.winnerTeamId === teamB.id && (
+                      {!isTie && m.winnerTeamId === teamB.id && (
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" aria-label="Winner" />
                       )}
                     </div>
@@ -100,11 +108,11 @@ export const LeagueFixturesGrid: React.FC = () => {
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-[10px] uppercase text-[#87968B]">Verified Result</span>
                     <span className={`font-mono text-xs font-bold px-2 py-0.5 rounded border ${winnerAccent}`}>
-                      {winner.name} won
+                      {isTie ? 'MATCH TIED' : `${winner?.name} won`}
                     </span>
                   </div>
 
-                  {isMatch3 && (
+                  {isSeason1Match3 && (
                     <div className="p-2 rounded bg-amber-950/20 border border-amber-500/30 text-[11px] font-sans text-amber-300/90 leading-snug flex items-start space-x-1.5">
                       <Zap className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
                       <span>

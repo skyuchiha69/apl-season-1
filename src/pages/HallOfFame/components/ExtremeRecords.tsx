@@ -1,8 +1,12 @@
 import React from 'react';
 import { Shield, TrendingUp, TrendingDown, Info, Trophy } from 'lucide-react';
+import { useSeasonOptional } from '../../../app/providers/SeasonProvider';
 
 export const ExtremeRecords: React.FC = () => {
-  const extremes = [
+  const { activeSeasonId } = useSeasonOptional();
+  const isSeason2 = activeSeasonId === 'season-2';
+
+  const extremesSeason1 = [
     {
       id: 'high-team-total',
       category: 'HIGHEST TEAM TOTAL IN APL HISTORY',
@@ -50,6 +54,56 @@ export const ExtremeRecords: React.FC = () => {
     },
   ];
 
+  const extremesSeason2 = [
+    {
+      id: 'high-team-total',
+      category: 'HIGHEST TEAM TOTAL IN APL HISTORY',
+      value: '319',
+      unit: 'Runs in 20.0 Overs',
+      teamName: 'KNIGHTS',
+      teamColor: '#F8FAFC',
+      opponent: 'vs Champions',
+      stage: 'Season 2 League Clash',
+      icon: TrendingUp,
+      accentColor: '#F8FAFC',
+      description:
+        'The highest team score ever recorded in APL competition. In an explosive batting masterclass against Champions, Knights smashed 319 runs—shattering their own previous tournament record of 291 from Season 1.',
+      contextNote: 'Season 2: Knights posted 319 vs Champions • All-time APL record total',
+    },
+    {
+      id: 'championship-decider',
+      category: 'THE CHAMPIONSHIP DECIDER',
+      value: 'Won by 4 Wkts',
+      unit: 'Grand Final Run Chase',
+      teamName: 'SKYSHOT',
+      teamColor: '#00D2FF',
+      opponent: 'vs Knights',
+      stage: 'Season 2 Grand Final',
+      icon: Trophy,
+      accentColor: '#00D2FF',
+      description:
+        'The crowning match of APL Season 2. In the championship decider against Knights, Skyshot executed a triumphant run chase to win by 4 wickets and secure their maiden APL championship crown.',
+      contextNote: 'Season 2 Grand Final: Skyshot defeated Knights by 4 wickets to claim the title',
+    },
+    {
+      id: 'lowest-team-total',
+      category: 'LOWEST TEAM TOTAL IN SEASON 2',
+      value: '113',
+      unit: 'All Out in League Play',
+      teamName: 'SKYSHOT',
+      teamColor: '#00D2FF',
+      opponent: 'vs Champions',
+      stage: 'Season 2 League Stage',
+      icon: TrendingDown,
+      accentColor: '#FF2E4D',
+      description:
+        'The stark volatility of tournament cricket. Eventual champions Skyshot were restricted by Champions to 113 in league play—the lowest team score recorded in the APL Season 2 archive.',
+      contextNote: 'League Stage: Champions restricted Skyshot to 113 • Lowest Season 2 total',
+    },
+  ];
+
+  const extremes = isSeason2 ? extremesSeason2 : extremesSeason1;
+
   return (
     <section id="extreme-records" className="py-12 lg:py-16 border-b border-[#EAE4D8]/10 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,14 +111,15 @@ export const ExtremeRecords: React.FC = () => {
         <div className="max-w-3xl mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAE4D8]/5 border border-[#EAE4D8]/15 text-[#B99A5B] text-xs font-mono uppercase tracking-widest mb-3">
             <Shield className="w-3.5 h-3.5 text-[#B99A5B]" />
-            <span>Team Benchmarks & Polar Extremes</span>
+            <span>Team Benchmarks &amp; Polar Extremes</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-[#EAE4D8] tracking-tight mb-4">
-            EXTREME BENCHMARKS OF SEASON 1
+            {isSeason2 ? 'EXTREME BENCHMARKS OF SEASON 2' : 'EXTREME BENCHMARKS OF SEASON 1'}
           </h2>
           <p className="text-base text-[#87968B] leading-relaxed font-sans">
-            From the pinnacle of attacking run-scoring to high-pressure finals chasing and bowling suffocations,
-            these team totals define the outer boundaries of APL Season 1 competitive cricket.
+            {isSeason2
+              ? 'From the pinnacle of record-breaking run-scoring to high-stakes playoff clashes and bowling collapses, these team totals define the outer boundaries of APL Season 2 competitive cricket.'
+              : 'From the pinnacle of attacking run-scoring to high-pressure finals chasing and bowling suffocations, these team totals define the outer boundaries of APL Season 1 competitive cricket.'}
           </p>
         </div>
 
@@ -139,9 +194,11 @@ export const ExtremeRecords: React.FC = () => {
           <Info className="w-4 h-4 text-[#B99A5B] shrink-0 mt-0.5" />
           <div>
             <strong className="text-[#EAE4D8] font-mono uppercase tracking-wider block mb-0.5">
-              The Championship Chase Historical Designation
+              {isSeason2 ? 'Season 2 Team Scoring Records Historical Designation' : 'The Championship Chase Historical Designation'}
             </strong>
-            Authors’ 226/7 in 19.2 overs to chase down Champions’ 225 in Match 15 is officially designated as <em>The Championship Chase</em>. Because complete second-innings run-chase progression logs are not preserved for all preliminary regular-season matches (Matches 1–12), the archive does not claim this was tournament-wide the &quot;greatest successful chase in tournament history.&quot; It is preserved strictly as the verified Grand Final chase that decided the inaugural APL title.
+            {isSeason2
+              ? 'Knights’ 319 vs Champions stands as the all-time highest team score in APL history, surpassing their Season 1 benchmark of 291. Skyshot’s 4-wicket Grand Final victory is verified as the official championship-deciding fixture of Season 2.'
+              : 'Authors’ 226/7 in 19.2 overs to chase down Champions’ 225 in Match 15 is officially designated as The Championship Chase. Because complete second-innings run-chase progression logs are not preserved for all preliminary regular-season matches (Matches 1–12), the archive does not claim this was tournament-wide the "greatest successful chase in tournament history." It is preserved strictly as the verified Grand Final chase that decided the inaugural APL title.'}
           </div>
         </div>
       </div>

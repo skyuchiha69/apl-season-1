@@ -7,6 +7,7 @@ import { TeamId } from '../../data/types';
 
 export const TeamsPage: React.FC = () => {
   const { seasonData } = useSeason();
+  const isSeason1 = seasonData.seasonId === 'season-1';
 
   // The 4 franchises in verified tournament order
   const franchiseList: Array<{
@@ -16,40 +17,75 @@ export const TeamsPage: React.FC = () => {
     playoffBanner: string;
     tagline: string;
     description: string;
-  }> = [
-    {
-      id: 'authors',
-      standing: 'T-2nd',
-      standingBadge: 'Tied 2nd (6 pts, 3W–3L)',
-      playoffBanner: 'Inaugural Champions • Chased 226 in Grand Final',
-      tagline: 'The Championship Strategists',
-      description: 'Masterminded by Dharm, Authors conquered high-pressure run chases, culminating in the historic 226/7 final victory.',
-    },
-    {
-      id: 'champions',
-      standing: 'T-2nd',
-      standingBadge: 'Tied 2nd (6 pts, 3W–3L)',
-      playoffBanner: 'Grand Finalists • Defended 225 in Semi-Final 1',
-      tagline: 'The High-Octane Finalists',
-      description: 'Under Umang’s tactical command, Champions produced blistering batting totals, defending 225 in SF1 and scoring 225 in the final.',
-    },
-    {
-      id: 'skyshot',
-      standing: '1st',
-      standingBadge: '1st Place (8 pts, 4W–2L)',
-      playoffBanner: 'Semi-Finalist • Regular Season Leaders',
-      tagline: 'The Regular-Season Pace Setters',
-      description: 'Commanded by Shubham, Skyshot dominated the 12-round league stage with 4 victories and claimed the Purple Cap with 12 wickets.',
-    },
-    {
-      id: 'knights',
-      standing: '4th',
-      standingBadge: '4th Place (4 pts, 2W–4L)',
-      playoffBanner: 'League Stage • Record Total 291 & Individual 146',
-      tagline: 'The Record-Breaking Contenders',
-      description: 'Led by Jay, Knights produced the single highest team score (291) and Jay’s historic 146 individual batting masterclass.',
-    },
-  ];
+  }> = isSeason1
+    ? [
+        {
+          id: 'authors',
+          standing: 'T-2nd',
+          standingBadge: 'Tied 2nd (6 pts, 3W–3L)',
+          playoffBanner: 'Inaugural Champions • Chased 226 in Grand Final',
+          tagline: 'The Championship Strategists',
+          description: 'Masterminded by Dharm, Authors conquered high-pressure run chases, culminating in the historic 226/7 final victory.',
+        },
+        {
+          id: 'champions',
+          standing: 'T-2nd',
+          standingBadge: 'Tied 2nd (6 pts, 3W–3L)',
+          playoffBanner: 'Grand Finalists • Defended 225 in Semi-Final 1',
+          tagline: 'The High-Octane Finalists',
+          description: 'Under Umang’s tactical command, Champions produced blistering batting totals, defending 225 in SF1 and scoring 225 in the final.',
+        },
+        {
+          id: 'skyshot',
+          standing: '1st',
+          standingBadge: '1st Place (8 pts, 4W–2L)',
+          playoffBanner: 'Semi-Finalist • Regular Season Leaders',
+          tagline: 'The Regular-Season Pace Setters',
+          description: 'Commanded by Shubham, Skyshot dominated the 12-round league stage with 4 victories and claimed the Purple Cap with 12 wickets.',
+        },
+        {
+          id: 'knights',
+          standing: '4th',
+          standingBadge: '4th Place (4 pts, 2W–4L)',
+          playoffBanner: 'League Stage • Record Total 291 & Individual 146',
+          tagline: 'The Record-Breaking Contenders',
+          description: 'Led by Jay, Knights produced the single highest team score (291) and Jay’s historic 146 individual batting masterclass.',
+        },
+      ]
+    : [
+        {
+          id: 'champions',
+          standing: '1st',
+          standingBadge: '1st Place (9 pts, 4W–1L–1T)',
+          playoffBanner: 'Playoff Semi-Finalist • Table Toppers',
+          tagline: 'The Regular-Season Leaders',
+          description: 'Under Umang’s tactical leadership, Champions dominated the regular season with 9 points (4 wins, 1 tie) and secured the top seed heading into the playoffs.',
+        },
+        {
+          id: 'skyshot',
+          standing: '2nd',
+          standingBadge: '2nd Place (7 pts, 3W–2L–1T)',
+          playoffBanner: 'Tournament Champions • Won Grand Final',
+          tagline: 'The Championship Winners',
+          description: 'Commanded by Shubham, Skyshot claimed 2nd place in the league stage, triumphed in the Qualifier, and captured the Season 2 Championship in the Grand Final.',
+        },
+        {
+          id: 'knights',
+          standing: '3rd',
+          standingBadge: '3rd Place (6 pts, 3W–3L)',
+          playoffBanner: 'Grand Finalists • Won Semi-Final',
+          tagline: 'The High-Ceiling Finalists',
+          description: 'Led by Jay and strengthened by Dharm, Knights finished 3rd in the regular season, defeated table-toppers Champions in the Semi-Final, and finished as Grand Finalists.',
+        },
+        {
+          id: 'authors',
+          standing: '4th',
+          standingBadge: '4th Place (2 pts, 1W–5L)',
+          playoffBanner: 'League Stage • 1 Win',
+          tagline: 'The Rebuilding Contenders',
+          description: 'Captained on-field by King following founding owner Dharm’s transfer, Authors competed across 6 regular-season rounds, earning a league victory.',
+        },
+      ];
 
   return (
     <div className="min-h-screen bg-[#090C0B] text-[#EAE4D8]">
@@ -65,7 +101,7 @@ export const TeamsPage: React.FC = () => {
           <div className="max-w-3xl space-y-4">
             <div className="flex items-center space-x-2 text-xs font-mono tracking-widest text-[#B99A5B] uppercase font-semibold">
               <Shield className="w-4 h-4 text-[#B99A5B]" />
-              <span>Franchises Hub • Season 1 Archive</span>
+              <span>Franchises Hub • {isSeason1 ? 'Season 1 Archive' : 'Season 2 Archive'}</span>
             </div>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#EAE4D8]">
               The Four Franchises.
@@ -87,56 +123,110 @@ export const TeamsPage: React.FC = () => {
               </span>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono">
-              {/* Skyshot */}
-              <div className="p-3 rounded-lg bg-[#14201A] border border-cyan-500/20 space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-cyan-400">SKYSHOT</span>
-                  <span className="px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 text-[10px]">1st</span>
+            {isSeason1 ? (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono">
+                {/* Skyshot */}
+                <div className="p-3 rounded-lg bg-[#14201A] border border-cyan-500/20 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-cyan-400">SKYSHOT</span>
+                    <span className="px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 text-[10px]">1st</span>
+                  </div>
+                  <p className="text-[#A69F92] text-[11px]">4 Wins – 2 Losses • 8 Pts</p>
+                  <p className="text-[#87968B] text-[10px]">Table Toppers</p>
                 </div>
-                <p className="text-[#A69F92] text-[11px]">4 Wins – 2 Losses • 8 Pts</p>
-                <p className="text-[#87968B] text-[10px]">Table Toppers</p>
-              </div>
 
-              {/* Authors */}
-              <div className="p-3 rounded-lg bg-[#14201A] border border-emerald-500/20 space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-emerald-400">AUTHORS</span>
-                  <span className="px-1.5 py-0.2 rounded bg-[#B99A5B]/20 text-[#B99A5B] text-[10px]">T-2nd</span>
+                {/* Authors */}
+                <div className="p-3 rounded-lg bg-[#14201A] border border-emerald-500/20 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-emerald-400">AUTHORS</span>
+                    <span className="px-1.5 py-0.2 rounded bg-[#B99A5B]/20 text-[#B99A5B] text-[10px]">T-2nd</span>
+                  </div>
+                  <p className="text-[#A69F92] text-[11px]">3 Wins – 3 Losses • 6 Pts</p>
+                  <p className="text-[#87968B] text-[10px]">Tied Second • Champions</p>
                 </div>
-                <p className="text-[#A69F92] text-[11px]">3 Wins – 3 Losses • 6 Pts</p>
-                <p className="text-[#87968B] text-[10px]">Tied Second • Champions</p>
-              </div>
 
-              {/* Champions */}
-              <div className="p-3 rounded-lg bg-[#14201A] border border-rose-500/20 space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-rose-400">CHAMPIONS</span>
-                  <span className="px-1.5 py-0.2 rounded bg-[#B99A5B]/20 text-[#B99A5B] text-[10px]">T-2nd</span>
+                {/* Champions */}
+                <div className="p-3 rounded-lg bg-[#14201A] border border-rose-500/20 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-rose-400">CHAMPIONS</span>
+                    <span className="px-1.5 py-0.2 rounded bg-[#B99A5B]/20 text-[#B99A5B] text-[10px]">T-2nd</span>
+                  </div>
+                  <p className="text-[#A69F92] text-[11px]">3 Wins – 3 Losses • 6 Pts</p>
+                  <p className="text-[#87968B] text-[10px]">Tied Second • Finalists</p>
                 </div>
-                <p className="text-[#A69F92] text-[11px]">3 Wins – 3 Losses • 6 Pts</p>
-                <p className="text-[#87968B] text-[10px]">Tied Second • Finalists</p>
-              </div>
 
-              {/* Knights */}
-              <div className="p-3 rounded-lg bg-[#14201A] border border-slate-500/20 space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-slate-300">KNIGHTS</span>
-                  <span className="px-1.5 py-0.2 rounded bg-slate-400/20 text-slate-200 text-[10px]">4th</span>
+                {/* Knights */}
+                <div className="p-3 rounded-lg bg-[#14201A] border border-slate-500/20 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-slate-300">KNIGHTS</span>
+                    <span className="px-1.5 py-0.2 rounded bg-slate-400/20 text-slate-200 text-[10px]">4th</span>
+                  </div>
+                  <p className="text-[#A69F92] text-[11px]">2 Wins – 4 Losses • 4 Pts</p>
+                  <p className="text-[#87968B] text-[10px]">Record Setters (291)</p>
                 </div>
-                <p className="text-[#A69F92] text-[11px]">2 Wins – 4 Losses • 4 Pts</p>
-                <p className="text-[#87968B] text-[10px]">Record Setters (291)</p>
               </div>
-            </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono">
+                {/* Champions */}
+                <div className="p-3 rounded-lg bg-[#14201A] border border-rose-500/20 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-rose-400">CHAMPIONS</span>
+                    <span className="px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-300 text-[10px]">1st</span>
+                  </div>
+                  <p className="text-[#A69F92] text-[11px]">4 Wins – 1 Loss – 1 Tie • 9 Pts</p>
+                  <p className="text-[#87968B] text-[10px]">Table Toppers</p>
+                </div>
+
+                {/* Skyshot */}
+                <div className="p-3 rounded-lg bg-[#14201A] border border-cyan-500/20 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-cyan-400">SKYSHOT</span>
+                    <span className="px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 text-[10px]">2nd</span>
+                  </div>
+                  <p className="text-[#A69F92] text-[11px]">3 Wins – 2 Losses – 1 Tie • 7 Pts</p>
+                  <p className="text-[#87968B] text-[10px]">Tournament Champions</p>
+                </div>
+
+                {/* Knights */}
+                <div className="p-3 rounded-lg bg-[#14201A] border border-slate-500/20 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-slate-300">KNIGHTS</span>
+                    <span className="px-1.5 py-0.2 rounded bg-slate-400/20 text-slate-200 text-[10px]">3rd</span>
+                  </div>
+                  <p className="text-[#A69F92] text-[11px]">3 Wins – 3 Losses • 6 Pts</p>
+                  <p className="text-[#87968B] text-[10px]">Grand Finalists</p>
+                </div>
+
+                {/* Authors */}
+                <div className="p-3 rounded-lg bg-[#14201A] border border-emerald-500/20 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-emerald-400">AUTHORS</span>
+                    <span className="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 text-[10px]">4th</span>
+                  </div>
+                  <p className="text-[#A69F92] text-[11px]">1 Win – 5 Losses • 2 Pts</p>
+                  <p className="text-[#87968B] text-[10px]">League Stage</p>
+                </div>
+              </div>
+            )}
 
             {/* Tie-breaker Footnote */}
-            <div className="pt-2 flex items-start space-x-2 text-[11px] font-sans text-[#A69F92] border-t border-[#EAE4D8]/5">
-              <AlertCircle className="w-3.5 h-3.5 text-[#B99A5B] shrink-0 mt-0.5" />
-              <span>
-                Authors and Champions finished tied on 6 points (both 3–3; split 1–1 head-to-head).
-                With no official league NRR recorded, both teams share 2nd place (T-2nd).
-              </span>
-            </div>
+            {isSeason1 ? (
+              <div className="pt-2 flex items-start space-x-2 text-[11px] font-sans text-[#A69F92] border-t border-[#EAE4D8]/5">
+                <AlertCircle className="w-3.5 h-3.5 text-[#B99A5B] shrink-0 mt-0.5" />
+                <span>
+                  Authors and Champions finished tied on 6 points (both 3–3; split 1–1 head-to-head).
+                  With no official league NRR recorded, both teams share 2nd place (T-2nd).
+                </span>
+              </div>
+            ) : (
+              <div className="pt-2 flex items-start space-x-2 text-[11px] font-sans text-[#A69F92] border-t border-[#EAE4D8]/5">
+                <AlertCircle className="w-3.5 h-3.5 text-[#B99A5B] shrink-0 mt-0.5" />
+                <span>
+                  Match 02 between Champions and Skyshot concluded in an official tie (1 point awarded to each team).
+                  Standings reflect total match points across the 12 regular-season league fixtures.
+                </span>
+              </div>
+            )}
           </div>
         </Container>
       </section>
@@ -160,10 +250,11 @@ export const TeamsPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {franchiseList.map((item) => {
               const team = seasonData.teams[item.id];
-              const isChampion = item.id === 'authors';
-              const isFinalist = item.id === 'champions';
-              const isSkyshot = item.id === 'skyshot';
+              const isChampion = seasonData.championTeamId === item.id;
+              const isFinalist = !isChampion && team.playoffResult === 'RUNNERS_UP';
+              const isTableTopper = !isChampion && !isFinalist && team.leagueRecord.position === 1;
               const primaryColor = team.theme.primaryColor;
+              const squadCount = seasonData.players.filter((p) => p.teamId === item.id).length;
 
               return (
                 <div
@@ -203,15 +294,20 @@ export const TeamsPage: React.FC = () => {
                           <Award className="w-3 h-3" />
                           <span>Grand Finalists</span>
                         </span>
-                      ) : isSkyshot ? (
+                      ) : isTableTopper ? (
                         <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 uppercase">
                           <Award className="w-3 h-3" />
                           <span>League 1st</span>
                         </span>
-                      ) : (
+                      ) : isSeason1 && item.id === 'knights' ? (
                         <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-400/20 text-slate-200 border border-slate-400/40 uppercase">
                           <Shield className="w-3 h-3" />
                           <span>Record 291</span>
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-400/20 text-slate-200 border border-slate-400/40 uppercase">
+                          <Shield className="w-3 h-3" />
+                          <span>League Stage</span>
                         </span>
                       )}
                     </div>
@@ -256,7 +352,7 @@ export const TeamsPage: React.FC = () => {
                       <div className="space-y-1">
                         <span className="text-[10px] text-[#87968B] uppercase block">Official Squad:</span>
                         <span className="text-[#A69F92] block flex items-center gap-1">
-                          <Users className="w-3 h-3 text-[#B99A5B]" /> 11 Verified Players
+                          <Users className="w-3 h-3 text-[#B99A5B]" /> {squadCount} Verified Players
                         </span>
                       </div>
                     </div>

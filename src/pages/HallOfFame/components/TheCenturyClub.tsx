@@ -1,8 +1,12 @@
 import React from 'react';
 import { Zap, Award, Info, Calendar } from 'lucide-react';
+import { useSeasonOptional } from '../../../app/providers/SeasonProvider';
 
 export const TheCenturyClub: React.FC = () => {
-  const centuries = [
+  const { activeSeasonId } = useSeasonOptional();
+  const isSeason2 = activeSeasonId === 'season-2';
+
+  const centuriesSeason1 = [
     {
       id: 'jay-146',
       score: 146,
@@ -95,6 +99,116 @@ export const TheCenturyClub: React.FC = () => {
     },
   ];
 
+  const centuriesSeason2 = [
+    {
+      id: 'pointer-161',
+      score: 161,
+      playerName: 'Pointer',
+      teamId: 'knights',
+      teamName: 'KNIGHTS',
+      teamColor: '#F8FAFC',
+      stage: 'Match #7 • League Stage',
+      opponent: 'vs Champions',
+      isRecord: true,
+      recordLabel: 'All-Time Tournament High Score',
+      ballsFacedNote: 'Balls faced unrecorded in surviving league log',
+      description:
+        'The highest individual innings in APL history. Pointer battered 161 runs for Knights against Champions, breaking all previous individual scoring benchmarks in the tournament archive.',
+    },
+    {
+      id: 'figarland-118',
+      score: 118,
+      playerName: 'Figarland',
+      teamId: 'skyshot',
+      teamName: 'SKYSHOT',
+      teamColor: '#00D2FF',
+      stage: 'Match #3 • League Stage',
+      opponent: 'vs Authors',
+      isRecord: true,
+      recordLabel: 'Most Centuries Record Holder (3)',
+      ballsFacedNote: 'Balls faced unrecorded in surviving league log',
+      description:
+        'Figarland’s tournament-high score of 118 formed the centerpiece of an unprecedented three-century campaign (102, 118, 102), making him the sole batsman with three hundreds in a single APL season.',
+    },
+    {
+      id: 'shubham-114',
+      score: 114,
+      playerName: 'Shubham',
+      teamId: 'skyshot',
+      teamName: 'SKYSHOT',
+      teamColor: '#00D2FF',
+      stage: 'Match #8 • Championship March',
+      opponent: 'Playoff Campaign',
+      isRecord: true,
+      recordLabel: 'Championship Captain & Owner Century',
+      ballsFacedNote: 'Balls faced unrecorded in surviving league log',
+      description:
+        'A captain’s masterclass in Skyshot’s championship march. Shubham compiled 114 runs in sequence entry #8, carrying his team to the Season 2 title and finishing with 304 tournament runs.',
+    },
+    {
+      id: 'harvey-112',
+      score: 112,
+      playerName: 'Harvey',
+      teamId: 'champions',
+      teamName: 'CHAMPIONS',
+      teamColor: '#FF2E4D',
+      stage: 'Match #8 • Playoff Campaign',
+      opponent: 'vs Knights',
+      isRecord: false,
+      recordLabel: 'Orange Cap Winner (2nd Century)',
+      ballsFacedNote: 'Balls faced unrecorded in surviving league log',
+      description:
+        'Orange Cap winner Harvey hammered his second century of the campaign (112 runs), anchoring Champions’ imposing postseason batting lineup and locking in the tournament run aggregate title.',
+    },
+    {
+      id: 'harvey-108',
+      score: 108,
+      playerName: 'Harvey',
+      teamId: 'champions',
+      teamName: 'CHAMPIONS',
+      teamColor: '#FF2E4D',
+      stage: 'Match #3 • League Stage',
+      opponent: 'vs Skyshot',
+      isRecord: false,
+      recordLabel: 'Orange Cap Winner (1st Century)',
+      ballsFacedNote: 'Balls faced unrecorded in surviving league log',
+      description:
+        'Harvey initiated his Orange Cap crusade with an authoritative 108 runs in Match 3 against Skyshot, asserting Champions’ batting firepower early in the Season 2 campaign.',
+    },
+    {
+      id: 'figarland-102a',
+      score: 102,
+      playerName: 'Figarland',
+      teamId: 'skyshot',
+      teamName: 'SKYSHOT',
+      teamColor: '#00D2FF',
+      stage: 'Match #1 • Opening Round',
+      opponent: 'vs Champions',
+      isRecord: false,
+      recordLabel: 'Opening Round Century',
+      ballsFacedNote: 'Balls faced unrecorded in surviving league log',
+      description:
+        'Figarland opened Skyshot’s championship season in electrifying fashion, striking 102 runs on opening day to register the first century of APL Season 2.',
+    },
+    {
+      id: 'figarland-102b',
+      score: 102,
+      playerName: 'Figarland',
+      teamId: 'skyshot',
+      teamName: 'SKYSHOT',
+      teamColor: '#00D2FF',
+      stage: 'Match #6 • League Stage',
+      opponent: 'vs Authors',
+      isRecord: false,
+      recordLabel: 'Third Tournament Century',
+      ballsFacedNote: 'Balls faced unrecorded in surviving league log',
+      description:
+        'Completing his historic triple-hundred collection, Figarland struck his third three-figure score of the campaign with 102 runs against Authors.',
+    },
+  ];
+
+  const centuries = isSeason2 ? centuriesSeason2 : centuriesSeason1;
+
   return (
     <section id="century-club" className="py-12 lg:py-16 border-b border-[#EAE4D8]/10 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,18 +216,19 @@ export const TheCenturyClub: React.FC = () => {
         <div className="max-w-3xl mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAE4D8]/5 border border-[#EAE4D8]/15 text-[#B99A5B] text-xs font-mono uppercase tracking-widest mb-3">
             <Zap className="w-3.5 h-3.5 text-[#B99A5B]" />
-            <span>The Hundred Club • 6 Historic Centuries</span>
+            <span>The Hundred Club • {isSeason2 ? '7 Historic Centuries' : '6 Historic Centuries'}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-[#EAE4D8] tracking-tight mb-4">
             THE CENTURY CLUB
           </h2>
           <p className="text-base text-[#87968B] leading-relaxed font-sans">
-            Across 15 fiercely contested matches in APL Season 1, reaching three figures was an extraordinary feat achieved
-            by only five batsmen. Exactly six centuries are preserved in the permanent league archive.
+            {isSeason2
+              ? 'Across 15 fiercely contested matches in APL Season 2, reaching three figures was achieved by four elite batsmen. Exactly seven centuries are preserved in the permanent league archive, led by Pointer’s all-time tournament record 161.'
+              : 'Across 15 fiercely contested matches in APL Season 1, reaching three figures was an extraordinary feat achieved by only five batsmen. Exactly six centuries are preserved in the permanent league archive.'}
           </p>
         </div>
 
-        {/* 6 Century Cards Grid */}
+        {/* 6 or 7 Century Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {centuries.map((c) => (
             <div
@@ -185,7 +300,9 @@ export const TheCenturyClub: React.FC = () => {
             <strong className="text-[#EAE4D8] font-mono uppercase tracking-wider block mb-0.5">
               Balls Faced Archival Protocol
             </strong>
-            Balls faced were preserved in official scorecards exclusively for the Grand Final (A. King: 108 runs from 54 balls). For regular-season league centuries (Jay, T. Stark, Red, Rogers, and King’s league hundred), only the official runs total survives in the tournament PDF ledger. In accordance with archival accuracy standards, strike rates and balls faced are not fabricated.
+            {isSeason2
+              ? 'Balls faced are unrecorded in surviving Season 2 tournament ledgers. In accordance with archival accuracy standards, strike rates and deliveries faced are not fabricated for Season 2 centuries (Pointer 161, Figarland 118, 102, 102, Shubham 114, and Harvey 112, 108).'
+              : 'Balls faced were preserved in official scorecards exclusively for the Grand Final (A. King: 108 runs from 54 balls). For regular-season league centuries (Jay, T. Stark, Red, Rogers, and King’s league hundred), only the official runs total survives in the tournament PDF ledger. In accordance with archival accuracy standards, strike rates and balls faced are not fabricated.'}
           </div>
         </div>
       </div>

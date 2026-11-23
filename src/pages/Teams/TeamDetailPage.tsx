@@ -29,7 +29,7 @@ export const TeamDetailPage: React.FC = () => {
           </h1>
           <p className="text-sm text-[#A69F92] leading-relaxed font-sans">
             The franchise identifier &quot;{teamId || 'unknown'}&quot; is not part of the four officially registered
-            clubs in the APL Season 1 archive.
+            clubs in the APL {seasonData.name} archive.
           </p>
           <div className="pt-4">
             <Link

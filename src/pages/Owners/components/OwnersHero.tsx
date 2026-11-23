@@ -1,74 +1,141 @@
 import React from 'react';
 import { Shield, Award, Swords, MessageSquareQuote, Compass } from 'lucide-react';
 import { Team } from '../../../data/types';
+import { useSeasonOptional } from '../../../app/providers/SeasonProvider';
 
 interface OwnersHeroProps {
   teams: Record<string, Team>;
 }
 
 export const OwnersHero: React.FC<OwnersHeroProps> = ({ teams }) => {
-  const owners = [
-    {
-      id: 'dharm',
-      name: 'Dharm',
-      nickname: 'Green',
-      teamId: 'authors',
-      teamName: teams.authors?.name || 'AUTHORS',
-      accentColor: '#00E676',
-      badge: 'Inaugural Champions',
-      finish: 'CHAMPIONS • Won Final by 3 Wickets',
-      regularSeason: '3W – 3L (Tied 2nd, 6 pts)',
-      teamCaptain: 'King',
-      captainNote: 'Official on-field captain King (A. King).',
-      favoriteColor: 'Green',
-      anchor: '#owner-dharm',
-    },
-    {
-      id: 'umang',
-      name: 'Umang',
-      nickname: 'UB',
-      teamId: 'champions',
-      teamName: teams.champions?.name || 'CHAMPIONS',
-      accentColor: '#FF2E4D',
-      badge: 'Runners-Up',
-      finish: 'RUNNERS-UP • Defended 225 in SF1',
-      regularSeason: '3W – 3L (Tied 2nd, 6 pts)',
-      teamCaptain: 'Stark',
-      captainNote: 'Official on-field captain Stark (T. Stark).',
-      favoriteColor: 'Red',
-      anchor: '#owner-umang',
-    },
-    {
-      id: 'shubham',
-      name: 'Shubham',
-      nickname: 'Sky',
-      teamId: 'skyshot',
-      teamName: teams.skyshot?.name || 'SKYSHOT',
-      accentColor: '#00D2FF',
-      badge: 'League Topper • Semi-Finalist',
-      finish: 'SEMI-FINALIST • Regular Season 1st',
-      regularSeason: '4W – 2L (1st Place, 8 pts)',
-      teamCaptain: 'Shubham',
-      captainNote: 'Official on-field captain and owner Shubham.',
-      favoriteColor: 'Blue',
-      anchor: '#owner-shubham',
-    },
-    {
-      id: 'jay',
-      name: 'Jay',
-      nickname: 'Red',
-      teamId: 'knights',
-      teamName: teams.knights?.name || 'KNIGHTS',
-      accentColor: '#F8FAFC',
-      badge: 'Record Setters',
-      finish: 'LEAGUE STAGE • 146 HS & 291 Total',
-      regularSeason: '2W – 4L (4th Place, 4 pts)',
-      teamCaptain: 'Jay',
-      captainNote: 'Official on-field captain and owner Jay.',
-      favoriteColor: 'Black',
-      anchor: '#owner-jay',
-    },
-  ];
+  const { activeSeasonId } = useSeasonOptional();
+  const isSeason2 = activeSeasonId === 'season-2';
+
+  const owners = isSeason2
+    ? [
+        {
+          id: 'dharm',
+          name: 'Dharm',
+          nickname: 'Green',
+          teamId: 'authors',
+          teamName: teams.authors?.name || 'AUTHORS',
+          accentColor: '#00E676',
+          badge: 'Founding Owner • Active Player',
+          finish: 'LEAGUE STAGE • 10 Wkts for Knights',
+          regularSeason: '1W – 5L (4th Place, 2 pts)',
+          teamCaptain: 'King',
+          captainNote: 'Official on-field captain King (A. King). Founding owner Dharm transferred to Knights as active bowler.',
+          favoriteColor: '#00E676',
+          anchor: '#owner-dharm',
+        },
+        {
+          id: 'umang',
+          name: 'Umang',
+          nickname: 'UB',
+          teamId: 'champions',
+          teamName: teams.champions?.name || 'CHAMPIONS',
+          accentColor: '#FF2E4D',
+          badge: 'Regular-Season League Topper',
+          finish: 'SEMI-FINALIST • Regular Season 1st',
+          regularSeason: '4W – 1L – 1T (1st Place, 9 pts)',
+          teamCaptain: 'Tony',
+          captainNote: 'Official on-field captain Tony (Tony Stark).',
+          favoriteColor: 'Red',
+          anchor: '#owner-umang',
+        },
+        {
+          id: 'shubham',
+          name: 'Shubham',
+          nickname: 'Sky',
+          teamId: 'skyshot',
+          teamName: teams.skyshot?.name || 'SKYSHOT',
+          accentColor: '#00D2FF',
+          badge: 'APL Season 2 Champions',
+          finish: 'CHAMPIONS • Won Final by 4 Wickets',
+          regularSeason: '3W – 2L – 1T (2nd Place, 7 pts)',
+          teamCaptain: 'Shubham',
+          captainNote: 'Official on-field captain, franchise owner, and Season 2 Champion Shubham.',
+          favoriteColor: 'Blue',
+          anchor: '#owner-shubham',
+        },
+        {
+          id: 'jay',
+          name: 'Jay',
+          nickname: 'Red',
+          teamId: 'knights',
+          teamName: teams.knights?.name || 'KNIGHTS',
+          accentColor: '#F8FAFC',
+          badge: 'Season 2 Runners-Up',
+          finish: 'RUNNERS-UP • Grand Finalists',
+          regularSeason: '3W – 3L (3rd Place, 6 pts)',
+          teamCaptain: 'Jay',
+          captainNote: 'Official on-field captain, franchise owner, and Grand Finalist Jay.',
+          favoriteColor: 'Black',
+          anchor: '#owner-jay',
+        },
+      ]
+    : [
+        {
+          id: 'dharm',
+          name: 'Dharm',
+          nickname: 'Green',
+          teamId: 'authors',
+          teamName: teams.authors?.name || 'AUTHORS',
+          accentColor: '#00E676',
+          badge: 'Inaugural Champions',
+          finish: 'CHAMPIONS • Won Final by 3 Wickets',
+          regularSeason: '3W – 3L (Tied 2nd, 6 pts)',
+          teamCaptain: 'King',
+          captainNote: 'Official on-field captain King (A. King).',
+          favoriteColor: 'Green',
+          anchor: '#owner-dharm',
+        },
+        {
+          id: 'umang',
+          name: 'Umang',
+          nickname: 'UB',
+          teamId: 'champions',
+          teamName: teams.champions?.name || 'CHAMPIONS',
+          accentColor: '#FF2E4D',
+          badge: 'Runners-Up',
+          finish: 'RUNNERS-UP • Defended 225 in SF1',
+          regularSeason: '3W – 3L (Tied 2nd, 6 pts)',
+          teamCaptain: 'Stark',
+          captainNote: 'Official on-field captain Stark (T. Stark).',
+          favoriteColor: 'Red',
+          anchor: '#owner-umang',
+        },
+        {
+          id: 'shubham',
+          name: 'Shubham',
+          nickname: 'Sky',
+          teamId: 'skyshot',
+          teamName: teams.skyshot?.name || 'SKYSHOT',
+          accentColor: '#00D2FF',
+          badge: 'League Topper • Semi-Finalist',
+          finish: 'SEMI-FINALIST • Regular Season 1st',
+          regularSeason: '4W – 2L (1st Place, 8 pts)',
+          teamCaptain: 'Shubham',
+          captainNote: 'Official on-field captain and owner Shubham.',
+          favoriteColor: 'Blue',
+          anchor: '#owner-shubham',
+        },
+        {
+          id: 'jay',
+          name: 'Jay',
+          nickname: 'Red',
+          teamId: 'knights',
+          teamName: teams.knights?.name || 'KNIGHTS',
+          accentColor: '#F8FAFC',
+          badge: 'Record Setters',
+          finish: 'LEAGUE STAGE • 146 HS & 291 Total',
+          regularSeason: '2W – 4L (4th Place, 4 pts)',
+          teamCaptain: 'Jay',
+          captainNote: 'Official on-field captain and owner Jay.',
+          favoriteColor: 'Black',
+          anchor: '#owner-jay',
+        },
+      ];
 
   return (
     <header className="relative pt-6 pb-12 border-b border-[#EAE4D8]/10 overflow-hidden">
@@ -87,15 +154,15 @@ export const OwnersHero: React.FC<OwnersHeroProps> = ({ teams }) => {
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAE4D8]/5 border border-[#EAE4D8]/15 text-[#B99A5B] text-xs font-mono uppercase tracking-widest">
             <Compass className="w-3.5 h-3.5" />
-            <span>Documentary Archive • APL Season 1</span>
+            <span>{isSeason2 ? 'Documentary Archive • APL Season 2' : 'Documentary Archive • APL Season 1'}</span>
           </div>
 
           <div className="flex items-center gap-3 text-xs font-mono text-[#87968B]">
-            <span>15 Decided Fixtures</span>
+            <span>{isSeason2 ? '15 Fixtures (1 Tied)' : '15 Decided Fixtures'}</span>
             <span className="text-[#EAE4D8]/20">•</span>
             <span>4 Franchises</span>
             <span className="text-[#EAE4D8]/20">•</span>
-            <span className="text-[#B99A5B]">1 Inaugural Champion</span>
+            <span className="text-[#B99A5B]">{isSeason2 ? '1 Reigning Champion' : '1 Inaugural Champion'}</span>
           </div>
         </div>
 
@@ -112,8 +179,11 @@ export const OwnersHero: React.FC<OwnersHeroProps> = ({ teams }) => {
               <strong className="text-[#EAE4D8]"> Dharm</strong>,
               <strong className="text-[#EAE4D8]"> Umang</strong>,
               <strong className="text-[#EAE4D8]"> Shubham</strong>, and
-              <strong className="text-[#EAE4D8]"> Jay</strong>—founded and commanded four distinct franchises to battle
-              for the inaugural <strong className="text-[#EAE4D8]">Ashes Premier League (APL) Season 1</strong> crown.
+              <strong className="text-[#EAE4D8]"> Jay</strong>—founded and commanded four distinct franchises {isSeason2 ? (
+                <>to contest the <strong className="text-[#EAE4D8]">Ashes Premier League (APL) Season 2</strong> championship.</>
+              ) : (
+                <>to battle for the inaugural <strong className="text-[#EAE4D8]">Ashes Premier League (APL) Season 1</strong> crown.</>
+              )}
             </p>
             <p>
               This chronicle preserves the authentic historical legacy of the tournament&apos;s four founders: their strategic
@@ -132,7 +202,7 @@ export const OwnersHero: React.FC<OwnersHeroProps> = ({ teams }) => {
                 </span>
                 On-field tactical leadership and team captaincy were executed by the actual in-game captains—
                 <strong className="text-[#EAE4D8]"> King</strong> (Authors),
-                <strong className="text-[#EAE4D8]"> Stark</strong> (Champions),
+                <strong className="text-[#EAE4D8]"> {isSeason2 ? 'Tony' : 'Stark'}</strong> (Champions),
                 <strong className="text-[#EAE4D8]"> Shubham</strong> (Skyshot), and
                 <strong className="text-[#EAE4D8]"> Jay</strong> (Knights).
                 Professional international cricketers represent owner personal favorites and inspirations; all squad assembly,

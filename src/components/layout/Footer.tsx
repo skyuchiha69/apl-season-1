@@ -1,13 +1,17 @@
 import React from 'react';
 import { Container } from './Container';
 import { Trophy, Award, Shield, FileText } from 'lucide-react';
+import { useSeason } from '../../app/providers/SeasonProvider';
 import { season1Reconciliation } from '../../data';
 
 export const Footer: React.FC = () => {
+  const { activeSeasonId } = useSeason();
+  const isSeason1 = activeSeasonId === 'season-1';
+
   return (
     <footer className="bg-[#090C0B] border-t border-[#EAE4D8]/10 pt-14 pb-10 text-[#87968B] text-sm">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-[#EAE4D8]/10">
+        <div className={`grid grid-cols-1 ${isSeason1 ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-8 pb-10 border-b border-[#EAE4D8]/10`}>
           {/* Col 1: League Identity */}
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center space-x-3">
@@ -21,14 +25,14 @@ export const Footer: React.FC = () => {
                   ASHES PREMIER LEAGUE
                 </h4>
                 <p className="text-xs text-[#B99A5B] font-semibold tracking-widest uppercase font-mono">
-                  Season 1: The Legends Legacy
+                  {isSeason1 ? 'Season 1: The Legends Legacy' : 'Season 2: The Legends Legacy'}
                 </p>
               </div>
             </div>
             <p className="text-xs text-[#A69F92] leading-relaxed max-w-lg font-sans">
-              The permanent interactive digital archive of APL Season 1. Created, owned, and contested
-              by four cousins across 15 high-stakes PC cricket matches, culminating in the Authors’
-              historic 226 chase in the final.
+              {isSeason1
+                ? 'The permanent interactive digital archive of APL Season 1. Created, owned, and contested by four cousins across 15 high-stakes PC cricket matches, culminating in the Authors’ historic 226 chase in the final.'
+                : 'The permanent interactive digital archive of APL Season 2. Created, owned, and contested by four cousins across 15 high-stakes PC cricket matches, culminating in Skyshot’s championship victory.'}
             </p>
             <div className="flex flex-wrap gap-2 pt-1 font-mono text-[11px]">
               <span className="bg-[#111815] border border-[#EAE4D8]/10 px-2.5 py-0.5 rounded text-[#EAE4D8]">
@@ -37,54 +41,91 @@ export const Footer: React.FC = () => {
               <span className="bg-[#111815] border border-[#EAE4D8]/10 px-2.5 py-0.5 rounded text-[#EAE4D8]">
                 15 Matches
               </span>
-              <span className="bg-[#111815] border border-[#EAE4D8]/10 px-2.5 py-0.5 rounded text-[#B99A5B]">
-                5,945 Batter Runs
-              </span>
-              <span className="bg-[#111815] border border-[#EAE4D8]/10 px-2.5 py-0.5 rounded text-[#EAE4D8]">
-                101 Wickets
-              </span>
+              {isSeason1 ? (
+                <>
+                  <span className="bg-[#111815] border border-[#EAE4D8]/10 px-2.5 py-0.5 rounded text-[#B99A5B]">
+                    5,945 Batter Runs
+                  </span>
+                  <span className="bg-[#111815] border border-[#EAE4D8]/10 px-2.5 py-0.5 rounded text-[#EAE4D8]">
+                    101 Wickets
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="bg-[#111815] border border-[#EAE4D8]/10 px-2.5 py-0.5 rounded text-purple-300">
+                    117 Bowler Wickets
+                  </span>
+                  <span className="bg-[#111815] border border-[#EAE4D8]/10 px-2.5 py-0.5 rounded text-amber-300">
+                    8 Batting Discrepancies
+                  </span>
+                </>
+              )}
             </div>
           </div>
 
-          {/* Col 2: The Four Cousins */}
-          <div className="space-y-2">
-            <h5 className="font-display text-xs font-bold text-[#EAE4D8] uppercase tracking-wider flex items-center gap-1.5">
-              <Shield className="w-3.5 h-3.5 text-[#B99A5B]" /> The Four Cousins
-            </h5>
-            <ul className="space-y-1.5 text-xs text-[#A69F92] font-mono">
-              <li>
-                <span className="text-cyan-400 font-semibold">Shubham (Sky)</span> — SKYSHOT
-              </li>
-              <li>
-                <span className="text-slate-300 font-semibold">Jay (Red)</span> — KNIGHTS
-              </li>
-              <li>
-                <span className="text-emerald-400 font-semibold">Dharm (Green)</span> — AUTHORS (Champions)
-              </li>
-              <li>
-                <span className="text-rose-400 font-semibold">Umang (UB)</span> — CHAMPIONS
-              </li>
-            </ul>
-          </div>
+          {/* Col 2: The Four Cousins (Season 1 only) */}
+          {isSeason1 && (
+            <div className="space-y-2">
+              <h5 className="font-display text-xs font-bold text-[#EAE4D8] uppercase tracking-wider flex items-center gap-1.5">
+                <Shield className="w-3.5 h-3.5 text-[#B99A5B]" /> The Four Cousins
+              </h5>
+              <ul className="space-y-1.5 text-xs text-[#A69F92] font-mono">
+                <li>
+                  <span className="text-cyan-400 font-semibold">Shubham (Sky)</span> — SKYSHOT
+                </li>
+                <li>
+                  <span className="text-slate-300 font-semibold">Jay (Red)</span> — KNIGHTS
+                </li>
+                <li>
+                  <span className="text-emerald-400 font-semibold">Dharm (Green)</span> — AUTHORS (Champions)
+                </li>
+                <li>
+                  <span className="text-rose-400 font-semibold">Umang (UB)</span> — CHAMPIONS
+                </li>
+              </ul>
+            </div>
+          )}
 
           {/* Col 3: Season Honors */}
           <div className="space-y-2">
             <h5 className="font-display text-xs font-bold text-[#EAE4D8] uppercase tracking-wider flex items-center gap-1.5">
-              <Trophy className="w-3.5 h-3.5 text-[#B99A5B]" /> Season 1 Honors
+              <Trophy className="w-3.5 h-3.5 text-[#B99A5B]" /> {isSeason1 ? 'Season 1 Honors' : 'Season 2 Honors'}
             </h5>
             <ul className="space-y-1.5 text-xs text-[#A69F92] font-mono">
-              <li>
-                <span className="text-[#87968B]">Champions:</span> <strong className="text-emerald-400">AUTHORS</strong>
-              </li>
-              <li>
-                <span className="text-[#87968B]">Orange Cap:</span> <span className="text-[#B99A5B] font-bold">A. King (527 runs)</span>
-              </li>
-              <li>
-                <span className="text-[#87968B]">Purple Cap:</span> <span className="text-purple-300">N. Sky (12 wickets)</span>
-              </li>
-              <li>
-                <span className="text-[#87968B]">Highest Score:</span> <span className="text-[#EAE4D8]">Jay (146 runs)</span>
-              </li>
+              {isSeason1 ? (
+                <>
+                  <li>
+                    <span className="text-[#87968B]">Champions:</span> <strong className="text-emerald-400">AUTHORS</strong>
+                  </li>
+                  <li>
+                    <span className="text-[#87968B]">Orange Cap:</span> <span className="text-[#B99A5B] font-bold">A. King (527 runs)</span>
+                  </li>
+                  <li>
+                    <span className="text-[#87968B]">Purple Cap:</span> <span className="text-purple-300">N. Sky (12 wickets)</span>
+                  </li>
+                  <li>
+                    <span className="text-[#87968B]">Highest Score:</span> <span className="text-[#EAE4D8]">Jay (146 runs)</span>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <span className="text-[#87968B]">Champions:</span> <strong className="text-cyan-400">SKYSHOT</strong>
+                  </li>
+                  <li>
+                    <span className="text-[#87968B]">Runner-Up:</span> <span className="text-slate-300 font-bold">KNIGHTS</span>
+                  </li>
+                  <li>
+                    <span className="text-[#87968B]">Orange Cap:</span> <span className="text-[#B99A5B] font-bold">Harvey (446 runs)</span>
+                  </li>
+                  <li>
+                    <span className="text-[#87968B]">Purple Cap:</span> <span className="text-purple-300">Silver (12 wickets)</span>
+                  </li>
+                  <li>
+                    <span className="text-[#87968B]">Highest Score:</span> <span className="text-[#EAE4D8]">Pointer (161 runs)</span>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
@@ -95,14 +136,24 @@ export const Footer: React.FC = () => {
             <FileText className="w-3.5 h-3.5 text-[#B99A5B]" />
             <span>Historical Data Integrity & Reconciliation Disclosure:</span>
           </div>
-          <p className="leading-relaxed">
-            All statistics, scores, player rosters, and match results are strictly derived from the official 15-page
-            APL Season 1 PDF archive. Individual printed scores total {season1Reconciliation.sourceInningsAggregate} runs.
-            An authorized historical reconciliation attributes {season1Reconciliation.winsmokeReconstruction} runs to
-            Winsmoke’s unprinted 6th match score alongside an unresolved {season1Reconciliation.remainingAggregateAdjustment}-run
-            aggregate adjustment to reach the official recorded batter total of {season1Reconciliation.officialRecordedBatterAggregate} runs.
-            Bowler wickets total exactly {season1Reconciliation.officialRecordedBowlerWickets} with zero adjustments.
-          </p>
+          {isSeason1 ? (
+            <p className="leading-relaxed">
+              All statistics, scores, player rosters, and match results are strictly derived from the official 15-page
+              APL Season 1 PDF archive. Individual printed scores total {season1Reconciliation.sourceInningsAggregate} runs.
+              An authorized historical reconciliation attributes {season1Reconciliation.winsmokeReconstruction} runs to
+              Winsmoke’s unprinted 6th match score alongside an unresolved {season1Reconciliation.remainingAggregateAdjustment}-run
+              aggregate adjustment to reach the official recorded batter total of {season1Reconciliation.officialRecordedBatterAggregate} runs.
+              Bowler wickets total exactly {season1Reconciliation.officialRecordedBowlerWickets} with zero adjustments.
+            </p>
+          ) : (
+            <p className="leading-relaxed">
+              All statistics, scores, player rosters, and match results are strictly derived from the official 21-page
+              APL Season 2 PDF archive. Individual printed bowling figures total exactly 117 recorded wickets across
+              21 bowlers with zero adjustments. Surviving score sheets contain 8 documented batting notation discrepancies
+              with a calculated net difference of -3 runs between sequence sums and official printed totals, with individual
+              honors and cap leaderboards verified directly against official tournament records.
+            </p>
+          )}
         </div>
 
         {/* Bottom copyright & tribute */}

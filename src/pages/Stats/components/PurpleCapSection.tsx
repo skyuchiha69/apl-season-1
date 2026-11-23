@@ -3,17 +3,23 @@ import { useSeason } from '../../../app/providers/SeasonProvider';
 import { Target, Award, AlertCircle } from 'lucide-react';
 
 export const PurpleCapSection: React.FC = () => {
-  const { seasonData } = useSeason();
+  const { seasonData, activeSeasonId } = useSeason();
+  const isSeason1 = activeSeasonId === 'season-1';
 
-  // Filter all 20 players with recorded bowling wickets
+  // Filter all players with recorded bowling wickets
   const bowlers = seasonData.players
     .filter((p) => p.stats.wickets !== undefined)
     .sort((a, b) => {
       if ((b.stats.wickets ?? 0) !== (a.stats.wickets ?? 0)) {
         return (b.stats.wickets ?? 0) - (a.stats.wickets ?? 0);
       }
-      return a.canonicalName.localeCompare(b.canonicalName);
+      if (isSeason1) {
+        return a.canonicalName.localeCompare(b.canonicalName);
+      }
+      return 0;
     });
+
+  const totalWickets = bowlers.reduce((sum, b) => sum + (b.stats.wickets ?? 0), 0);
 
   // Calculate standard competition ranking: 1st, 2nd, 3rd, T-4th, T-4th, T-4th, T-4th, 8th...
   let currentRank = 1;
@@ -43,8 +49,8 @@ export const PurpleCapSection: React.FC = () => {
     };
   });
 
-  // Top tier: exactly all 7 bowlers with 6 or more wickets
-  const topTierSeven = rankedBowlers.filter((b) => (b.player.stats.wickets ?? 0) >= 6);
+  // Top tier: bowlers with 6 or more wickets
+  const topTier = rankedBowlers.filter((b) => (b.player.stats.wickets ?? 0) >= 6);
 
   return (
     <section
@@ -68,21 +74,25 @@ export const PurpleCapSection: React.FC = () => {
             </h2>
           </div>
           <p className="text-xs font-mono text-[#87968B] max-w-sm text-left sm:text-right">
-            Official recorded totals across all 20 tournament bowlers (101 verified wickets).
+            {`Official recorded totals across all ${bowlers.length} tournament bowlers (${totalWickets} verified wickets).`}
           </p>
         </div>
 
-        {/* Top 7 Leading Wicket-Takers Feature Spread (Standard Competition Ranking) */}
+        {/* Leading Wicket-Takers Feature Spread (Standard Competition Ranking) */}
         <div>
           <div className="flex items-center justify-between text-xs font-mono text-[#87968B] mb-3">
             <span className="uppercase tracking-wider">
-              Leading Wicket-Takers Tier (All 7 Bowlers With 6+ Wickets)
+              {`Leading Wicket-Takers Tier (All ${topTier.length} Bowlers With 6+ Wickets)`}
             </span>
-            <span className="text-purple-300">Standard Competition Ranking (1, 2, 3, T-4, T-4, T-4, T-4)</span>
+            <span className="text-purple-300">
+              {isSeason1
+                ? 'Standard Competition Ranking (1, 2, 3, T-4, T-4, T-4, T-4)'
+                : 'Standard Competition Ranking (1, 2, T-3, T-3, T-5, T-5, T-5, T-8, T-8)'}
+            </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {topTierSeven.map(({ player, displayRank }, idx) => {
+            {topTier.map(({ player, displayRank }, idx) => {
               const isPurpleCap = idx === 0;
               const team = seasonData.teams[player.teamId];
 
@@ -152,17 +162,17 @@ export const PurpleCapSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Complete 20-Player Bowling Register Table */}
+        {/* Complete Tournament Bowling Register Table */}
         <div className="space-y-3">
           <div className="flex items-center justify-between text-xs font-mono text-[#87968B]">
-            <span className="uppercase tracking-wider">Complete Tournament Bowling Register (All 20 Bowlers)</span>
+            <span className="uppercase tracking-wider">{`Complete Tournament Bowling Register (All ${bowlers.length} Bowlers)`}</span>
             <span>Scroll horizontally on mobile →</span>
           </div>
 
           <div className="rounded-xl border border-[#EAE4D8]/10 bg-[#0E1713] overflow-hidden shadow-xl">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-[580px]">
-                <caption className="sr-only">APL Season 1 Complete Bowling Leaderboard</caption>
+                <caption className="sr-only">APL {seasonData.name} Complete Bowling Leaderboard</caption>
                 <thead>
                   <tr className="bg-[#14201A] border-b border-[#EAE4D8]/10 text-[10px] sm:text-xs font-mono text-[#B99A5B] uppercase tracking-wider">
                     <th scope="col" className="py-3 px-4 w-16 text-center">Rank</th>
@@ -237,7 +247,10 @@ export const PurpleCapSection: React.FC = () => {
               Complete regular-season bowling figures, runs conceded, and overs were not recorded in tournament
               archives. Bowling averages, economy rates, and maidens are therefore unavailable and strictly omitted.
               Best bowling figures are displayed only where recorded in official records (such as 5/x or 4/x, where x
-              represents unrecorded runs conceded); other bowlers are indicated with a neutral dash (—).
+              represents unrecorded runs conceded); other bowlers are indicated with a neutral dash (—).{' '}
+              {isSeason1
+                ? 'All 20 bowler aggregate figures match tournament dismissal records with zero adjustments applied.'
+                : 'All 21 bowler sequence totals match tournament aggregate wickets with zero discrepancies (117 total wickets).'}
             </p>
           </div>
         </div>
